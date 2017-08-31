@@ -1,4 +1,4 @@
-package fr.cnes.sonarqube.plugins.framac.measures;
+package fr.cnes.sonarqube.plugins.framac.sensor;
 
 import java.io.IOException;
 import java.nio.channels.FileChannel;
@@ -13,32 +13,39 @@ import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.sensor.Sensor;
 import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.batch.sensor.SensorDescriptor;
+import org.sonar.api.batch.sensor.issue.NewIssue;
+import org.sonar.api.batch.sensor.issue.NewIssueLocation;
 import org.sonar.api.ce.measure.MeasureComputer;
+import org.sonar.api.rule.RuleKey;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
+import fr.cnes.sonarqube.plugins.framac.measures.CyclomaticMetrics;
+import fr.cnes.sonarqube.plugins.framac.measures.FramaCMetrics;
+import fr.cnes.sonarqube.plugins.framac.report.ErrorInterface;
+import fr.cnes.sonarqube.plugins.framac.report.FramaCError;
 import fr.cnes.sonarqube.plugins.framac.report.FramaCReportReader;
-import fr.cnes.sonarqube.plugins.framac.report.ReportFunctionRuleInterface;
 import fr.cnes.sonarqube.plugins.framac.report.ReportInterface;
 import fr.cnes.sonarqube.plugins.framac.report.ReportModuleRuleInterface;
+import fr.cnes.sonarqube.plugins.framac.rules.FramaCRulesDefinition;
+import fr.cnes.sonarqube.plugins.framac.settings.FramaCLanguageProperties;
 
 
 /**
  * Scan Frama-C report file.
- * For all project code file : <b>FILE</b>, Frama-C create a report file <b>FILE{@link FramaCSensor#REPORT_EXT}</b> into the {@link FramaCSensor#REPORT_SUBDIR} shall be
+ * For all project code file : <b>FILE</b>, Frama-C create a report file <b>FILE{@link FramaCMetricsSensor#REPORT_EXT}</b> into the {@link FramaCMetricsSensor#REPORT_SUBDIR} shall be
  * 
  * @author Cyrille FRANCOIS
  */
-public class FramaCSensor implements Sensor {
+public class FramaCMetricsSensor implements Sensor {
 	
-	private static final Logger LOGGER = Loggers.get(FramaCSensor.class);
+	private static final Logger LOGGER = Loggers.get(FramaCMetricsSensor.class);
 	
-	/** Report sub directory */
-	private static final String REPORT_SUBDIR = "oracle";
-	/** Report extension */
-	private static final String REPORT_OUT_EXT = ".res.oracle";
-	/** project code file patterns */
-	private static final String EXPECTED_REPORT_INPUT_FILE_TYPES = "*.c,*.i";
+	private String expectedReportInputFileTypes = null;
+
+	private String reportOutExt = null;
+
+	private String reportSubdir = null;
 	
 	FramaCReportReader framaCReportReader = null;
 	
@@ -54,6 +61,12 @@ public class FramaCSensor implements Sensor {
 		LOGGER.info("FramaCSensor : file system base dir = " + fs.baseDir());
 		FilePredicates p = fs.predicates();
 		LOGGER.info("FramaCSensor : file system base dir = " + fs.hasFiles(p.all()));
+		
+		// Read Plugin settings
+		expectedReportInputFileTypes = context.settings().getString(FramaCLanguageProperties.EXPECTED_REPORT_INPUT_FILE_TYPES_KEY);
+		reportOutExt = context.settings().getString(FramaCLanguageProperties.REPORT_OUT_EXT_KEY);
+		reportSubdir = context.settings().getString(FramaCLanguageProperties.REPORT_SUBDIR_KEY);
+		
 		// // only "main" files, but not "tests"
 		// Iterable<InputFile> files =
 		// fs.inputFiles(fs.predicates().hasType(InputFile.Type.MAIN));
@@ -75,9 +88,8 @@ public class FramaCSensor implements Sensor {
 	 * @return all expected file code patterns
 	 */
 	private String[] matchingPatterns() {
-		StringBuffer sb = new StringBuffer();
-		String patternSeparator = ",";
-		String[] res = EXPECTED_REPORT_INPUT_FILE_TYPES.trim().split(patternSeparator);
+		String patternSeparator = FramaCLanguageProperties.FILE_SUFFIXES_SEPARATOR;
+		String[] res = expectedReportInputFileTypes.trim().split(patternSeparator);
 		return res;
 	}
 	
@@ -86,7 +98,6 @@ public class FramaCSensor implements Sensor {
 	 * @return relative report file for this input code file
 	 */
 	private String outReportFileName(InputFile file) {		
-		String reportOutExt = REPORT_OUT_EXT;
 		return relativeReportFileName(file, reportOutExt);
 	}
 
@@ -99,7 +110,7 @@ public class FramaCSensor implements Sensor {
 		String separator = file.file().separator;
 		String name = file.file().getName();
 		int extensionPoint = name.lastIndexOf('.');
-		return REPORT_SUBDIR+separator+name.substring(0,extensionPoint)+reportOutExt;
+		return reportSubdir+separator+name.substring(0,extensionPoint)+reportOutExt;
 	}
 
 	/**
@@ -194,6 +205,7 @@ public class FramaCSensor implements Sensor {
 	 * @see XmlReportReader#parse
 	 */
 	private void parseReportMeasures(SensorContext context, InputFile file, ReportInterface report) {
+		LOGGER.info("Parse and store report measures (doing...)");
 		// Add metrics results
 		ReportModuleRuleInterface reportModuleRuleInterface = report.getModuleCyclomaticMeasure();
 		double cyclomaticValueSum = 0;
@@ -245,7 +257,7 @@ public class FramaCSensor implements Sensor {
 		storeCyclomaticMeasures(context, file, cyclomaticValueMin, cyclomaticValueMax, cyclomaticValueMean,
 				currentCyclomaticValue);
 		storeLocMeasures(context, file, locValueMin, locValueMax, locValueMean, currentLocValue);
-
+		LOGGER.info("Parse and store report measures (done)");
 	}
 	
 	/**
@@ -322,31 +334,22 @@ public class FramaCSensor implements Sensor {
 	}
 		
 	private void parseReportIssues(SensorContext context, InputFile file, ReportInterface report) {
+		LOGGER.info("Parse and store report issues (doing...)");
+		
 		// Read all report issues
-		ReportModuleRuleInterface reportModuleRuleInterface = report.getModuleCyclomaticMeasure();
-		ReportFunctionRuleInterface[] reportModuleRuleInterfaces = report.getCyclomaticMeasureByFunction();
+		ErrorInterface[] errors = report.getErrors();
 
 		// Create issues for this file
-		if(reportModuleRuleInterface != null && reportModuleRuleInterfaces != null){
+		if(errors != null){
 			InputFile inputFile = file;
-			int lines = inputFile.lines();
-			
-			// Read measure value for each elements of this module
-			for (ReportFunctionRuleInterface currentFunctionRuleInterface : reportModuleRuleInterfaces) {
-				String line = currentFunctionRuleInterface.getLine();
-	            int lineNr = getLineAsInt(line, lines);
-//			            RuleKey ruleKey = ICodeRulesDefinition.RULE_CYCLO;//TODO: TBD
-//			            NewIssue newIssue = context.newIssue().forRule(ruleKey);
-//			            NewIssueLocation location = newIssue.newLocation()
-//			                    .on(inputFile)
-//			                    .at(inputFile.selectLine(lineNr > 0 ? lineNr : 1))
-//			                    .message(currentFunctionRuleInterface.getValue());
-//
-//			            newIssue.at(location);
-//			            newIssue.save();
-//			            violationsCount++;//TODO: TBD count number of issues
+			for (ErrorInterface error : errors) {
+				String lineString = error.getLineDescriptor();
+				String message = error.getDescription();
+				String externalRuleKey = error.getRuleKey();
+				saveIssue(context, inputFile, lineString, externalRuleKey , message);
 			}
 		}
+		LOGGER.info("Parse and store report issues (done)");
 	}
 
 	/**
@@ -386,4 +389,47 @@ public class FramaCSensor implements Sensor {
 		res=Files.exists(fileReportPath, LinkOption.NOFOLLOW_LINKS);
 		return res;
 	}
+
+	//============================= TODO refactor avec FramaCIssuesSensor ===================
+	  private void saveIssue(final SensorContext context, final InputFile inputFile, String lineString, final String externalRuleKey, final String message) {
+		    RuleKey ruleKey = RuleKey.of(FramaCRulesDefinition.getRepositoryKeyForLanguage(), externalRuleKey);
+
+		    LOGGER.info("externalRuleKey: "+externalRuleKey);
+		    LOGGER.info("Repo: "+FramaCRulesDefinition.getRepositoryKeyForLanguage());
+		    LOGGER.info("RuleKey: "+ruleKey);
+		    NewIssue newIssue = context.newIssue()
+		      .forRule(ruleKey);
+
+		    NewIssueLocation primaryLocation = newIssue.newLocation()
+		      .on(inputFile)
+		      .message(message);
+		    
+		    int maxLine = inputFile.lines();
+		    int iLine = getLineAsInt(lineString, maxLine);
+		    if (iLine > 0) {
+		      primaryLocation.at(inputFile.selectLine(iLine));
+		    }
+		    newIssue.at(primaryLocation);
+
+		    newIssue.save();
+		  }
+	  
+	  private void getResourceAndSaveIssue(final SensorContext context, final FramaCError error) {
+		    LOGGER.debug(error.toString());
+		    
+		    FileSystem fileSystem = context.fileSystem();
+
+		    InputFile inputFile = fileSystem.inputFile(
+		      fileSystem.predicates().and(
+		        fileSystem.predicates().hasRelativePath(error.getFilePath()),
+		        fileSystem.predicates().hasType(InputFile.Type.MAIN)));
+
+		    LOGGER.debug("inputFile null ? " + (inputFile == null));
+
+		    if (inputFile != null) {
+		      saveIssue(context, inputFile, error.getLine(), error.getType(), error.getDescription());
+		    } else {
+		      LOGGER.error("Not able to find a InputFile with " + error.getFilePath());
+		    }
+		  }
 }

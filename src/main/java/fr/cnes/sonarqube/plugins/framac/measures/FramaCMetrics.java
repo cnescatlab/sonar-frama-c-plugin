@@ -16,7 +16,7 @@ import java.util.Arrays;
  * Number of warnings: 0 equals no warning messages
  * Number of errors: 0 equals no error messages
  *
- * @author Cyrille
+ * @author Cyrille FRANCOIS
  */
 public class FramaCMetrics implements Metrics {
 

@@ -4,12 +4,14 @@ import org.sonar.api.ce.measure.Component;
 import org.sonar.api.ce.measure.Measure;
 import org.sonar.api.ce.measure.MeasureComputer;
 
+import fr.cnes.sonarqube.plugins.framac.sensor.FramaCMetricsSensor;
+
 /**
  * Compute cyclomatic complexity into the project.
  * 
  * Each file cyclomatic complexited is computed by Frama-C (option -metrics) and stored into a result file
  * 
- * @see FramaCSensor
+ * @see FramaCMetricsSensor
  * 
  * @author Cyrille FRANCOIS
  *

@@ -4,12 +4,14 @@ import org.sonar.api.ce.measure.Component;
 import org.sonar.api.ce.measure.Measure;
 import org.sonar.api.ce.measure.MeasureComputer;
 
+import fr.cnes.sonarqube.plugins.framac.sensor.FramaCMetricsSensor;
+
 /**
  * Compute a project global Frama-C report error.
  * 
  * Frama-C shall provide a report for each project code file
  * 
- * @see FramaCSensor
+ * @see FramaCMetricsSensor
  * 
  * @author Cyrille FRANCOIS
  *
@@ -40,7 +42,7 @@ public class ComputePluginErrors implements MeasureComputer {
 	        sumOfReportFiles++;
 	      }
 	      
-		  context.addMeasure(FramaCMetrics.REPORT_FILES_ERROR.key(), "Number of report files : "+sumOfReportFiles+" parse "+FramaCMetrics.REPORT_FILES_ERROR.getName()+" for each file...");	 
+		  context.addMeasure(FramaCMetrics.REPORT_FILES_ERROR.key(), "See report files error messages...");	 
 	    }
 	}
 	

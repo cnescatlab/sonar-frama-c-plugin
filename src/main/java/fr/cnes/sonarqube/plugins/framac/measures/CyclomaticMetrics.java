@@ -41,7 +41,7 @@ import org.sonar.api.measures.Metrics;
  * 
  * Each metrics is associated with a expected report pattern in order to import Frama-C metrics measures 
  *
- * @author Cyrille
+ * @author Cyrille FRANCOIS
  * 
  */
 public class CyclomaticMetrics implements Metrics {

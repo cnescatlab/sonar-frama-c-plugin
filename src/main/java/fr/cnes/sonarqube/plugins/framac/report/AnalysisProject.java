@@ -1,15 +1,20 @@
 package fr.cnes.sonarqube.plugins.framac.report;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Analyze Frama-C report file
  * 
- * @author Cyrille
+ * @author Cyrille FRANCOIS
  *
  */
 public class AnalysisProject  implements ReportInterface{
 	
 	/** Global metrics measures computed by Frama-C */
 	MetricsModuleMeasure globalMetrics;
+	
+	List<FramaCError> errors;
 
 	public AnalysisProject() {
 		super();
@@ -31,6 +36,24 @@ public class AnalysisProject  implements ReportInterface{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public ErrorInterface[] getErrors() {
+		if(this.errors == null){
+			this.errors = new ArrayList<FramaCError>();
+		}
+		ErrorInterface[] res = new ErrorInterface[this.errors.size()];
+		res = this.errors.toArray(res);
+		return res;
+	}
+	
+	public void addError(FramaCError err) {
+		if(this.errors == null){
+			this.errors = new ArrayList<FramaCError>();
+		}
+		this.errors.add(err);
+	}
+
 }
 
 class MetricsModuleMeasure implements ReportModuleRuleInterface{

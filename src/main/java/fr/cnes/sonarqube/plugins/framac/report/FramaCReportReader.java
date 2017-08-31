@@ -21,17 +21,15 @@ import fr.cnes.sonarqube.plugins.framac.measures.CyclomaticMetrics;
  * 
  * Scan a Frama-C report file for patterns given by Metrics and Rules and produce measures and issues for each match
  * 
- * @author Cyrille
+ * @author Cyrille FRANCOIS
  *
  */
 public class FramaCReportReader {
 	
 	private static final Logger LOGGER = Loggers.get(FramaCReportReader.class);
 	
-	public static final String PATTERN_USER_ERROR = "";
-	
-	public static final String WORD_KERNEL = "[kernel]";
-	public static final String WORD_VALUE = "[value]";
+	public static final String WORD_KERNEL = "\\Q[kernel]\\E";
+	public static final String WORD_VALUE = "\\Q[value]\\E";
 	public static final String WORD_WARNING = " warning:";
 	
 	public static final Pattern PATTERN_KERNEL = Pattern.compile(WORD_KERNEL);
@@ -102,6 +100,8 @@ public class FramaCReportReader {
 		int nbLines = 0;
 
 		Matcher metricsMatcher = CyclomaticMetrics.METRICS_PATTERN.matcher("");
+		Matcher kernelMatcher = PATTERN_KERNEL.matcher("");
+		Matcher valueMatcher = PATTERN_VALUE.matcher("");
 		Scanner scanner = null;
 		try {
 			scanner = new Scanner(fileReportPath, ENCODING.name());
@@ -111,139 +111,54 @@ public class FramaCReportReader {
 				metricsMatcher.reset(line); // reset the input each time
 				if (metricsMatcher.find()) {
 					LOGGER.info("Metrics matcher :" + line);
-					// Skip next line
-					scanner.nextLine();
-					Metric<?> metric = null;
 
-					// Read sloc value
-					{
-						metric = CyclomaticMetrics.SLOC;
-						String sloc = scanMetricValue(scanner, CyclomaticMetrics.getMapMetricsPattern(), metric);
-						if (sloc != null) {
-							res.getGlobalMetrics().setSloc(sloc.toString());
-						} else {
-							LOGGER.warn("No expected value for metrics " + metric.getName());
-						}
+					readGlobalMetrics(res, scanner);
+				}
+				// Search issues...
+				else {
+
+					// Search KERNEL message pattern
+					kernelMatcher.reset(line);
+					if (kernelMatcher.find()) {
+
+						// Syntax rules violation
+						LOGGER.info("Kernel matcher :" + line);
 					}
+					// Search VALUE message pattern
+					else {
+						valueMatcher.reset(line);
+						if (valueMatcher.find()) {
 
-					// Read Decision point value
-					{
-						metric = CyclomaticMetrics.DECISION_POINTS;
-						String dp = scanMetricValue(scanner, CyclomaticMetrics.getMapMetricsPattern(), metric);
-						if (dp != null) {
-							res.getGlobalMetrics().setDecisionPoint(dp.toString());
-						} else {
-							LOGGER.warn("No expected value for metrics " + metric.getName());
-						}
-					}
+							// Syntax rules violation
+							LOGGER.info("Value matcher :" + line);
 
-					// Read Global variables value
-					{
-						metric = CyclomaticMetrics.NUMBER_OF_GLOBAL_VARIABLES;
-						String gv = scanMetricValue(scanner, CyclomaticMetrics.getMapMetricsPattern(), metric);
-						if (gv != null) {
-							res.getGlobalMetrics().setGlobalVariables(gv.toString());
-						} else {
-							LOGGER.warn("No expected value for metrics " + metric.getName());
-						}
-					}
-
-					// Read If statements value
-					{
-						metric = CyclomaticMetrics.NUMBER_OF_IF_STATEMENTS;
-						String ifStatements = scanMetricValue(scanner, CyclomaticMetrics.getMapMetricsPattern(), metric);
-						if (ifStatements != null) {
-							res.getGlobalMetrics().setIfStatements(ifStatements.toString());
-						} else {
-							LOGGER.warn("No expected value for metrics " + metric.getName());
-						}
-					}
-
-					// Read Loop statements value
-					{
-						metric = CyclomaticMetrics.NUMBER_OF_LOOP_STATEMENTS;
-						String loopStatements = scanMetricValue(scanner, CyclomaticMetrics.getMapMetricsPattern(), metric);
-						if (loopStatements != null) {
-							res.getGlobalMetrics().setLoopStatements(loopStatements.toString());
-						} else {
-							LOGGER.warn("No expected value for metrics " + metric.getName());
-						}
-					}
-
-					// Read goto statements value
-					{
-						metric = CyclomaticMetrics.NUMBER_OF_GOTO_STATEMENTS;
-						String gotoStatements = scanMetricValue(scanner, CyclomaticMetrics.getMapMetricsPattern(), metric);
-						if (gotoStatements != null) {
-							res.getGlobalMetrics().setGotoStatements(gotoStatements.toString());
-						} else {
-							LOGGER.warn("No expected value for metrics " + metric.getName());
-						}
-					}
-
-					// Read assignment value
-					{
-						metric = CyclomaticMetrics.NUMBER_OF_ASSIGNMENT_STATEMENTS;
-						String assignment = scanMetricValue(scanner, CyclomaticMetrics.getMapMetricsPattern(), metric);
-						if (assignment != null) {
-							res.getGlobalMetrics().setAssignmentStatements(assignment.toString());
-						} else {
-							LOGGER.warn("No expected value for metrics " + metric.getName());
-						}
-					}
-
-					// Read exit point value
-					{
-						metric = CyclomaticMetrics.NUMBER_OF_EXIT_POINT_STATEMENTS;
-						String ep = scanMetricValue(scanner, CyclomaticMetrics.getMapMetricsPattern(), metric);
-						if (ep != null) {
-							res.getGlobalMetrics().setExitPoint(ep.toString());
-						} else {
-							LOGGER.warn("No expected value for metrics " + metric.getName());
-						}
-					}
-
-					// Read function value
-					{
-						metric = CyclomaticMetrics.NUMBER_OF_FUNCTIONS_DECLARED;
-						String fd = scanMetricValue(scanner, CyclomaticMetrics.getMapMetricsPattern(), metric);
-						if (fd != null) {
-							res.getGlobalMetrics().setFunction(fd.toString());
-						} else {
-							LOGGER.warn("No expected value for metrics " + metric.getName());
-						}
-					}
-
-					// Read function call value
-					{
-						metric = CyclomaticMetrics.NUMBER_OF_FUNCTION_CALLS;
-						String fc = scanMetricValue(scanner, CyclomaticMetrics.getMapMetricsPattern(), metric);
-						if (fc != null) {
-							res.getGlobalMetrics().setFunctionCall(fc.toString());
-						} else {
-							LOGGER.warn("No expected value for metrics " + metric.getName());
-						}
-					}					
-
-					// Read pointer dereferencing value
-					{
-						metric = CyclomaticMetrics.NUMBER_OF_POINTER_DEREFERENCINGS;
-						String pd = scanMetricValue(scanner, CyclomaticMetrics.getMapMetricsPattern(), metric);
-						if (pd != null) {
-							res.getGlobalMetrics().setPointerDereferencing(pd.toString());
-						} else {
-							LOGGER.warn("No expected value for metrics " + metric.getName());
-						}
-					}
-
-					// Read cyclomatic complexity value
-					{
-						metric = CyclomaticMetrics.CYCLOMATIC;
-						String cyclomatic = scanMetricValue(scanner, CyclomaticMetrics.getMapMetricsPattern(), metric);
-						if (cyclomatic != null) {
-							res.getGlobalMetrics().setCyclomaticComplexity(cyclomatic.toString());
-						} else {
-							LOGGER.warn("No expected value for metrics " + metric.getName());
+							// Global VALUE Rule
+							String rule0_Key = "VALUE.0";
+							Pattern pValue0 = mapRulePattern.get(rule0_Key);
+							Matcher mValue0 = pValue0.matcher(line);
+							if (mValue0.find()) {
+								int index = 1;
+								boolean ruleFind = false;
+								String ruleKey = "VALUE." + index;
+								Pattern pattern = mapRulePattern.get(ruleKey);
+								while (pattern != null && !ruleFind) {
+									Matcher matcher = pattern.matcher(line);
+									if (matcher.find()) {
+										LOGGER.info("Rule = " + ruleKey);
+										FramaCError err = parseError(ruleKey,pattern, matcher, line);
+										LOGGER.info("Rule violation: "+err);
+										res.addError(err);
+										ruleFind = true;
+									} else {
+										index++;
+										ruleKey = "VALUE." + index;
+										pattern = mapRulePattern.get(ruleKey);
+									}
+								}
+								if (!ruleFind) {
+									LOGGER.info("Rule = " + rule0_Key);
+								}
+							}
 						}
 					}
 				}
@@ -255,7 +170,7 @@ public class FramaCReportReader {
 				scanner.close();
 			}
 		}
-		LOGGER.info("Metrics matcher :" + nbLines);
+		LOGGER.debug("Metrics matcher :" + nbLines);
 		LOGGER.info("Parsing report: " + fileReportPath.getFileName() + " (done)");
 		// TODO: parser le fichier de rapport de Frama-C
 		return res;
@@ -279,6 +194,175 @@ public class FramaCReportReader {
 		// return handler.getAnalysisProject();
 	}
 
+	private FramaCError parseError(
+			String ruleKey, 
+			Pattern pattern,
+			Matcher matcher, 
+			String line) {
+		String externalRuleKey = ruleKey;
+		String description = line.substring(matcher.start());
+		
+		// Check file and line error: <FILE_PATH>:<LINE>:<PATTERN & DESCRIPTION>
+		int filePathEndIndex = line.indexOf(":");
+		String filePath = "No file error reported";
+		String lineNb = "1";
+		
+		// The index of the first semi-coloms separator shall be before start of PATTERN
+		if(filePathEndIndex > 0 && filePathEndIndex < matcher.start()){
+			filePath = line.substring(0, filePathEndIndex);
+			int lineNbBeginIndex = filePathEndIndex+1;
+			String lineQueue = line.substring(lineNbBeginIndex);
+			LOGGER.info("LineQueue="+lineQueue);
+			int lineNbEndIndex = lineQueue.indexOf(":");
+			// The index of the second semi-coloms separator shall be before start of PATTERN
+			if(lineNbEndIndex > 0 && lineNbEndIndex < matcher.start()){
+				lineNb = lineQueue.substring(0, lineNbEndIndex);
+			}
+		}
+		
+		FramaCError error = new FramaCError(externalRuleKey, description, filePath, lineNb);
+
+		return error;
+	}
+
+	private void readGlobalMetrics(AnalysisProject res, Scanner scanner) {
+		// Skip next line
+		scanner.nextLine();
+		Metric<?> metric = null;
+
+		// Read sloc value
+		{
+			metric = CyclomaticMetrics.SLOC;
+			String sloc = scanMetricValue(scanner, CyclomaticMetrics.getMapMetricsPattern(), metric);
+			if (sloc != null) {
+				res.getGlobalMetrics().setSloc(sloc.toString());
+			} else {
+				LOGGER.warn("No expected value for metrics " + metric.getName());
+			}
+		}
+
+		// Read Decision point value
+		{
+			metric = CyclomaticMetrics.DECISION_POINTS;
+			String dp = scanMetricValue(scanner, CyclomaticMetrics.getMapMetricsPattern(), metric);
+			if (dp != null) {
+				res.getGlobalMetrics().setDecisionPoint(dp.toString());
+			} else {
+				LOGGER.warn("No expected value for metrics " + metric.getName());
+			}
+		}
+
+		// Read Global variables value
+		{
+			metric = CyclomaticMetrics.NUMBER_OF_GLOBAL_VARIABLES;
+			String gv = scanMetricValue(scanner, CyclomaticMetrics.getMapMetricsPattern(), metric);
+			if (gv != null) {
+				res.getGlobalMetrics().setGlobalVariables(gv.toString());
+			} else {
+				LOGGER.warn("No expected value for metrics " + metric.getName());
+			}
+		}
+
+		// Read If statements value
+		{
+			metric = CyclomaticMetrics.NUMBER_OF_IF_STATEMENTS;
+			String ifStatements = scanMetricValue(scanner, CyclomaticMetrics.getMapMetricsPattern(), metric);
+			if (ifStatements != null) {
+				res.getGlobalMetrics().setIfStatements(ifStatements.toString());
+			} else {
+				LOGGER.warn("No expected value for metrics " + metric.getName());
+			}
+		}
+
+		// Read Loop statements value
+		{
+			metric = CyclomaticMetrics.NUMBER_OF_LOOP_STATEMENTS;
+			String loopStatements = scanMetricValue(scanner, CyclomaticMetrics.getMapMetricsPattern(), metric);
+			if (loopStatements != null) {
+				res.getGlobalMetrics().setLoopStatements(loopStatements.toString());
+			} else {
+				LOGGER.warn("No expected value for metrics " + metric.getName());
+			}
+		}
+
+		// Read goto statements value
+		{
+			metric = CyclomaticMetrics.NUMBER_OF_GOTO_STATEMENTS;
+			String gotoStatements = scanMetricValue(scanner, CyclomaticMetrics.getMapMetricsPattern(), metric);
+			if (gotoStatements != null) {
+				res.getGlobalMetrics().setGotoStatements(gotoStatements.toString());
+			} else {
+				LOGGER.warn("No expected value for metrics " + metric.getName());
+			}
+		}
+
+		// Read assignment value
+		{
+			metric = CyclomaticMetrics.NUMBER_OF_ASSIGNMENT_STATEMENTS;
+			String assignment = scanMetricValue(scanner, CyclomaticMetrics.getMapMetricsPattern(), metric);
+			if (assignment != null) {
+				res.getGlobalMetrics().setAssignmentStatements(assignment.toString());
+			} else {
+				LOGGER.warn("No expected value for metrics " + metric.getName());
+			}
+		}
+
+		// Read exit point value
+		{
+			metric = CyclomaticMetrics.NUMBER_OF_EXIT_POINT_STATEMENTS;
+			String ep = scanMetricValue(scanner, CyclomaticMetrics.getMapMetricsPattern(), metric);
+			if (ep != null) {
+				res.getGlobalMetrics().setExitPoint(ep.toString());
+			} else {
+				LOGGER.warn("No expected value for metrics " + metric.getName());
+			}
+		}
+
+		// Read function value
+		{
+			metric = CyclomaticMetrics.NUMBER_OF_FUNCTIONS_DECLARED;
+			String fd = scanMetricValue(scanner, CyclomaticMetrics.getMapMetricsPattern(), metric);
+			if (fd != null) {
+				res.getGlobalMetrics().setFunction(fd.toString());
+			} else {
+				LOGGER.warn("No expected value for metrics " + metric.getName());
+			}
+		}
+
+		// Read function call value
+		{
+			metric = CyclomaticMetrics.NUMBER_OF_FUNCTION_CALLS;
+			String fc = scanMetricValue(scanner, CyclomaticMetrics.getMapMetricsPattern(), metric);
+			if (fc != null) {
+				res.getGlobalMetrics().setFunctionCall(fc.toString());
+			} else {
+				LOGGER.warn("No expected value for metrics " + metric.getName());
+			}
+		}					
+
+		// Read pointer dereferencing value
+		{
+			metric = CyclomaticMetrics.NUMBER_OF_POINTER_DEREFERENCINGS;
+			String pd = scanMetricValue(scanner, CyclomaticMetrics.getMapMetricsPattern(), metric);
+			if (pd != null) {
+				res.getGlobalMetrics().setPointerDereferencing(pd.toString());
+			} else {
+				LOGGER.warn("No expected value for metrics " + metric.getName());
+			}
+		}
+
+		// Read cyclomatic complexity value
+		{
+			metric = CyclomaticMetrics.CYCLOMATIC;
+			String cyclomatic = scanMetricValue(scanner, CyclomaticMetrics.getMapMetricsPattern(), metric);
+			if (cyclomatic != null) {
+				res.getGlobalMetrics().setCyclomaticComplexity(cyclomatic.toString());
+			} else {
+				LOGGER.warn("No expected value for metrics " + metric.getName());
+			}
+		}
+	}
+
 	private String scanMetricValue(Scanner scanner, Map<String, Pattern> map, Metric<?> metric) {
 		String res = null;
 		
@@ -288,9 +372,10 @@ public class FramaCReportReader {
 				metric.key())
 				.matcher(globalMetricsNextLine);
 		if(slocMatcher.find()){
-			LOGGER.info("Match :"+slocMatcher.pattern()+" on line: "+globalMetricsNextLine+" res="+globalMetricsNextLine.substring(slocMatcher.end())); 
+			LOGGER.debug("Match :"+slocMatcher.pattern()+" on line: "+globalMetricsNextLine+" res="+globalMetricsNextLine.substring(slocMatcher.end())); 
 			res = globalMetricsNextLine.substring(slocMatcher.end());
 		}
 		return res;
 	}
+
 }

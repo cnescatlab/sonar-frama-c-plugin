@@ -1,0 +1,181 @@
+<framaclint-rules>
+	<rule>
+		<key>VALUE.0</key>
+		<name>Example Rule 0</name>
+		<internalKey>ExampleRule1</internalKey>
+		<description>This is an example of rule defined thru the XML.
+		</description>
+		<severity>BLOCKER</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>BUG</type>
+		<tag>example</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+        <remediationFunctionBaseEffort>2min</remediationFunctionBaseEffort>
+	</rule>
+	<rule>
+		<key>VALUE.1</key>
+		<name>Example Rule 1</name>
+		<internalKey>ExampleRule2</internalKey>
+		<description>This is a other example of rule defined thru the XML.
+		</description>
+		<severity>MAJOR</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>CODE_SMELL</type>
+		<tag>example</tag>
+		<tag>convention</tag>
+        <remediationFunction>LINEAR</remediationFunction>
+        <remediationFunctionGapMultiplier>60min</remediationFunctionGapMultiplier>		
+	</rule>
+	<rule>
+		<key>VALUE.2</key>
+		<name>Example Rule 2</name> <!-- max size is 200 -->
+		<internalKey>ExampleRule3</internalKey>
+		<description>This is a other example of rule defined thru the XML.
+		</description>
+		<severity>CRITICAL</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>VULNERABILITY</type>
+		<tag>example</tag>
+	    <remediationFunction>LINEAR_OFFSET</remediationFunction>
+	    <remediationFunctionGapMultiplier>10min</remediationFunctionGapMultiplier>
+	    <remediationFunctionBaseEffort>30min</remediationFunctionBaseEffort>		
+	</rule>
+	<rule>
+		<key>VALUE.3</key>
+		<name>Example Rule 3</name> <!-- max size is 200 -->
+		<internalKey>ExampleRule3</internalKey>
+		<description>This is a other example of rule defined thru the XML.
+		</description>
+		<severity>CRITICAL</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>VULNERABILITY</type>
+		<tag>example</tag>
+	    <remediationFunction>LINEAR_OFFSET</remediationFunction>
+	    <remediationFunctionGapMultiplier>10min</remediationFunctionGapMultiplier>
+	    <remediationFunctionBaseEffort>30min</remediationFunctionBaseEffort>		
+	</rule>
+	<rule>
+		<key>VALUE.4</key>
+		<name>Example Rule 4</name> <!-- max size is 200 -->
+		<internalKey>ExampleRule3</internalKey>
+		<description>This is a other example of rule defined thru the XML.
+		</description>
+		<severity>CRITICAL</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>VULNERABILITY</type>
+		<tag>example</tag>
+	    <remediationFunction>LINEAR_OFFSET</remediationFunction>
+	    <remediationFunctionGapMultiplier>10min</remediationFunctionGapMultiplier>
+	    <remediationFunctionBaseEffort>30min</remediationFunctionBaseEffort>		
+	</rule>
+	<rule>
+		<key>VALUE.5</key>
+		<name>Example Rule 3</name> <!-- max size is 200 -->
+		<internalKey>ExampleRule3</internalKey>
+		<description>This is a other example of rule defined thru the XML.
+		</description>
+		<severity>CRITICAL</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>VULNERABILITY</type>
+		<tag>example</tag>
+	    <remediationFunction>LINEAR_OFFSET</remediationFunction>
+	    <remediationFunctionGapMultiplier>10min</remediationFunctionGapMultiplier>
+	    <remediationFunctionBaseEffort>30min</remediationFunctionBaseEffort>		
+	</rule>
+	<rule>
+		<key>VALUE.6</key>
+		<name>Example Rule 3</name> <!-- max size is 200 -->
+		<internalKey>ExampleRule3</internalKey>
+		<description>This is a other example of rule defined thru the XML.
+		</description>
+		<severity>CRITICAL</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>VULNERABILITY</type>
+		<tag>example</tag>
+	    <remediationFunction>LINEAR_OFFSET</remediationFunction>
+	    <remediationFunctionGapMultiplier>10min</remediationFunctionGapMultiplier>
+	    <remediationFunctionBaseEffort>30min</remediationFunctionBaseEffort>		
+	</rule>
+	<rule>
+		<key>VALUE.7</key>
+		<name>Example Rule 3</name> <!-- max size is 200 -->
+		<internalKey>ExampleRule3</internalKey>
+		<description>This is a other example of rule defined thru the XML.
+		</description>
+		<severity>CRITICAL</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>VULNERABILITY</type>
+		<tag>example</tag>
+	    <remediationFunction>LINEAR_OFFSET</remediationFunction>
+	    <remediationFunctionGapMultiplier>10min</remediationFunctionGapMultiplier>
+	    <remediationFunctionBaseEffort>30min</remediationFunctionBaseEffort>		
+	</rule>
+	<rule>
+		<key>VALUE.8</key>
+		<name>Example Rule 3</name> <!-- max size is 200 -->
+		<internalKey>ExampleRule3</internalKey>
+		<description>This is a other example of rule defined thru the XML.
+		</description>
+		<severity>CRITICAL</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>VULNERABILITY</type>
+		<tag>example</tag>
+	    <remediationFunction>LINEAR_OFFSET</remediationFunction>
+	    <remediationFunctionGapMultiplier>10min</remediationFunctionGapMultiplier>
+	    <remediationFunctionBaseEffort>30min</remediationFunctionBaseEffort>		
+	</rule>
+	<rule>
+		<key>VALUE.9</key>
+		<name>Example Rule 3</name> <!-- max size is 200 -->
+		<internalKey>ExampleRule3</internalKey>
+		<description>This is a other example of rule defined thru the XML.
+		</description>
+		<severity>CRITICAL</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>VULNERABILITY</type>
+		<tag>example</tag>
+	    <remediationFunction>LINEAR_OFFSET</remediationFunction>
+	    <remediationFunctionGapMultiplier>10min</remediationFunctionGapMultiplier>
+	    <remediationFunctionBaseEffort>30min</remediationFunctionBaseEffort>		
+	</rule>
+	<rule>
+		<key>VALUE.10</key>
+		<name>Example Rule 3</name> <!-- max size is 200 -->
+		<internalKey>ExampleRule3</internalKey>
+		<description>This is a other example of rule defined thru the XML.
+		</description>
+		<severity>CRITICAL</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>VULNERABILITY</type>
+		<tag>example</tag>
+	    <remediationFunction>LINEAR_OFFSET</remediationFunction>
+	    <remediationFunctionGapMultiplier>10min</remediationFunctionGapMultiplier>
+	    <remediationFunctionBaseEffort>30min</remediationFunctionBaseEffort>		
+	</rule>
+	<rule>
+		<key>VALUE.11</key>
+		<name>Example Rule 3</name> <!-- max size is 200 -->
+		<internalKey>ExampleRule3</internalKey>
+		<description>This is a other example of rule defined thru the XML.
+		</description>
+		<severity>CRITICAL</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>VULNERABILITY</type>
+		<tag>example</tag>
+	    <remediationFunction>LINEAR_OFFSET</remediationFunction>
+	    <remediationFunctionGapMultiplier>10min</remediationFunctionGapMultiplier>
+	    <remediationFunctionBaseEffort>30min</remediationFunctionBaseEffort>		
+	</rule>
+</framaclint-rules>

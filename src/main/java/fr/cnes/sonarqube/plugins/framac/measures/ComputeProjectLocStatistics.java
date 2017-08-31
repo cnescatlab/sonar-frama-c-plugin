@@ -4,6 +4,8 @@ import org.sonar.api.ce.measure.Component;
 import org.sonar.api.ce.measure.Measure;
 import org.sonar.api.ce.measure.MeasureComputer;
 
+import fr.cnes.sonarqube.plugins.framac.sensor.FramaCMetricsSensor;
+
 /**
  * Compute lines of code statistics for all source files from a same project .
  * 
@@ -11,7 +13,7 @@ import org.sonar.api.ce.measure.MeasureComputer;
  * Sonar sensor add source file global metrics measure into Sonar data base.
  * This sub-class of MeasureComputer provide project measures 
  * 
- * @see FramaCSensor
+ * @see FramaCMetricsSensor
  * 
  * @author Cyrille FRANCOIS
  *
