@@ -51,7 +51,7 @@ public class CyclomaticMetrics implements Metrics {
 	private static final Map<String,Pattern> mapMetricsPattern = new HashMap<String, Pattern>();
 	
 	public static Map<String, Pattern> getMapMetricsPattern() {
-		if(mapMetricsPattern == null){
+		if(mapMetricsPattern == null || mapMetricsPattern.isEmpty()){
 			initMapMetricsPattern();
 		}
 		return mapMetricsPattern;
@@ -295,15 +295,14 @@ public class CyclomaticMetrics implements Metrics {
 
 	
 	static void analyseReportOut(SensorContext context, InputFile file, String fileRelativePathNameReportOut) {
-		StringBuffer warningMsgs = new StringBuffer();
+		StringBuilder warningMsgs = new StringBuilder();
 		int nbWarningMsgs = 0;
-		StringBuffer errorMsgs = new StringBuffer();
+		StringBuilder errorMsgs = new StringBuilder();
 		int nbErrorMsgs = 0;
 	    if(existFile(file, fileRelativePathNameReportOut)){
   	    	  
 			Path path=file.path().resolve(fileRelativePathNameReportOut);
-			try {
-				FileChannel reportFile = FileChannel.open(path);
+			try (FileChannel reportFile = FileChannel.open(path)){
 			    long reportFileSize = reportFile.size();
 			    if(reportFileSize>0){
 			    	errorMsgs.append("Empty report file : "+fileRelativePathNameReportOut);

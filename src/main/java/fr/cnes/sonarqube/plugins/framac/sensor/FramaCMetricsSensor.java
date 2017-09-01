@@ -67,9 +67,7 @@ public class FramaCMetricsSensor implements Sensor {
 		reportOutExt = context.settings().getString(FramaCLanguageProperties.REPORT_OUT_EXT_KEY);
 		reportSubdir = context.settings().getString(FramaCLanguageProperties.REPORT_SUBDIR_KEY);
 		
-		// // only "main" files, but not "tests"
-		// Iterable<InputFile> files =
-		// fs.inputFiles(fs.predicates().hasType(InputFile.Type.MAIN));
+		// Only "main" files, but not "tests"
 		String[] icodeMatchingPatterns = matchingPatterns();
 		Iterable<InputFile> filesC = fs.inputFiles(fs.predicates().matchesPathPatterns(icodeMatchingPatterns));
 		for (InputFile file : filesC) {
@@ -126,9 +124,9 @@ public class FramaCMetricsSensor implements Sensor {
 			InputFile file, 
 			String fileRelativePathNameReportOut) {
 		ReportInterface report = null;
-		StringBuffer warningMsgs = new StringBuffer();
+		StringBuilder warningMsgs = new StringBuilder();
 		int nbWarningMsgs = 0;
-		StringBuffer errorMsgs = new StringBuffer();
+		StringBuilder errorMsgs = new StringBuilder();
 		int nbErrorMsgs = 0;
 		LOGGER.debug("file.absolutePath():"+file.absolutePath());
 		LOGGER.debug("Paths.get(file.absolutePath()).getParent():"+Paths.get(file.absolutePath()).getParent());
@@ -136,8 +134,7 @@ public class FramaCMetricsSensor implements Sensor {
 		Path fileReportPath = Paths.get(file.absolutePath()).getParent().resolve(fileRelativePathNameReportOut);
 	    if(existReportFile(fileReportPath)){
   	    	  
-			try {
-				FileChannel reportFile = FileChannel.open(fileReportPath);
+			try (FileChannel reportFile = FileChannel.open(fileReportPath)){
 				framaCReportReader = new FramaCReportReader();
 				report = framaCReportReader.parse(fileReportPath);
 			    long reportFileSize = reportFile.size();
@@ -390,7 +387,6 @@ public class FramaCMetricsSensor implements Sensor {
 		return res;
 	}
 
-	//============================= TODO refactor avec FramaCIssuesSensor ===================
 	  private void saveIssue(final SensorContext context, final InputFile inputFile, String lineString, final String externalRuleKey, final String message) {
 		    RuleKey ruleKey = RuleKey.of(FramaCRulesDefinition.getRepositoryKeyForLanguage(), externalRuleKey);
 
@@ -412,24 +408,5 @@ public class FramaCMetricsSensor implements Sensor {
 		    newIssue.at(primaryLocation);
 
 		    newIssue.save();
-		  }
-	  
-	  private void getResourceAndSaveIssue(final SensorContext context, final FramaCError error) {
-		    LOGGER.debug(error.toString());
-		    
-		    FileSystem fileSystem = context.fileSystem();
-
-		    InputFile inputFile = fileSystem.inputFile(
-		      fileSystem.predicates().and(
-		        fileSystem.predicates().hasRelativePath(error.getFilePath()),
-		        fileSystem.predicates().hasType(InputFile.Type.MAIN)));
-
-		    LOGGER.debug("inputFile null ? " + (inputFile == null));
-
-		    if (inputFile != null) {
-		      saveIssue(context, inputFile, error.getLine(), error.getType(), error.getDescription());
-		    } else {
-		      LOGGER.error("Not able to find a InputFile with " + error.getFilePath());
-		    }
 		  }
 }
