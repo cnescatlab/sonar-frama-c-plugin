@@ -3,6 +3,7 @@ package fr.cnes.sonarqube.plugins.framac;
 import org.sonar.api.Plugin;
 
 import fr.cnes.sonarqube.plugins.framac.languages.FramaCLanguage;
+import fr.cnes.sonarqube.plugins.framac.languages.FramaCQualityProfile;
 import fr.cnes.sonarqube.plugins.framac.measures.ComputePluginErrors;
 import fr.cnes.sonarqube.plugins.framac.measures.ComputeProjectCyclomaticStatistics;
 import fr.cnes.sonarqube.plugins.framac.measures.ComputeProjectLocStatistics;
@@ -22,7 +23,7 @@ public class FramaCPlugin implements Plugin {
 	public void define(Context context) {
 		
 		// Setting plugin FramaC
-		context.addExtension(FramaCLanguage.class);
+		context.addExtensions(FramaCLanguage.class, FramaCQualityProfile.class);
 		context.addExtensions(FramaCLanguageProperties.getProperties());
 
 		// Metrics definition and computed measures
