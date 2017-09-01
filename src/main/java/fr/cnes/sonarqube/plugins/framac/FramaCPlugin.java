@@ -28,8 +28,11 @@ public class FramaCPlugin implements Plugin {
 
 		// Metrics definition and computed measures
 		context.addExtensions(
-				FramaCMetrics.class, ComputePluginErrors.class,
-				CyclomaticMetrics.class, ComputeProjectCyclomaticStatistics.class,ComputeProjectLocStatistics.class);
+				FramaCMetrics.class, 
+				ComputePluginErrors.class,
+				CyclomaticMetrics.class, 
+				ComputeProjectCyclomaticStatistics.class,
+				ComputeProjectLocStatistics.class);
 
 		// Rules definition and scan issues
 		context.addExtension(FramaCRulesDefinition.class);
