@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.sonar.api.Plugin;
 
 import fr.cnes.sonarqube.plugins.framac.languages.FramaCLanguage;
+import fr.cnes.sonarqube.plugins.framac.rules.FramaCRulesDefinition;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -17,7 +18,7 @@ public class FramaCPluginTest {
 		FramaCPlugin plugin = new FramaCPlugin();
 		plugin.define(context);
 		
-		verify(context).addExtension(FramaCLanguage.class);
+		verify(context).addExtension(FramaCRulesDefinition.class);
 	}
 
 }
