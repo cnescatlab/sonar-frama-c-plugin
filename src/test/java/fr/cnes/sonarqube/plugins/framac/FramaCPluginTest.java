@@ -3,7 +3,6 @@ package fr.cnes.sonarqube.plugins.framac;
 import org.junit.Test;
 import org.sonar.api.Plugin;
 
-import fr.cnes.sonarqube.plugins.framac.languages.FramaCLanguage;
 import fr.cnes.sonarqube.plugins.framac.rules.FramaCRulesDefinition;
 
 import static org.mockito.Mockito.mock;
