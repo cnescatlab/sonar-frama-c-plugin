@@ -1,181 +1,338 @@
-<framaclint-rules>
+<framac-rules>
 	<rule>
 		<key>VALUE.0</key>
-		<name>Example Rule 0</name>
-		<internalKey>ExampleRule1</internalKey>
-		<description>This is an example of rule defined thru the XML.
-		</description>
-		<severity>BLOCKER</severity>
-		<cardinality>SINGLE</cardinality>
-		<status>READY</status>
-		<type>BUG</type>
-		<tag>example</tag>
-		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
-        <remediationFunctionBaseEffort>2min</remediationFunctionBaseEffort>
-	</rule>
-	<rule>
-		<key>VALUE.1</key>
-		<name>Example Rule 1</name>
-		<internalKey>ExampleRule2</internalKey>
-		<description>This is a other example of rule defined thru the XML.
+		<name>Rule value 0</name>
+		<internalKey>*</internalKey>
+		<description>Unreferenced rule
 		</description>
 		<severity>MAJOR</severity>
 		<cardinality>SINGLE</cardinality>
 		<status>READY</status>
 		<type>CODE_SMELL</type>
-		<tag>example</tag>
-		<tag>convention</tag>
-        <remediationFunction>LINEAR</remediationFunction>
-        <remediationFunctionGapMultiplier>60min</remediationFunctionGapMultiplier>		
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+        <remediationFunctionBaseEffort>5min</remediationFunctionBaseEffort>
+	</rule>
+	<rule>
+		<key>VALUE.1</key>
+		<name>Rule value 1</name>
+		<internalKey>dropping duplicate def'n of func</internalKey>
+		<description>dropping duplicate def'n of func...
+		</description>
+		<severity>MAJOR</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>CODE_SMELL</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+        <remediationFunctionBaseEffort>5min</remediationFunctionBaseEffort>
 	</rule>
 	<rule>
 		<key>VALUE.2</key>
-		<name>Example Rule 2</name> <!-- max size is 200 -->
-		<internalKey>ExampleRule3</internalKey>
-		<description>This is a other example of rule defined thru the XML.
+		<name>Rule value 2</name> <!-- max size is 200 -->
+		<internalKey>Variable-sized local</internalKey>
+		<description>Variable-sized local...
 		</description>
-		<severity>CRITICAL</severity>
+		<severity>MAJOR</severity>
 		<cardinality>SINGLE</cardinality>
 		<status>READY</status>
-		<type>VULNERABILITY</type>
-		<tag>example</tag>
-	    <remediationFunction>LINEAR_OFFSET</remediationFunction>
-	    <remediationFunctionGapMultiplier>10min</remediationFunctionGapMultiplier>
-	    <remediationFunctionBaseEffort>30min</remediationFunctionBaseEffort>		
+		<type>CODE_SMELL</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+        <remediationFunctionBaseEffort>5min</remediationFunctionBaseEffort>
 	</rule>
 	<rule>
 		<key>VALUE.3</key>
-		<name>Example Rule 3</name> <!-- max size is 200 -->
-		<internalKey>ExampleRule3</internalKey>
-		<description>This is a other example of rule defined thru the XML.
+		<name>Rule value 3</name> <!-- max size is 200 -->
+		<internalKey>Clobber list contain \"memory\" argument</internalKey>
+		<description>Clobber list contain \"memory\" argument...
 		</description>
-		<severity>CRITICAL</severity>
+		<severity>MAJOR</severity>
 		<cardinality>SINGLE</cardinality>
 		<status>READY</status>
-		<type>VULNERABILITY</type>
-		<tag>example</tag>
-	    <remediationFunction>LINEAR_OFFSET</remediationFunction>
-	    <remediationFunctionGapMultiplier>10min</remediationFunctionGapMultiplier>
-	    <remediationFunctionBaseEffort>30min</remediationFunctionBaseEffort>		
+		<type>CODE_SMELL</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+        <remediationFunctionBaseEffort>5min</remediationFunctionBaseEffort>
 	</rule>
 	<rule>
 		<key>VALUE.4</key>
-		<name>Example Rule 4</name> <!-- max size is 200 -->
-		<internalKey>ExampleRule3</internalKey>
-		<description>This is a other example of rule defined thru the XML.
+		<name>Rule value 4</name> <!-- max size is 200 -->
+		<internalKey>Too many initializers for structure</internalKey>
+		<description>Too many initializers for structure...
 		</description>
-		<severity>CRITICAL</severity>
+		<severity>MAJOR</severity>
 		<cardinality>SINGLE</cardinality>
 		<status>READY</status>
-		<type>VULNERABILITY</type>
-		<tag>example</tag>
-	    <remediationFunction>LINEAR_OFFSET</remediationFunction>
-	    <remediationFunctionGapMultiplier>10min</remediationFunctionGapMultiplier>
-	    <remediationFunctionBaseEffort>30min</remediationFunctionBaseEffort>		
+		<type>CODE_SMELL</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+        <remediationFunctionBaseEffort>5min</remediationFunctionBaseEffort>
 	</rule>
 	<rule>
 		<key>VALUE.5</key>
-		<name>Example Rule 3</name> <!-- max size is 200 -->
-		<internalKey>ExampleRule3</internalKey>
-		<description>This is a other example of rule defined thru the XML.
+		<name>Rule value 5</name> <!-- max size is 200 -->
+		<internalKey>merging definitions of enum E using int type</internalKey>
+		<description>merging definitions of enum E using int type...
 		</description>
-		<severity>CRITICAL</severity>
+		<severity>MAJOR</severity>
 		<cardinality>SINGLE</cardinality>
 		<status>READY</status>
-		<type>VULNERABILITY</type>
-		<tag>example</tag>
-	    <remediationFunction>LINEAR_OFFSET</remediationFunction>
-	    <remediationFunctionGapMultiplier>10min</remediationFunctionGapMultiplier>
-	    <remediationFunctionBaseEffort>30min</remediationFunctionBaseEffort>		
+		<type>CODE_SMELL</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+        <remediationFunctionBaseEffort>5min</remediationFunctionBaseEffort>
 	</rule>
 	<rule>
 		<key>VALUE.6</key>
-		<name>Example Rule 3</name> <!-- max size is 200 -->
-		<internalKey>ExampleRule3</internalKey>
-		<description>This is a other example of rule defined thru the XML.
+		<name>Rule value 6</name> <!-- max size is 200 -->
+		<internalKey>Calling undeclared function</internalKey>
+		<description>Calling undeclared function...
 		</description>
-		<severity>CRITICAL</severity>
+		<severity>MAJOR</severity>
 		<cardinality>SINGLE</cardinality>
 		<status>READY</status>
-		<type>VULNERABILITY</type>
-		<tag>example</tag>
-	    <remediationFunction>LINEAR_OFFSET</remediationFunction>
-	    <remediationFunctionGapMultiplier>10min</remediationFunctionGapMultiplier>
-	    <remediationFunctionBaseEffort>30min</remediationFunctionBaseEffort>		
+		<type>CODE_SMELL</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+        <remediationFunctionBaseEffort>5min</remediationFunctionBaseEffort>
 	</rule>
 	<rule>
 		<key>VALUE.7</key>
-		<name>Example Rule 3</name> <!-- max size is 200 -->
-		<internalKey>ExampleRule3</internalKey>
-		<description>This is a other example of rule defined thru the XML.
+		<name>Rule value 7</name> <!-- max size is 200 -->
+		<internalKey>Body of function</internalKey>
+		<description>Body of function...
 		</description>
-		<severity>CRITICAL</severity>
+		<severity>MAJOR</severity>
 		<cardinality>SINGLE</cardinality>
 		<status>READY</status>
-		<type>VULNERABILITY</type>
-		<tag>example</tag>
-	    <remediationFunction>LINEAR_OFFSET</remediationFunction>
-	    <remediationFunctionGapMultiplier>10min</remediationFunctionGapMultiplier>
-	    <remediationFunctionBaseEffort>30min</remediationFunctionBaseEffort>		
+		<type>CODE_SMELL</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+        <remediationFunctionBaseEffort>5min</remediationFunctionBaseEffort>
 	</rule>
 	<rule>
 		<key>VALUE.8</key>
-		<name>Example Rule 3</name> <!-- max size is 200 -->
-		<internalKey>ExampleRule3</internalKey>
-		<description>This is a other example of rule defined thru the XML.
+		<name>Rule value 8</name> <!-- max size is 200 -->
+		<internalKey>Neither code nor specification for function</internalKey>
+		<description>Neither code nor specification for function...
 		</description>
-		<severity>CRITICAL</severity>
+		<severity>MAJOR</severity>
 		<cardinality>SINGLE</cardinality>
 		<status>READY</status>
-		<type>VULNERABILITY</type>
-		<tag>example</tag>
-	    <remediationFunction>LINEAR_OFFSET</remediationFunction>
-	    <remediationFunctionGapMultiplier>10min</remediationFunctionGapMultiplier>
-	    <remediationFunctionBaseEffort>30min</remediationFunctionBaseEffort>		
+		<type>CODE_SMELL</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+        <remediationFunctionBaseEffort>5min</remediationFunctionBaseEffort>
 	</rule>
 	<rule>
 		<key>VALUE.9</key>
-		<name>Example Rule 3</name> <!-- max size is 200 -->
-		<internalKey>ExampleRule3</internalKey>
-		<description>This is a other example of rule defined thru the XML.
+		<name>Rule value 9</name> <!-- max size is 200 -->
+		<internalKey>imprecise size for variable</internalKey>
+		<description>imprecise size for variable...
 		</description>
-		<severity>CRITICAL</severity>
+		<severity>MAJOR</severity>
 		<cardinality>SINGLE</cardinality>
 		<status>READY</status>
-		<type>VULNERABILITY</type>
-		<tag>example</tag>
-	    <remediationFunction>LINEAR_OFFSET</remediationFunction>
-	    <remediationFunctionGapMultiplier>10min</remediationFunctionGapMultiplier>
-	    <remediationFunctionBaseEffort>30min</remediationFunctionBaseEffort>		
+		<type>CODE_SMELL</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+        <remediationFunctionBaseEffort>5min</remediationFunctionBaseEffort>
 	</rule>
 	<rule>
 		<key>VALUE.10</key>
-		<name>Example Rule 3</name> <!-- max size is 200 -->
-		<internalKey>ExampleRule3</internalKey>
-		<description>This is a other example of rule defined thru the XML.
+		<name>Rule value 10</name> <!-- max size is 200 -->
+		<internalKey>Unspecified sequence with side effect</internalKey>
+		<description>Unspecified sequence with side effect...
 		</description>
-		<severity>CRITICAL</severity>
+		<severity>MAJOR</severity>
 		<cardinality>SINGLE</cardinality>
 		<status>READY</status>
-		<type>VULNERABILITY</type>
-		<tag>example</tag>
-	    <remediationFunction>LINEAR_OFFSET</remediationFunction>
-	    <remediationFunctionGapMultiplier>10min</remediationFunctionGapMultiplier>
-	    <remediationFunctionBaseEffort>30min</remediationFunctionBaseEffort>		
+		<type>CODE_SMELL</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+        <remediationFunctionBaseEffort>5min</remediationFunctionBaseEffort>
 	</rule>
 	<rule>
 		<key>VALUE.11</key>
-		<name>Example Rule 3</name> <!-- max size is 200 -->
-		<internalKey>ExampleRule3</internalKey>
-		<description>This is a other example of rule defined thru the XML.
+		<name>Rule value 11</name> <!-- max size is 200 -->
+		<internalKey>Floating-point constant</internalKey>
+		<description>Floating-point constant...
 		</description>
-		<severity>CRITICAL</severity>
+		<severity>MAJOR</severity>
 		<cardinality>SINGLE</cardinality>
 		<status>READY</status>
-		<type>VULNERABILITY</type>
-		<tag>example</tag>
-	    <remediationFunction>LINEAR_OFFSET</remediationFunction>
-	    <remediationFunctionGapMultiplier>10min</remediationFunctionGapMultiplier>
-	    <remediationFunctionBaseEffort>30min</remediationFunctionBaseEffort>		
+		<type>CODE_SMELL</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+        <remediationFunctionBaseEffort>5min</remediationFunctionBaseEffort>
 	</rule>
-</framaclint-rules>
+		<rule>
+		<key>SYNTAX.0</key>
+		<name>Rule syntaxe 0</name>
+		<internalKey>*</internalKey>
+		<description>Unreferenced rule
+		</description>
+		<severity>MAJOR</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>CODE_SMELL</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+        <remediationFunctionBaseEffort>5min</remediationFunctionBaseEffort>
+	</rule>
+	<rule>
+		<key>SYNTAX.1</key>
+		<name>Rule syntaxe 1</name>
+		<internalKey>accessing uninitialized left-value</internalKey>
+		<description>accessing uninitialized left-value...
+		</description>
+		<severity>MAJOR</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>CODE_SMELL</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+        <remediationFunctionBaseEffort>5min</remediationFunctionBaseEffort>
+	</rule>
+	<rule>
+		<key>SYNTAX.2</key>
+		<name>Rule syntaxe 2</name> <!-- max size is 200 -->
+		<internalKey>signed overflow</internalKey>
+		<description>signed overflow...
+		</description>
+		<severity>MAJOR</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>CODE_SMELL</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+        <remediationFunctionBaseEffort>5min</remediationFunctionBaseEffort>
+	</rule>
+	<rule>
+		<key>SYNTAX.3</key>
+		<name>Rule syntaxe 3</name> <!-- max size is 200 -->
+		<internalKey>global initialization of volatile variable</internalKey>
+		<description>global initialization of volatile variable...
+		</description>
+		<severity>MAJOR</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>CODE_SMELL</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+        <remediationFunctionBaseEffort>5min</remediationFunctionBaseEffort>
+	</rule>
+	<rule>
+		<key>SYNTAX.4</key>
+		<name>Rule syntaxe 4</name> <!-- max size is 200 -->
+		<internalKey>non-finite</internalKey>
+		<description>non-finite...
+		</description>
+		<severity>MAJOR</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>CODE_SMELL</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+        <remediationFunctionBaseEffort>5min</remediationFunctionBaseEffort>
+	</rule>
+	<rule>
+		<key>SYNTAX.5</key>
+		<name>Rule syntaxe 5</name> <!-- max size is 200 -->
+		<internalKey>initialization of volatile variable</internalKey>
+		<description>initialization of volatile variable...
+		</description>
+		<severity>MAJOR</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>CODE_SMELL</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+        <remediationFunctionBaseEffort>5min</remediationFunctionBaseEffort>
+	</rule>
+	<rule>
+		<key>SYNTAX.6</key>
+		<name>Rule syntaxe 6</name> <!-- max size is 200 -->
+		<internalKey>pointer comparison</internalKey>
+		<description>pointer comparison...
+		</description>
+		<severity>MAJOR</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>CODE_SMELL</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+        <remediationFunctionBaseEffort>5min</remediationFunctionBaseEffort>
+	</rule>
+	<rule>
+		<key>SYNTAX.7</key>
+		<name>Rule syntaxe 7</name> <!-- max size is 200 -->
+		<internalKey>division by zero</internalKey>
+		<description>division by zero...
+		</description>
+		<severity>MAJOR</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>CODE_SMELL</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+        <remediationFunctionBaseEffort>5min</remediationFunctionBaseEffort>
+	</rule>
+	<rule>
+		<key>SYNTAX.8</key>
+		<name>Rule syntaxe 8</name> <!-- max size is 200 -->
+		<internalKey>locals</internalKey>
+		<description>locals...
+		</description>
+		<severity>MAJOR</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>CODE_SMELL</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+        <remediationFunctionBaseEffort>5min</remediationFunctionBaseEffort>
+	</rule>
+	<rule>
+		<key>SYNTAX.9</key>
+		<name>Rule syntaxe 9</name> <!-- max size is 200 -->
+		<internalKey>detected recursive call</internalKey>
+		<description>detected recursive call...
+		</description>
+		<severity>MAJOR</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>CODE_SMELL</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+        <remediationFunctionBaseEffort>5min</remediationFunctionBaseEffort>
+	</rule>
+	<rule>
+		<key>SYNTAX.10</key>
+		<name>Rule syntaxe 10</name> <!-- max size is 200 -->
+		<internalKey>during initialization of variable</internalKey>
+		<description>during initialization of variable...
+		</description>
+		<severity>MAJOR</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>CODE_SMELL</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+        <remediationFunctionBaseEffort>5min</remediationFunctionBaseEffort>
+	</rule>
+	<rule>
+		<key>SYNTAX.11</key>
+		<name>Rule syntaxe 11</name> <!-- max size is 200 -->
+		<internalKey>ignoring non-existing function</internalKey>
+		<description>ignoring non-existing function...
+		</description>
+		<severity>MAJOR</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>CODE_SMELL</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+        <remediationFunctionBaseEffort>5min</remediationFunctionBaseEffort>
+	</rule>
+</framac-rules>

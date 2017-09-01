@@ -26,6 +26,10 @@ import fr.cnes.sonarqube.plugins.framac.measures.CyclomaticMetrics;
  */
 public class FramaCReportReader {
 	
+	private static final String VALUE_MODULE_NAME = "VALUE";
+
+	private static final String SYNTAX_MODULE_NAME = "SYNTAX";
+
 	private static final Logger LOGGER = Loggers.get(FramaCReportReader.class);
 	
 	public static final String WORD_KERNEL = "\\Q[kernel]\\E";
@@ -59,7 +63,7 @@ public class FramaCReportReader {
 				Pattern.compile(WORD_KERNEL+WORD_WARNING+" Floating-point constant")
 		};
 		for (int i = 0; i < patterns.length; i++) {
-			mapRulePattern.put("SYNTAXE"+"."+i, patterns[i]);			
+			mapRulePattern.put(SYNTAX_MODULE_NAME+"."+i, patterns[i]);			
 		}
 	}
 
@@ -79,7 +83,7 @@ public class FramaCReportReader {
 				Pattern.compile(WORD_VALUE+WORD_WARNING+" ignoring non-existing function")
 		};
 		for (int i = 0; i < patterns.length; i++) {
-			mapRulePattern.put("VALUE"+"."+i, patterns[i]);			
+			mapRulePattern.put(VALUE_MODULE_NAME+"."+i, patterns[i]);			
 		}
 	}
 
@@ -123,6 +127,12 @@ public class FramaCReportReader {
 
 						// Syntax rules violation
 						LOGGER.info("Kernel matcher :" + line);
+						
+						// Global SYNTAXE Rule
+						FramaCError err = searchError(line, SYNTAX_MODULE_NAME);
+						if(err != null){
+							res.addError(err);									
+						}
 					}
 					// Search VALUE message pattern
 					else {
@@ -131,33 +141,11 @@ public class FramaCReportReader {
 
 							// Syntax rules violation
 							LOGGER.info("Value matcher :" + line);
-
+							
 							// Global VALUE Rule
-							String rule0_Key = "VALUE.0";
-							Pattern pValue0 = mapRulePattern.get(rule0_Key);
-							Matcher mValue0 = pValue0.matcher(line);
-							if (mValue0.find()) {
-								int index = 1;
-								boolean ruleFind = false;
-								String ruleKey = "VALUE." + index;
-								Pattern pattern = mapRulePattern.get(ruleKey);
-								while (pattern != null && !ruleFind) {
-									Matcher matcher = pattern.matcher(line);
-									if (matcher.find()) {
-										LOGGER.info("Rule = " + ruleKey);
-										FramaCError err = parseError(ruleKey,pattern, matcher, line);
-										LOGGER.info("Rule violation: "+err);
-										res.addError(err);
-										ruleFind = true;
-									} else {
-										index++;
-										ruleKey = "VALUE." + index;
-										pattern = mapRulePattern.get(ruleKey);
-									}
-								}
-								if (!ruleFind) {
-									LOGGER.info("Rule = " + rule0_Key);
-								}
+							FramaCError err = searchError(line, VALUE_MODULE_NAME);
+							if(err != null){
+								res.addError(err);
 							}
 						}
 					}
@@ -172,26 +160,40 @@ public class FramaCReportReader {
 		}
 		LOGGER.debug("Metrics matcher :" + nbLines);
 		LOGGER.info("Parsing report: " + fileReportPath.getFileName() + " (done)");
-		// TODO: parser le fichier de rapport de Frama-C
 		return res;
-		// // New factory
-		// SAXParserFactory factory = SAXParserFactory.newInstance();
-		// SAXParser parser;
-		// SAXHandler handler = new SAXHandler(res);
-		// try {
-		// parser = factory.newSAXParser();
-		// parser.parse(fileReportPath.toFile(), handler);
-		// } catch (ParserConfigurationException | SAXException e) {
-		// LOGGER.error("Parsing error: "+e.getMessage());
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// } catch (IOException e) {
-		// LOGGER.error("Report file error: "+e.getMessage());
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
-		// LOGGER.debug("parse("+fileReportPath.getFileName()+")"+handler.getAnalysisProject());
-		// return handler.getAnalysisProject();
+	}
+
+	private FramaCError searchError(String line, String ruleModuleKey) {
+		FramaCError err = null;
+		String rule0_Key = ruleModuleKey+".0";
+		Pattern pValue0 = mapRulePattern.get(rule0_Key);
+		Matcher mValue0 = pValue0.matcher(line);
+		if (mValue0.find()) {
+			int index = 1;
+			boolean ruleFind = false;
+			String ruleKey = ruleModuleKey + "." + index;
+			Pattern pattern = mapRulePattern.get(ruleKey);
+			while (pattern != null && !ruleFind) {
+				Matcher matcher = pattern.matcher(line);
+				if (matcher.find()) {
+					LOGGER.info("Rule = " + ruleKey);
+					err = parseError(ruleKey,pattern, matcher, line);
+					LOGGER.info("Rule violation: "+err);
+
+					ruleFind = true;
+				} else {
+					index++;
+					ruleKey = ruleModuleKey + "." + index;
+					pattern = mapRulePattern.get(ruleKey);
+				}
+			}
+			if (!ruleFind) {
+				err = parseError(rule0_Key,pValue0, mValue0, line);
+				LOGGER.info("Rule = " + rule0_Key);
+			}
+
+		}
+		return err;
 	}
 
 	private FramaCError parseError(
