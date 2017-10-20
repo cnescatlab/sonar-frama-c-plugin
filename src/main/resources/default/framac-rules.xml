@@ -11,7 +11,7 @@
 		<type>CODE_SMELL</type>
 		<tag>value</tag>
 		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
-        <remediationFunctionBaseEffort>5min</remediationFunctionBaseEffort>
+        <remediationFunctionBaseEffort>30min</remediationFunctionBaseEffort>
 	</rule>
 	<rule>
 		<key>VALUE.1</key>
@@ -25,7 +25,7 @@
 		<type>CODE_SMELL</type>
 		<tag>value</tag>
 		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
-        <remediationFunctionBaseEffort>5min</remediationFunctionBaseEffort>
+        <remediationFunctionBaseEffort>15min</remediationFunctionBaseEffort>
 	</rule>
 	<rule>
 		<key>VALUE.2</key>
@@ -39,7 +39,7 @@
 		<type>CODE_SMELL</type>
 		<tag>value</tag>
 		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
-        <remediationFunctionBaseEffort>5min</remediationFunctionBaseEffort>
+        <remediationFunctionBaseEffort>15min</remediationFunctionBaseEffort>
 	</rule>
 	<rule>
 		<key>VALUE.3</key>
@@ -53,7 +53,7 @@
 		<type>CODE_SMELL</type>
 		<tag>value</tag>
 		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
-        <remediationFunctionBaseEffort>5min</remediationFunctionBaseEffort>
+        <remediationFunctionBaseEffort>30min</remediationFunctionBaseEffort>
 	</rule>
 	<rule>
 		<key>VALUE.4</key>
@@ -64,10 +64,10 @@
 		<severity>MAJOR</severity>
 		<cardinality>SINGLE</cardinality>
 		<status>READY</status>
-		<type>CODE_SMELL</type>
+		<type>BUG</type>
 		<tag>value</tag>
 		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
-        <remediationFunctionBaseEffort>5min</remediationFunctionBaseEffort>
+        <remediationFunctionBaseEffort>15min</remediationFunctionBaseEffort>
 	</rule>
 	<rule>
 		<key>VALUE.5</key>
@@ -81,7 +81,7 @@
 		<type>CODE_SMELL</type>
 		<tag>value</tag>
 		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
-        <remediationFunctionBaseEffort>5min</remediationFunctionBaseEffort>
+        <remediationFunctionBaseEffort>15min</remediationFunctionBaseEffort>
 	</rule>
 	<rule>
 		<key>VALUE.6</key>
@@ -109,7 +109,7 @@
 		<type>CODE_SMELL</type>
 		<tag>value</tag>
 		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
-        <remediationFunctionBaseEffort>5min</remediationFunctionBaseEffort>
+        <remediationFunctionBaseEffort>15min</remediationFunctionBaseEffort>
 	</rule>
 	<rule>
 		<key>VALUE.8</key>
@@ -120,10 +120,10 @@
 		<severity>MAJOR</severity>
 		<cardinality>SINGLE</cardinality>
 		<status>READY</status>
-		<type>CODE_SMELL</type>
+		<type>BUG</type>
 		<tag>value</tag>
 		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
-        <remediationFunctionBaseEffort>5min</remediationFunctionBaseEffort>
+        <remediationFunctionBaseEffort>15min</remediationFunctionBaseEffort>
 	</rule>
 	<rule>
 		<key>VALUE.9</key>
@@ -137,7 +137,7 @@
 		<type>CODE_SMELL</type>
 		<tag>value</tag>
 		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
-        <remediationFunctionBaseEffort>5min</remediationFunctionBaseEffort>
+        <remediationFunctionBaseEffort>15min</remediationFunctionBaseEffort>
 	</rule>
 	<rule>
 		<key>VALUE.10</key>
@@ -148,10 +148,10 @@
 		<severity>MAJOR</severity>
 		<cardinality>SINGLE</cardinality>
 		<status>READY</status>
-		<type>CODE_SMELL</type>
+		<type>BUG</type>
 		<tag>value</tag>
 		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
-        <remediationFunctionBaseEffort>5min</remediationFunctionBaseEffort>
+        <remediationFunctionBaseEffort>15min</remediationFunctionBaseEffort>
 	</rule>
 	<rule>
 		<key>VALUE.11</key>
@@ -165,7 +165,7 @@
 		<type>CODE_SMELL</type>
 		<tag>value</tag>
 		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
-        <remediationFunctionBaseEffort>5min</remediationFunctionBaseEffort>
+        <remediationFunctionBaseEffort>15min</remediationFunctionBaseEffort>
 	</rule>
 		<rule>
 		<key>SYNTAX.0</key>
@@ -179,7 +179,7 @@
 		<type>CODE_SMELL</type>
 		<tag>value</tag>
 		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
-        <remediationFunctionBaseEffort>5min</remediationFunctionBaseEffort>
+        <remediationFunctionBaseEffort>30min</remediationFunctionBaseEffort>
 	</rule>
 	<rule>
 		<key>SYNTAX.1</key>
@@ -190,10 +190,10 @@
 		<severity>MAJOR</severity>
 		<cardinality>SINGLE</cardinality>
 		<status>READY</status>
-		<type>CODE_SMELL</type>
+		<type>BUG</type>
 		<tag>value</tag>
 		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
-        <remediationFunctionBaseEffort>5min</remediationFunctionBaseEffort>
+        <remediationFunctionBaseEffort>15min</remediationFunctionBaseEffort>
 	</rule>
 	<rule>
 		<key>SYNTAX.2</key>
@@ -204,10 +204,10 @@
 		<severity>MAJOR</severity>
 		<cardinality>SINGLE</cardinality>
 		<status>READY</status>
-		<type>CODE_SMELL</type>
+		<type>BUG</type>
 		<tag>value</tag>
 		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
-        <remediationFunctionBaseEffort>5min</remediationFunctionBaseEffort>
+        <remediationFunctionBaseEffort>20min</remediationFunctionBaseEffort>
 	</rule>
 	<rule>
 		<key>SYNTAX.3</key>
@@ -221,7 +221,7 @@
 		<type>CODE_SMELL</type>
 		<tag>value</tag>
 		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
-        <remediationFunctionBaseEffort>5min</remediationFunctionBaseEffort>
+        <remediationFunctionBaseEffort>15min</remediationFunctionBaseEffort>
 	</rule>
 	<rule>
 		<key>SYNTAX.4</key>
@@ -232,10 +232,10 @@
 		<severity>MAJOR</severity>
 		<cardinality>SINGLE</cardinality>
 		<status>READY</status>
-		<type>CODE_SMELL</type>
+		<type>BUG</type>
 		<tag>value</tag>
 		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
-        <remediationFunctionBaseEffort>5min</remediationFunctionBaseEffort>
+        <remediationFunctionBaseEffort>15min</remediationFunctionBaseEffort>
 	</rule>
 	<rule>
 		<key>SYNTAX.5</key>
@@ -249,7 +249,7 @@
 		<type>CODE_SMELL</type>
 		<tag>value</tag>
 		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
-        <remediationFunctionBaseEffort>5min</remediationFunctionBaseEffort>
+        <remediationFunctionBaseEffort>15min</remediationFunctionBaseEffort>
 	</rule>
 	<rule>
 		<key>SYNTAX.6</key>
@@ -263,7 +263,7 @@
 		<type>CODE_SMELL</type>
 		<tag>value</tag>
 		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
-        <remediationFunctionBaseEffort>5min</remediationFunctionBaseEffort>
+        <remediationFunctionBaseEffort>15min</remediationFunctionBaseEffort>
 	</rule>
 	<rule>
 		<key>SYNTAX.7</key>
@@ -271,13 +271,13 @@
 		<internalKey>division by zero</internalKey>
 		<description>division by zero...
 		</description>
-		<severity>MAJOR</severity>
+		<severity>CRITICAL</severity>
 		<cardinality>SINGLE</cardinality>
 		<status>READY</status>
-		<type>CODE_SMELL</type>
+		<type>BUG</type>
 		<tag>value</tag>
 		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
-        <remediationFunctionBaseEffort>5min</remediationFunctionBaseEffort>
+        <remediationFunctionBaseEffort>10min</remediationFunctionBaseEffort>
 	</rule>
 	<rule>
 		<key>SYNTAX.8</key>
@@ -291,7 +291,7 @@
 		<type>CODE_SMELL</type>
 		<tag>value</tag>
 		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
-        <remediationFunctionBaseEffort>5min</remediationFunctionBaseEffort>
+        <remediationFunctionBaseEffort>15min</remediationFunctionBaseEffort>
 	</rule>
 	<rule>
 		<key>SYNTAX.9</key>
@@ -305,7 +305,7 @@
 		<type>CODE_SMELL</type>
 		<tag>value</tag>
 		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
-        <remediationFunctionBaseEffort>5min</remediationFunctionBaseEffort>
+        <remediationFunctionBaseEffort>30min</remediationFunctionBaseEffort>
 	</rule>
 	<rule>
 		<key>SYNTAX.10</key>
@@ -313,13 +313,13 @@
 		<internalKey>during initialization of variable</internalKey>
 		<description>during initialization of variable...
 		</description>
-		<severity>MAJOR</severity>
+		<severity>CRITICAL</severity>
 		<cardinality>SINGLE</cardinality>
 		<status>READY</status>
 		<type>CODE_SMELL</type>
 		<tag>value</tag>
 		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
-        <remediationFunctionBaseEffort>5min</remediationFunctionBaseEffort>
+        <remediationFunctionBaseEffort>15min</remediationFunctionBaseEffort>
 	</rule>
 	<rule>
 		<key>SYNTAX.11</key>
@@ -333,6 +333,6 @@
 		<type>CODE_SMELL</type>
 		<tag>value</tag>
 		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
-        <remediationFunctionBaseEffort>5min</remediationFunctionBaseEffort>
+        <remediationFunctionBaseEffort>10min</remediationFunctionBaseEffort>
 	</rule>
 </framac-rules>
