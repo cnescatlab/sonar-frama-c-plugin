@@ -1,0 +1,1 @@
+/* Do not run Frama-C on this source file or delete the result file...**/
