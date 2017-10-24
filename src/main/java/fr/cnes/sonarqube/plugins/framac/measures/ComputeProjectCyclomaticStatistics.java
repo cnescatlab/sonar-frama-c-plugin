@@ -33,15 +33,15 @@ public class ComputeProjectCyclomaticStatistics implements MeasureComputer {
 		// Create module measures
 		if (context.getComponent().getType() != Component.Type.FILE) {
 			
-			// Search Cyclomatic measure for children files
-			childrenMeasures = context.getChildrenMeasures(CyclomaticMetrics.CYCLOMATIC.key());
-			if(childrenMeasures.iterator().hasNext()){
-				int sum = 0;
-				for (Measure child : childrenMeasures) {
-					sum += child.getIntValue();
-				}			
-				context.addMeasure(CyclomaticMetrics.CYCLOMATIC.key(),sum);				
-			}
+//			// Search Cyclomatic measure for children files
+//			childrenMeasures = context.getChildrenMeasures(CyclomaticMetrics.CYCLOMATIC.key());
+//			if(childrenMeasures.iterator().hasNext()){
+//				int sum = 0;
+//				for (Measure child : childrenMeasures) {
+//					sum += child.getIntValue();
+//				}			
+//				context.addMeasure(CyclomaticMetrics.CYCLOMATIC.key(),sum);				
+//			}
 			
 			// Search Cyclomatic mean measure for children files
 			childrenMeasures = context.getChildrenMeasures(CyclomaticMetrics.CYCLOMATIC_MEAN.key());
@@ -59,15 +59,12 @@ public class ComputeProjectCyclomaticStatistics implements MeasureComputer {
 			childrenMeasures = context.getChildrenMeasures(CyclomaticMetrics.CYCLOMATIC_MIN.key());
 			if(childrenMeasures.iterator().hasNext()){
 				int min = 1000;
-//				String msg = "";
 				for (Measure child : childrenMeasures){
-//					msg += "child value for type "+context.getComponent().getType()+" = "+child.getIntValue();
 					if(child.getIntValue() < min){
 						min = child.getIntValue();
 					}
 				}
 				context.addMeasure(CyclomaticMetrics.CYCLOMATIC_MIN.key(), min);
-//				context.addMeasure(DBG.key(), msg);
 			}
 						
 			// Search Cyclomatic minimum measure for children files

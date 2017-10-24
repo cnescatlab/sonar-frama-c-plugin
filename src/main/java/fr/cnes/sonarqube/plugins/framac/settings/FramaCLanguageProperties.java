@@ -24,7 +24,7 @@ public class FramaCLanguageProperties {
 		
 	/** Report sub directory */
 	public static final String REPORT_SUBDIR_KEY = "sonar."+FramaCLanguage.KEY+".report.subdir";
-	public static final String REPORT_SUBDIR_DEFAULT_VALUE = "oracle";
+	public static final String REPORT_SUBDIR_DEFAULT_VALUE = "frama-c-results";
 	/** Report extension */
 	public static final String REPORT_OUT_EXT_KEY = "sonar."+FramaCLanguage.KEY+".report.out.ext";
 	public static final String REPORT_OUT_EXT_DEFAULT_VALUE = ".res.oracle";

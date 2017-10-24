@@ -68,8 +68,8 @@ public class FramaCMetricsSensor implements Sensor {
 		reportSubdir = context.settings().getString(FramaCLanguageProperties.REPORT_SUBDIR_KEY);
 		
 		// Only "main" files, but not "tests"
-		String[] icodeMatchingPatterns = matchingPatterns();
-		Iterable<InputFile> filesC = fs.inputFiles(fs.predicates().matchesPathPatterns(icodeMatchingPatterns));
+		String[] aMatchingPatterns = matchingPatterns();
+		Iterable<InputFile> filesC = fs.inputFiles(fs.predicates().matchesPathPatterns(aMatchingPatterns));
 		for (InputFile file : filesC) {
 			LOGGER.debug("FramaCSensor : current input file = " + file.absolutePath());
 

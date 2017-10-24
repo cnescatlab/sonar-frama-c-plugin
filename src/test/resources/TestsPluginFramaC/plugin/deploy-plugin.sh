@@ -4,7 +4,7 @@
 PLUGIN_NAME="sonar-frama-c-plugin-0.0.1-SNAPSHOT.jar"
 
 # Nom du repertoire partager ou aller chercher le plugin.
-PLUGIN_SHARE_PATH="/root/Documents/Partage/"
+PLUGIN_SHARE_PATH="/mnt/Share/"
 
 # Repertoire de destination du plugin à installer.
 PLUGIN_DESTINATION_PATH="/opt/sonar/extensions/plugins/"
@@ -63,7 +63,7 @@ function Restart_Sonar_Server
         echo "============="
         echo -e "  > \e[93mService SONAR is restarting.\e[39m"
 
-        service sonar restart
+        sonar restart
 
         echo -e "  > \e[96mPlease, wait. SONAR Web Server is not again started...\e[39m"
 
