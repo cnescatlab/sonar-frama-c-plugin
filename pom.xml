@@ -9,8 +9,7 @@
 	<name>Frama-C</name>
 
 	<description>Frama-c plugin for Sonarqube</description>
-	<!-- TBC : is it the right repository ? -->
-	<url>https://github.com/dupuisa/sonar-frama-c-plugin</url>
+	<url>https://github.com/lequal/sonar-frama-c-plugin</url>
 	<inceptionYear>2017</inceptionYear>
 
 	<licenses>
