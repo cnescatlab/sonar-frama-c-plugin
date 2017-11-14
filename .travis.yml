@@ -22,7 +22,7 @@ addons:
   sonarcloud:
     organization: "lequal"
     token:
-      secure: "68277bcce1c58ff74e60b3c516f64219afce179e"
+      secure: "sonar-frama-c-plugin-token"
 # Script to execute.
 
 script:
