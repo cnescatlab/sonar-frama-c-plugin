@@ -12,6 +12,7 @@ import fr.cnes.sonarqube.plugins.framac.measures.FramaCMetrics;
 import fr.cnes.sonarqube.plugins.framac.rules.FramaCRulesDefinition;
 import fr.cnes.sonarqube.plugins.framac.sensor.FramaCMetricsSensor;
 import fr.cnes.sonarqube.plugins.framac.settings.FramaCLanguageProperties;
+import fr.cnes.sonarqube.plugins.framac.web.FramaCDashboard;
 
 /**
  * This class is the entry point for all extensions
@@ -37,8 +38,12 @@ public class FramaCPlugin implements Plugin {
 		// Rules definition and scan issues
 		context.addExtension(FramaCRulesDefinition.class);
 		
+		// Dashboard
+		context.addExtension(
+				FramaCDashboard.class);
+		
 		// Sonar scanner extension (Sensor)
 		context.addExtension(
-				FramaCMetricsSensor.class);		
+				FramaCMetricsSensor.class);	
 	}
 }
