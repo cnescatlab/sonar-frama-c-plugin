@@ -20,7 +20,7 @@ const output = path.join(__dirname, '../../target/classes/static');
 
 module.exports = {
   entry: {
-    'metrics_summary': ['./src/main/js/app-metrics_summary.js'],
+    'framac_metrics_summary': ['./src/main/js/app-metrics_summary.js'],
   },
   output: {
     path: output,

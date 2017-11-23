@@ -8,7 +8,7 @@ import { render, unmountComponentAtNode } from 'react-dom';
 import App from './App';
 import './style.css';
 
-window.registerExtension('framac/metrics_summary', options => {
+window.registerExtension('framac/framac_metrics_summary', options => {
 
   const { el } = options;
 
