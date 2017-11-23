@@ -5,7 +5,7 @@
 	<groupId>fr.cnes.sonarqube.plugins</groupId>
 	<artifactId>sonar-frama-c-plugin</artifactId>
 	<packaging>sonar-plugin</packaging>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>1.0.0-SNAPSHOT</version>
 	<name>Frama-C</name>
 
 	<description>Frama-c plugin for Sonarqube</description>
@@ -13,13 +13,11 @@
 	<url>https://github.com/lequal/sonar-frama-c-plugin</url>
 	<inceptionYear>2017</inceptionYear>
 
-	<!-- TBD : Apache license ? (Sonarqube update center required a FLOSS one -->
 	<licenses>
 		<license>
-			<name>GNU GENERAL PUBLIC LICENSE</name>
-			<url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
-			<distribution>repo</distribution>
-			<comments>A business-friendly OSS license</comments>
+			<name>GNU General Public License, Version 3.0</name>
+			<url>https://www.gnu.org/licenses/gpl-3.0.en.html</url>
+			<distribution>manual</distribution>
 		</license>
 	</licenses>
 
