@@ -10,7 +10,7 @@ public class FramaCDashboard implements PageDefinition {
 	  @Override
 	  public void define(Context context) {
 	    context
-	      .addPage(Page.builder("framac/metrics_summary")
+	      .addPage(Page.builder("framac/framac_metrics_summary")
 	        .setName("Frama-C metrics summary")
 	        .setScope(Scope.COMPONENT).build());
 	  }
