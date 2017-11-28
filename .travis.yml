@@ -22,8 +22,8 @@ addons:
   sonarcloud:
     organization: "lequal"
     token:
-      secure: sonar-frama-c-plugin-token
+      secure: 8e949e4df6d60b96cd14527f08228def39e0efd8
 # Script to execute.
 
 script:
-  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=lequal -Dsonar.login=8e949e4df6d60b96cd14527f08228def39e0efd8
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar 
