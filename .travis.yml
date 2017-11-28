@@ -1,5 +1,4 @@
 language: java
-
 sudo: false
 install: true
 
@@ -22,7 +21,7 @@ addons:
   sonarcloud:
     organization: "lequal"
     token:
-      secure: 8e949e4df6d60b96cd14527f08228def39e0efd8
+      secure: "8e949e4df6d60b96cd14527f08228def39e0efd8"
 # Script to execute.
 
 script:
