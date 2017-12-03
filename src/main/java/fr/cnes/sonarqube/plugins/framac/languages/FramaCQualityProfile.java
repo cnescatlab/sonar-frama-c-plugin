@@ -19,7 +19,6 @@ package fr.cnes.sonarqube.plugins.framac.languages;
 
 import org.sonar.api.profiles.ProfileDefinition;
 import org.sonar.api.profiles.RulesProfile;
-import org.sonar.api.rules.Rule;
 import org.sonar.api.utils.ValidationMessages;
 
 /**
@@ -27,9 +26,11 @@ import org.sonar.api.utils.ValidationMessages;
  */
 public final class FramaCQualityProfile extends ProfileDefinition {
 
-  @Override
+  public static final String FRAMA_C_RULES_PROFILE_NAME = "FramaC Rules";
+
+@Override
   public RulesProfile createProfile(ValidationMessages validation) {
-    RulesProfile profile = RulesProfile.create("FramaC Rules", FramaCLanguage.KEY);
+    RulesProfile profile = RulesProfile.create(FRAMA_C_RULES_PROFILE_NAME, FramaCLanguage.KEY);
 
     return profile;
   }

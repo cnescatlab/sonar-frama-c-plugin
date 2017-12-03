@@ -54,52 +54,65 @@ public class ComputeProjectLocStatistics implements MeasureComputer {
 			
 			// Search Cyclomatic measure for children files
 			childrenMeasures = context.getChildrenMeasures(CyclomaticMetrics.SLOC.key());
-			if(childrenMeasures.iterator().hasNext()){
-				int sum = 0;
-				for (Measure child : childrenMeasures) {
-					sum += child.getIntValue();
-				}			
-				context.addMeasure(CyclomaticMetrics.SLOC.key(),sum);				
-			}
+			computeLoc(context, childrenMeasures);
 			
 			// Search Cyclomatic mean measure for children files
 			childrenMeasures = context.getChildrenMeasures(CyclomaticMetrics.SLOC_MEAN.key());
-			if(childrenMeasures.iterator().hasNext()){
-				double sum = 0;
-				int nbItem = 0;
-				for (Measure child : childrenMeasures) {
-					sum += child.getDoubleValue();
-					nbItem++;
-				}
-				context.addMeasure(CyclomaticMetrics.SLOC_MEAN.key(),(nbItem!=0)?sum/nbItem:sum);							
-			}
+			computeLocMean(context, childrenMeasures);
 
 			// Search Cyclomatic minimum measure for children files
 			childrenMeasures = context.getChildrenMeasures(CyclomaticMetrics.SLOC_MIN.key());
-			if(childrenMeasures.iterator().hasNext()){
-				int min = 1000;
-//				String msg = "";
-				for (Measure child : childrenMeasures){
-//					msg += "child value for type "+context.getComponent().getType()+" = "+child.getIntValue();
-					if(child.getIntValue() < min){
-						min = child.getIntValue();
-					}
-				}
-				context.addMeasure(CyclomaticMetrics.SLOC_MIN.key(), min);
-//				context.addMeasure(DBG.key(), msg);
-			}
+			computeLocMin(context, childrenMeasures);
 						
 			// Search Cyclomatic minimum measure for children files
 			childrenMeasures = context.getChildrenMeasures(CyclomaticMetrics.SLOC_MAX.key());
-			if(childrenMeasures.iterator().hasNext()){
-				int max = 0;
-				for (Measure child : childrenMeasures){
-					if(child.getIntValue() > max){
-						max = child.getIntValue();
-					}
+			computeLocMax(context, childrenMeasures);
+		}
+	}
+
+	private void computeLocMax(MeasureComputerContext context, Iterable<Measure> childrenMeasures) {
+		if(childrenMeasures.iterator().hasNext()){
+			int max = 0;
+			for (Measure child : childrenMeasures){
+				if(child.getIntValue() > max){
+					max = child.getIntValue();
 				}
-				context.addMeasure(CyclomaticMetrics.SLOC_MAX.key(), max);
 			}
+			context.addMeasure(CyclomaticMetrics.SLOC_MAX.key(), max);
+		}
+	}
+
+	private void computeLocMin(MeasureComputerContext context, Iterable<Measure> childrenMeasures) {
+		if(childrenMeasures.iterator().hasNext()){
+			int min = 1000;
+			for (Measure child : childrenMeasures){
+				if(child.getIntValue() < min){
+					min = child.getIntValue();
+				}
+			}
+			context.addMeasure(CyclomaticMetrics.SLOC_MIN.key(), min);
+		}
+	}
+
+	private void computeLocMean(MeasureComputerContext context, Iterable<Measure> childrenMeasures) {
+		if(childrenMeasures.iterator().hasNext()){
+			double sum = 0;
+			int nbItem = 0;
+			for (Measure child : childrenMeasures) {
+				sum += child.getDoubleValue();
+				nbItem++;
+			}
+			context.addMeasure(CyclomaticMetrics.SLOC_MEAN.key(),(nbItem!=0)?sum/nbItem:sum);							
+		}
+	}
+
+	private void computeLoc(MeasureComputerContext context, Iterable<Measure> childrenMeasures) {
+		if(childrenMeasures.iterator().hasNext()){
+			int sum = 0;
+			for (Measure child : childrenMeasures) {
+				sum += child.getIntValue();
+			}			
+			context.addMeasure(CyclomaticMetrics.SLOC.key(),sum);				
 		}
 	}
 }

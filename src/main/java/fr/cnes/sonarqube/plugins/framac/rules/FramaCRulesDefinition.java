@@ -34,7 +34,7 @@ import fr.cnes.sonarqube.plugins.framac.languages.FramaCLanguage;
  * @author Cyrille FRANCOIS
  *
  */
-public final class FramaCRulesDefinition implements RulesDefinition {
+public class FramaCRulesDefinition implements RulesDefinition {
 
 	public static final String PATH_TO_RULES_XML = "/default/framac-rules.xml";
 
@@ -43,7 +43,7 @@ public final class FramaCRulesDefinition implements RulesDefinition {
 	public static final String REPO_KEY = FramaCLanguage.KEY + "-" + KEY;
 	protected static final String REPO_NAME = FramaCLanguage.NAME;
 
-	private static NewRepository repository;
+	private NewRepository repository;
 
 	protected String rulesDefinitionFilePath() {
 		return PATH_TO_RULES_XML;
