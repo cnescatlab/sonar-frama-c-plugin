@@ -25,5 +25,5 @@ addons:
 # Script to execute.
 
 script:
-  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.organization=cfranccyrille-github -Dsonar.login=5f48701233bf83529cbb6b0e0f4b3feb39a0119d
-
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.host.url=https://sonarcloud.io -Dsonar.organization=cfranccyrille-github -Dsonar.login=5f48701233bf83529cbb6b0e0f4b3feb39a0119d
+ 
