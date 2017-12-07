@@ -25,4 +25,4 @@ addons:
 # Script to execute.
 
 script:
-  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar 
+  - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent install sonar:sonar -Dsonar.organization=lequal -Dsonar.login=9db718e65d4f86b35aa956a3838294cb035868ad
