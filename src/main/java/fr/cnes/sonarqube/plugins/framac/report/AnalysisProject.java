@@ -51,7 +51,7 @@ public class AnalysisProject  implements ReportInterface{
 	@Override
 	public ReportFunctionRuleInterface[] getCyclomaticMeasureByFunction() {
 		// TODO Auto-generated method stub
-		return null;
+		return new ReportFunctionRuleInterface[0];
 	}
 
 	@Override

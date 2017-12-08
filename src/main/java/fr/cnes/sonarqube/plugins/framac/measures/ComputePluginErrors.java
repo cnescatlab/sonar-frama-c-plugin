@@ -35,6 +35,8 @@ import fr.cnes.sonarqube.plugins.framac.sensor.FramaCMetricsSensor;
  */
 public class ComputePluginErrors implements MeasureComputer {
 	
+	static final String SEE_REPORT_FILES_ERROR_MESSAGES = "See report files error messages...";
+
 	@Override
 	public MeasureComputerDefinition define(MeasureComputerDefinitionContext defContext) {
 	    return defContext.newDefinitionBuilder()
@@ -59,7 +61,7 @@ public class ComputePluginErrors implements MeasureComputer {
 	        sumOfReportFiles++;
 	      }
 	      
-		  context.addMeasure(FramaCMetrics.REPORT_FILES_ERROR.key(), "See report files error messages...");	 
+		  context.addMeasure(FramaCMetrics.REPORT_FILES_ERROR.key(), SEE_REPORT_FILES_ERROR_MESSAGES);	 
 	    }
 	}
 	

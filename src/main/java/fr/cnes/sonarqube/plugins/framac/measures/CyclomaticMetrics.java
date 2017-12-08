@@ -1,20 +1,19 @@
 /*
-	 * This file is part of sonar-frama-c-plugin.
-	 *
-	 * sonar-frama-c-plugin is free software: you can redistribute it and/or modify
-	 * it under the terms of the GNU General Public License as published by
-	 * the Free Software Foundation, either version 3 of the License, or
-	 * (at your option) any later version.
-	 *
-	 * sonar-frama-c-plugin is distributed in the hope that it will be useful,
-	 * but WITHOUT ANY WARRANTY; without even the implied warranty of
-	 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	 * GNU General Public License for more details.
-	 *
-	 * You should have received a copy of the GNU General Public License
-	 * along with sonar-frama-c-plugin.  If not, see <http://www.gnu.org/licenses/>.
-
-*/
+ * This file is part of sonar-frama-c-plugin.
+ *
+ * sonar-frama-c-plugin is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * sonar-frama-c-plugin is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with sonar-frama-c-plugin.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package fr.cnes.sonarqube.plugins.framac.measures;
 
 import java.io.IOException;
@@ -68,7 +67,7 @@ public class CyclomaticMetrics implements Metrics {
 	private static final Map<String,Pattern> mapMetricsPattern = new HashMap<String, Pattern>();
 	
 	public static Map<String, Pattern> getMapMetricsPattern() {
-		if(mapMetricsPattern == null || mapMetricsPattern.isEmpty()){
+		if(mapMetricsPattern.isEmpty()){
 			initMapMetricsPattern();
 		}
 		return mapMetricsPattern;
@@ -309,66 +308,4 @@ public class CyclomaticMetrics implements Metrics {
 		mapMetricsPattern.put(NUMBER_OF_POINTER_DEREFERENCINGS.getKey(), patterns[10]);
 		mapMetricsPattern.put(CYCLOMATIC.getKey(), patterns[11]);
 	}
-
-	
-	static void analyseReportOut(SensorContext context, InputFile file, String fileRelativePathNameReportOut) {
-		StringBuilder warningMsgs = new StringBuilder();
-		int nbWarningMsgs = 0;
-		StringBuilder errorMsgs = new StringBuilder();
-		int nbErrorMsgs = 0;
-	    if(existFile(file, fileRelativePathNameReportOut)){
-  	    	  
-			Path path=file.path().resolve(fileRelativePathNameReportOut);
-			try (FileChannel reportFile = FileChannel.open(path)){
-			    long reportFileSize = reportFile.size();
-			    if(reportFileSize>0){
-			    	errorMsgs.append("Empty report file : "+fileRelativePathNameReportOut);
-			    	nbErrorMsgs++;
-			    }
-			} catch (IOException e) {
-				errorMsgs.append("Unexpected error report file for : "+fileRelativePathNameReportOut);
-		    	nbErrorMsgs++;
-			}
-	    }
-	    else{
-	    	errorMsgs.append("No report file for : "+fileRelativePathNameReportOut);
-	    	nbErrorMsgs++;
-	    }
-		// Add a FramaC report warning
-		if(nbWarningMsgs>0){
-		      context.<String>newMeasure()
-		        .forMetric(FramaCMetrics.REPORT_FILES_WARNING)
-		        .on(file)
-		        .withValue(warningMsgs.toString())
-		        .save();	    	  			
-		      context.<Integer>newMeasure()
-		        .forMetric(FramaCMetrics.NUMBER_OF_WARNINGS)
-		        .on(file)
-		        .withValue(nbWarningMsgs)
-		        .save();	    	  			
-		}
-		// Add a FramaC report error
-		if(nbErrorMsgs>0){
-		      context.<String>newMeasure()
-		        .forMetric(FramaCMetrics.REPORT_FILES_ERROR)
-		        .on(file)
-		        .withValue(errorMsgs.toString())
-		        .save();	    	  			
-		      context.<Integer>newMeasure()
-		        .forMetric(FramaCMetrics.NUMBER_OF_ERRORS)
-		        .on(file)
-		        .withValue(nbErrorMsgs)
-		        .save();	    	  			
-		}
-		// TODO: add metrics results
-	}
-	
-	static private boolean existFile(InputFile file, String fileRelativePathNameReport) {
-		boolean res=false;
-		Path path = file.path().resolve(fileRelativePathNameReport);
-		res = Files.exists(path, LinkOption.NOFOLLOW_LINKS);
-		return res;
-	}
-//	Number of decision points (conditional statements (if) and expressions (? :), switc cases, lazy logical operators, loops).
-
 }

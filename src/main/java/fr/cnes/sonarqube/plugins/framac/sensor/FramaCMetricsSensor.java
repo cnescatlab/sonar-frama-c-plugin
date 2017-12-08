@@ -1,26 +1,23 @@
 /*
-	 * This file is part of sonar-frama-c-plugin.
-	 *
-	 * sonar-frama-c-plugin is free software: you can redistribute it and/or modify
-	 * it under the terms of the GNU General Public License as published by
-	 * the Free Software Foundation, either version 3 of the License, or
-	 * (at your option) any later version.
-	 *
-	 * sonar-frama-c-plugin is distributed in the hope that it will be useful,
-	 * but WITHOUT ANY WARRANTY; without even the implied warranty of
-	 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	 * GNU General Public License for more details.
-	 *
-	 * You should have received a copy of the GNU General Public License
-	 * along with sonar-frama-c-plugin.  If not, see <http://www.gnu.org/licenses/>.
-
-*/
+ * This file is part of sonar-frama-c-plugin.
+ *
+ * sonar-frama-c-plugin is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * sonar-frama-c-plugin is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with sonar-frama-c-plugin.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package fr.cnes.sonarqube.plugins.framac.sensor;
 
 import java.io.IOException;
 import java.nio.channels.FileChannel;
-import java.nio.file.Files;
-import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -40,7 +37,6 @@ import org.sonar.api.utils.log.Loggers;
 import fr.cnes.sonarqube.plugins.framac.measures.CyclomaticMetrics;
 import fr.cnes.sonarqube.plugins.framac.measures.FramaCMetrics;
 import fr.cnes.sonarqube.plugins.framac.report.ErrorInterface;
-import fr.cnes.sonarqube.plugins.framac.report.FramaCError;
 import fr.cnes.sonarqube.plugins.framac.report.FramaCReportReader;
 import fr.cnes.sonarqube.plugins.framac.report.ReportInterface;
 import fr.cnes.sonarqube.plugins.framac.report.ReportModuleRuleInterface;
@@ -58,11 +54,11 @@ public class FramaCMetricsSensor implements Sensor {
 	
 	private static final Logger LOGGER = Loggers.get(FramaCMetricsSensor.class);
 	
-	private String expectedReportInputFileTypes = null;
+	String expectedReportInputFileTypes = null;
 
-	private String reportOutExt = null;
+	String reportOutExt = null;
 
-	private String reportSubdir = null;
+	String reportSubdir = null;
 	
 	FramaCReportReader framaCReportReader = null;
 	
@@ -79,10 +75,7 @@ public class FramaCMetricsSensor implements Sensor {
 		FilePredicates p = fs.predicates();
 		LOGGER.info("FramaCSensor : file system base dir = " + fs.hasFiles(p.all()));
 		
-		// Read Plugin settings
-		expectedReportInputFileTypes = context.settings().getString(FramaCLanguageProperties.EXPECTED_REPORT_INPUT_FILE_TYPES_KEY);
-		reportOutExt = context.settings().getString(FramaCLanguageProperties.REPORT_OUT_EXT_KEY);
-		reportSubdir = context.settings().getString(FramaCLanguageProperties.REPORT_SUBDIR_KEY);
+		readPluginSettings(context);
 		
 		// Only "main" files, but not "tests"
 		String[] aMatchingPatterns = matchingPatterns();
@@ -97,6 +90,13 @@ public class FramaCMetricsSensor implements Sensor {
 			analyseReportOut(context, file, fileRelativePathNameReportOut);
 		}
 		LOGGER.info("FramaCSensor done!");
+	}
+
+	void readPluginSettings(SensorContext context) {
+		// Read Plugin settings
+		expectedReportInputFileTypes = context.settings().getString(FramaCLanguageProperties.EXPECTED_REPORT_INPUT_FILE_TYPES_KEY);
+		reportOutExt = context.settings().getString(FramaCLanguageProperties.REPORT_OUT_EXT_KEY);
+		reportSubdir = context.settings().getString(FramaCLanguageProperties.REPORT_SUBDIR_KEY);
 	}
 
 	/**
@@ -172,20 +172,17 @@ public class FramaCMetricsSensor implements Sensor {
 	    	errorMsgs.append("No report file for : "+fileRelativePathNameReportOut);
 	    	nbErrorMsgs++;
 	    }
-		// Add a ICode report warning
-		if(nbWarningMsgs>0){
-		      context.<String>newMeasure()
-		        .forMetric(FramaCMetrics.REPORT_FILES_WARNING)
-		        .on(file)
-		        .withValue(warningMsgs.toString())
-		        .save();	    	  			
-		      context.<Integer>newMeasure()
-		        .forMetric(FramaCMetrics.NUMBER_OF_WARNINGS)
-		        .on(file)
-		        .withValue(nbWarningMsgs)
-		        .save();	    	  			
+		// Add a Frama-C report warning
+		computeWarnings(context, file, warningMsgs, nbWarningMsgs);
+		// Add a Frama-C report error
+		computeErrors(context, file, errorMsgs, nbErrorMsgs);
+		if(report != null){
+			parseReportMeasures(context, file, report);
+			parseReportIssues(context, file, report);
 		}
-		// Add a ICode report error
+	}
+
+	private void computeErrors(SensorContext context, InputFile file, StringBuilder errorMsgs, int nbErrorMsgs) {
 		if(nbErrorMsgs>0){
 		      context.<String>newMeasure()
 		        .forMetric(FramaCMetrics.REPORT_FILES_ERROR)
@@ -198,9 +195,20 @@ public class FramaCMetricsSensor implements Sensor {
 		        .withValue(nbErrorMsgs)
 		        .save();	    	  			
 		}
-		if(report != null){
-			parseReportMeasures(context, file, report);
-			parseReportIssues(context, file, report);
+	}
+
+	private void computeWarnings(SensorContext context, InputFile file, StringBuilder warningMsgs, int nbWarningMsgs) {
+		if(nbWarningMsgs>0){
+		      context.<String>newMeasure()
+		        .forMetric(FramaCMetrics.REPORT_FILES_WARNING)
+		        .on(file)
+		        .withValue(warningMsgs.toString())
+		        .save();	    	  			
+		      context.<Integer>newMeasure()
+		        .forMetric(FramaCMetrics.NUMBER_OF_WARNINGS)
+		        .on(file)
+		        .withValue(nbWarningMsgs)
+		        .save();	    	  			
 		}
 	}
 
@@ -400,7 +408,7 @@ public class FramaCMetricsSensor implements Sensor {
 	private static boolean existReportFile(Path fileReportPath) {
 		boolean res=false;
 		LOGGER.debug("existFile ?:"+fileReportPath.toAbsolutePath());
-		res=Files.exists(fileReportPath, LinkOption.NOFOLLOW_LINKS);
+		res=fileReportPath.toFile().exists();
 		return res;
 	}
 

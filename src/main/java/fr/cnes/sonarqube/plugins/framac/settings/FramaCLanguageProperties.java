@@ -22,10 +22,8 @@ import static java.util.Arrays.asList;
 import java.util.List;
 
 import org.sonar.api.config.PropertyDefinition;
-import org.sonar.api.resources.Qualifiers;
 
 import fr.cnes.sonarqube.plugins.framac.languages.FramaCLanguage;
-import fr.cnes.sonarqube.plugins.framac.sensor.FramaCMetricsSensor;
 
 /**
  * Sonar plugin Frama-C properties.
@@ -50,6 +48,10 @@ public class FramaCLanguageProperties {
 	public static final String EXPECTED_REPORT_INPUT_FILE_TYPES_DEFAULT_VALUE = "*.c,*.i";
 	public static final String FILE_SUFFIXES_SEPARATOR = ",";
 
+	private FramaCLanguageProperties() {
+		throw new IllegalStateException("Utility class");
+	}
+	
 	/**
 	 * Plugin properties extensions
 	 */
