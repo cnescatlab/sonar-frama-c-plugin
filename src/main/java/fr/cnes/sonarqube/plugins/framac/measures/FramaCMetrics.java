@@ -17,13 +17,12 @@
 */
 package fr.cnes.sonarqube.plugins.framac.measures;
 
-import org.sonar.api.measures.Metrics;
-import org.sonar.api.measures.CoreMetrics;
-import org.sonar.api.measures.Metric;
-
-import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+
+import org.sonar.api.measures.Metric;
+import org.sonar.api.measures.Metrics;
 
 /**
  * General metrics of Frama-C plugin for sonar.
@@ -77,7 +76,7 @@ public class FramaCMetrics implements Metrics {
 	
 	@SuppressWarnings({ "rawtypes" })
 	public List<Metric> getMetrics() {
-		ArrayList<Metric> res=new ArrayList<Metric>();
+		ArrayList<Metric> res=new ArrayList<>();
 		res.addAll(Arrays.asList(
 				NUMBER_OF_WARNINGS, 
 				NUMBER_OF_ERRORS,

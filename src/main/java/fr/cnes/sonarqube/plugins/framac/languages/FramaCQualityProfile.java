@@ -30,8 +30,6 @@ public final class FramaCQualityProfile extends ProfileDefinition {
 
 @Override
   public RulesProfile createProfile(ValidationMessages validation) {
-    RulesProfile profile = RulesProfile.create(FRAMA_C_RULES_PROFILE_NAME, FramaCLanguage.KEY);
-
-    return profile;
+    return RulesProfile.create(FRAMA_C_RULES_PROFILE_NAME, FramaCLanguage.KEY);
   }
 }

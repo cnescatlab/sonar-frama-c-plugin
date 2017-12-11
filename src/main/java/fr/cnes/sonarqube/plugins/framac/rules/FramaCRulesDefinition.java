@@ -20,7 +20,6 @@ package fr.cnes.sonarqube.plugins.framac.rules;
 
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.Collection;
 
 import org.sonar.api.server.rule.RulesDefinition;
 import org.sonar.api.server.rule.RulesDefinitionXmlLoader;
@@ -43,15 +42,13 @@ public class FramaCRulesDefinition implements RulesDefinition {
 	public static final String REPO_KEY = FramaCLanguage.KEY + "-" + KEY;
 	protected static final String REPO_NAME = FramaCLanguage.NAME;
 
-	private NewRepository repository;
-
 	protected String rulesDefinitionFilePath() {
 		return PATH_TO_RULES_XML;
 	}
 
 	private void defineRulesForLanguage(Context context, String repositoryKey, String repositoryName,
 			String languageKey) {
-		repository = context.createRepository(repositoryKey, languageKey).setName(repositoryName);
+		NewRepository repository = context.createRepository(repositoryKey, languageKey).setName(repositoryName);
 
 		InputStream rulesXml = this.getClass().getResourceAsStream(rulesDefinitionFilePath());
 		if (rulesXml != null) {

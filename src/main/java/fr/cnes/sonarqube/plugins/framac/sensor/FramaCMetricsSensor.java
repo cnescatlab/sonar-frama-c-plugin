@@ -16,6 +16,7 @@
  */
 package fr.cnes.sonarqube.plugins.framac.sensor;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.nio.file.Path;
@@ -104,8 +105,7 @@ public class FramaCMetricsSensor implements Sensor {
 	 */
 	private String[] matchingPatterns() {
 		String patternSeparator = FramaCLanguageProperties.FILE_SUFFIXES_SEPARATOR;
-		String[] res = expectedReportInputFileTypes.trim().split(patternSeparator);
-		return res;
+		return expectedReportInputFileTypes.trim().split(patternSeparator);
 	}
 	
 	/**
@@ -122,7 +122,8 @@ public class FramaCMetricsSensor implements Sensor {
 	 * @return relative report file for this input code file
 	 */
 	private String relativeReportFileName(InputFile file, String reportOutExt) {
-		String separator = file.file().separator;
+		String separator = File.separator;
+		@SuppressWarnings("deprecation")
 		String name = file.file().getName();
 		int extensionPoint = name.lastIndexOf('.');
 		return reportSubdir+separator+name.substring(0,extensionPoint)+reportOutExt;
@@ -182,7 +183,7 @@ public class FramaCMetricsSensor implements Sensor {
 		}
 	}
 
-	private void computeErrors(SensorContext context, InputFile file, StringBuilder errorMsgs, int nbErrorMsgs) {
+	final void computeErrors(SensorContext context, InputFile file, StringBuilder errorMsgs, int nbErrorMsgs) {
 		if(nbErrorMsgs>0){
 		      context.<String>newMeasure()
 		        .forMetric(FramaCMetrics.REPORT_FILES_ERROR)
@@ -197,7 +198,7 @@ public class FramaCMetricsSensor implements Sensor {
 		}
 	}
 
-	private void computeWarnings(SensorContext context, InputFile file, StringBuilder warningMsgs, int nbWarningMsgs) {
+	final void computeWarnings(SensorContext context, InputFile file, StringBuilder warningMsgs, int nbWarningMsgs) {
 		if(nbWarningMsgs>0){
 		      context.<String>newMeasure()
 		        .forMetric(FramaCMetrics.REPORT_FILES_WARNING)
@@ -381,7 +382,7 @@ public class FramaCMetricsSensor implements Sensor {
 	 * @param maxLine file line numbers
 	 * @return Sonar complaint fine number (strictly positive)
 	 */
-	private static int getLineAsInt(String line, int maxLine) {
+	static final int getLineAsInt(String line, int maxLine) {
 	    int lineNr = 0;
 	    if (line != null) {
 	      try {

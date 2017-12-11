@@ -40,9 +40,10 @@ public class ComputeProjectLocStatistics implements MeasureComputer {
 	@Override
 	public MeasureComputerDefinition define(MeasureComputerDefinitionContext defContext) {
 		
-	    return defContext.newDefinitionBuilder()
-	    		.setInputMetrics(new String[] {CyclomaticMetrics.SLOC.key(),CyclomaticMetrics.SLOC_MEAN.key(),CyclomaticMetrics.SLOC_MIN.key(),CyclomaticMetrics.SLOC_MAX.key()})
-	    		.setOutputMetrics(new String[] {CyclomaticMetrics.SLOC.key(),CyclomaticMetrics.SLOC_MEAN.key(),CyclomaticMetrics.SLOC_MIN.key(),CyclomaticMetrics.SLOC_MAX.key()})
+	    String[] metricTab = new String[] {CyclomaticMetrics.SLOC.key(),CyclomaticMetrics.SLOC_MEAN.key(),CyclomaticMetrics.SLOC_MIN.key(),CyclomaticMetrics.SLOC_MAX.key()};
+		return defContext.newDefinitionBuilder()
+	    		.setInputMetrics(metricTab)
+	    		.setOutputMetrics(metricTab)
 	    		.build();
 	}
 
