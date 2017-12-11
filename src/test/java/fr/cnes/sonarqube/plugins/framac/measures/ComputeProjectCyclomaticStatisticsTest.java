@@ -1,7 +1,5 @@
 package fr.cnes.sonarqube.plugins.framac.measures;
 
-import static org.junit.Assert.*;
-
 import java.util.ArrayList;
 import java.util.Set;
 
@@ -18,20 +16,7 @@ public class ComputeProjectCyclomaticStatisticsTest {
 
 	@Test
 	public void callDefine() {
-		MeasureComputerDefinition measureComputerDefinition = new MeasureComputerDefinition() {
-			
-			@Override
-			public Set<String> getOutputMetrics() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-			
-			@Override
-			public Set<String> getInputMetrics() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-		};
+		MeasureComputerDefinition measureComputerDefinition = Mockito.mock(MeasureComputerDefinition.class);
 		MeasureComputer.MeasureComputerDefinition.Builder builder = Mockito.mock(MeasureComputer.MeasureComputerDefinition.Builder.class);
 		Mockito.when(builder.setInputMetrics(new String[] {CyclomaticMetrics.CYCLOMATIC.key(),CyclomaticMetrics.CYCLOMATIC_MEAN.key(),CyclomaticMetrics.CYCLOMATIC_MIN.key(),CyclomaticMetrics.CYCLOMATIC_MAX.key()})).thenReturn(builder);
 		Mockito.when(builder.setOutputMetrics(new String[] {CyclomaticMetrics.CYCLOMATIC.key(),CyclomaticMetrics.CYCLOMATIC_MEAN.key(),CyclomaticMetrics.CYCLOMATIC_MIN.key(),CyclomaticMetrics.CYCLOMATIC_MAX.key()})).thenReturn(builder);
@@ -40,6 +25,7 @@ public class ComputeProjectCyclomaticStatisticsTest {
 		Mockito.when(measureComputerDefinitionContext.newDefinitionBuilder()).thenReturn(builder);
 		ComputeProjectCyclomaticStatistics computeProjectCyclomaticStatistics = new ComputeProjectCyclomaticStatistics();
 		computeProjectCyclomaticStatistics.define(measureComputerDefinitionContext);
+
 	}
 
 	@Test
