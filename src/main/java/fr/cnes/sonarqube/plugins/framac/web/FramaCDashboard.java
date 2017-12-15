@@ -11,10 +11,9 @@ public class FramaCDashboard implements PageDefinition {
 	static final String PAGE_NAME_FRAMA_C_METRICS_SUMMARY = "Frama-C metrics summary";
 
 	protected Page buildMetricsSummaryPage(){
-		  Page res = Page.builder(PAGE_KEY_FRAMAC_FRAMAC_METRICS_SUMMARY)
+		  return Page.builder(PAGE_KEY_FRAMAC_FRAMAC_METRICS_SUMMARY)
 			        .setName(PAGE_NAME_FRAMA_C_METRICS_SUMMARY)
 			        .setScope(Scope.COMPONENT).build();
-		  return res;
 	  }
 
 	  @Override

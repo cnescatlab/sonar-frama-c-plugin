@@ -44,20 +44,18 @@ public class AnalysisProject  implements ReportInterface{
 
 	@Override
 	public ReportModuleRuleInterface getModuleCyclomaticMeasure() {
-		// TODO Auto-generated method stub
 		return this.globalMetrics;
 	}
 
 	@Override
 	public ReportFunctionRuleInterface[] getCyclomaticMeasureByFunction() {
-		// TODO Auto-generated method stub
 		return new ReportFunctionRuleInterface[0];
 	}
 
 	@Override
 	public ErrorInterface[] getErrors() {
 		if(this.errors == null){
-			this.errors = new ArrayList<FramaCError>();
+			this.errors = new ArrayList<>();
 		}
 		ErrorInterface[] res = new ErrorInterface[this.errors.size()];
 		res = this.errors.toArray(res);
@@ -66,7 +64,7 @@ public class AnalysisProject  implements ReportInterface{
 	
 	public void addError(FramaCError err) {
 		if(this.errors == null){
-			this.errors = new ArrayList<FramaCError>();
+			this.errors = new ArrayList<>();
 		}
 		this.errors.add(err);
 	}
@@ -90,13 +88,11 @@ class MetricsModuleMeasure implements ReportModuleRuleInterface{
 
 	@Override
 	public String getLoc() {
-		// TODO Auto-generated method stub
 		return this.sloc;
 	}
 
 	@Override
 	public String getComplexity() {
-		// TODO Auto-generated method stub
 		return this.cyclomaticComplexity;
 	}
 

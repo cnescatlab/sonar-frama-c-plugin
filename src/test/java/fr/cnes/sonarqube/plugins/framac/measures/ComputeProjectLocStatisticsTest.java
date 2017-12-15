@@ -23,20 +23,7 @@ public class ComputeProjectLocStatisticsTest {
 
 	@Test
 	public void callDefine() {
-		MeasureComputerDefinition measureComputerDefinition = new MeasureComputerDefinition() {
-			
-			@Override
-			public Set<String> getOutputMetrics() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-			
-			@Override
-			public Set<String> getInputMetrics() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-		};
+		MeasureComputerDefinition measureComputerDefinition = Mockito.mock(MeasureComputerDefinition.class);
 		MeasureComputer.MeasureComputerDefinition.Builder builder = Mockito.mock(MeasureComputer.MeasureComputerDefinition.Builder.class);
 		Mockito.when(builder.setInputMetrics(new String[] {CyclomaticMetrics.SLOC.key(),CyclomaticMetrics.SLOC_MEAN.key(),CyclomaticMetrics.SLOC_MIN.key(),CyclomaticMetrics.SLOC_MAX.key()})).thenReturn(builder);
 		Mockito.when(builder.setOutputMetrics(new String[] {CyclomaticMetrics.SLOC.key(),CyclomaticMetrics.SLOC_MEAN.key(),CyclomaticMetrics.SLOC_MIN.key(),CyclomaticMetrics.SLOC_MAX.key()})).thenReturn(builder);

@@ -38,9 +38,10 @@ public class ComputeProjectCyclomaticStatistics implements MeasureComputer {
 	@Override
 	public MeasureComputerDefinition define(MeasureComputerDefinitionContext defContext) {
 		
-	    return defContext.newDefinitionBuilder()
-	    		.setInputMetrics(new String[] {CyclomaticMetrics.CYCLOMATIC.key(),CyclomaticMetrics.CYCLOMATIC_MEAN.key(),CyclomaticMetrics.CYCLOMATIC_MIN.key(),CyclomaticMetrics.CYCLOMATIC_MAX.key()})
-	    		.setOutputMetrics(new String[] {CyclomaticMetrics.CYCLOMATIC.key(),CyclomaticMetrics.CYCLOMATIC_MEAN.key(),CyclomaticMetrics.CYCLOMATIC_MIN.key(),CyclomaticMetrics.CYCLOMATIC_MAX.key()})
+	    String[] metricTab = new String[] {CyclomaticMetrics.CYCLOMATIC.key(),CyclomaticMetrics.CYCLOMATIC_MEAN.key(),CyclomaticMetrics.CYCLOMATIC_MIN.key(),CyclomaticMetrics.CYCLOMATIC_MAX.key()};
+		return defContext.newDefinitionBuilder()
+	    		.setInputMetrics(metricTab)
+	    		.setOutputMetrics(metricTab)
 	    		.build();
 	}
 

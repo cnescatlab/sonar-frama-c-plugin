@@ -16,11 +16,6 @@
  */
 package fr.cnes.sonarqube.plugins.framac.measures;
 
-import java.io.IOException;
-import java.nio.channels.FileChannel;
-import java.nio.file.Files;
-import java.nio.file.LinkOption;
-import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -28,8 +23,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import org.sonar.api.batch.fs.InputFile;
-import org.sonar.api.batch.sensor.SensorContext;
 import org.sonar.api.measures.Metric;
 import org.sonar.api.measures.Metrics;
 
@@ -64,7 +57,7 @@ public class CyclomaticMetrics implements Metrics {
 
 	public static final String DOMAIN = FramaCMetrics.DOMAIN;
 	
-	private static final Map<String,Pattern> mapMetricsPattern = new HashMap<String, Pattern>();
+	private static final Map<String,Pattern> mapMetricsPattern = new HashMap<>();
 	
 	public static Map<String, Pattern> getMapMetricsPattern() {
 		if(mapMetricsPattern.isEmpty()){
@@ -73,7 +66,7 @@ public class CyclomaticMetrics implements Metrics {
 		return mapMetricsPattern;
 	}
 
-	public final static Pattern METRICS_PATTERN = Pattern.compile("Global metrics");
+	public static final Pattern METRICS_PATTERN = Pattern.compile("Global metrics");
 
 	/** Metric for number of lines of code (assuming one C statement equals one line of code): Sloc */
 	public static final Metric<Integer> SLOC = new Metric.Builder(
@@ -251,7 +244,7 @@ public class CyclomaticMetrics implements Metrics {
 		
 		initMapMetricsPattern();
 		
-		ArrayList<Metric> res=new ArrayList<Metric>();
+		ArrayList<Metric> res=new ArrayList<>();
 		res.addAll(Arrays.asList(
 				DECISION_POINTS, 
 				NUMBER_OF_GLOBAL_VARIABLES,

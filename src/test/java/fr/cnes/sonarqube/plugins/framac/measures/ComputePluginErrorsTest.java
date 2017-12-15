@@ -20,20 +20,7 @@ public class ComputePluginErrorsTest {
 
 	@Test
 	public void callDefine() {
-		MeasureComputerDefinition measureComputerDefinition = new MeasureComputerDefinition() {
-			
-			@Override
-			public Set<String> getOutputMetrics() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-			
-			@Override
-			public Set<String> getInputMetrics() {
-				// TODO Auto-generated method stub
-				return null;
-			}
-		};
+		MeasureComputerDefinition measureComputerDefinition = Mockito.mock(MeasureComputerDefinition.class);
 		MeasureComputer.MeasureComputerDefinition.Builder builder = Mockito.mock(MeasureComputer.MeasureComputerDefinition.Builder.class);
 		Mockito.when(builder.setInputMetrics(new String[] {FramaCMetrics.NUMBER_OF_ERRORS.key(), FramaCMetrics.REPORT_FILES_ERROR.key()})).thenReturn(builder);
 		Mockito.when(builder.setOutputMetrics(new String[] {FramaCMetrics.NUMBER_OF_ERRORS.key(), FramaCMetrics.REPORT_FILES_ERROR.key()})).thenReturn(builder);

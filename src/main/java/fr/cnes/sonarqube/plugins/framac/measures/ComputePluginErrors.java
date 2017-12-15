@@ -39,9 +39,10 @@ public class ComputePluginErrors implements MeasureComputer {
 
 	@Override
 	public MeasureComputerDefinition define(MeasureComputerDefinitionContext defContext) {
-	    return defContext.newDefinitionBuilder()
-	    		.setInputMetrics(new String[] {FramaCMetrics.NUMBER_OF_ERRORS.key(), FramaCMetrics.REPORT_FILES_ERROR.key()})
-	    		.setOutputMetrics(new String[] {FramaCMetrics.NUMBER_OF_ERRORS.key(), FramaCMetrics.REPORT_FILES_ERROR.key()})
+	    String[] metricTab = new String[] {FramaCMetrics.NUMBER_OF_ERRORS.key(), FramaCMetrics.REPORT_FILES_ERROR.key()};
+		return defContext.newDefinitionBuilder()
+	    		.setInputMetrics(metricTab)
+	    		.setOutputMetrics(metricTab)
 	    		.build();
 	}
 
@@ -55,11 +56,6 @@ public class ComputePluginErrors implements MeasureComputer {
 	        sum += child.getIntValue();
 	      }
 	      context.addMeasure(FramaCMetrics.NUMBER_OF_ERRORS.key(), sum);
-	      
-	      int sumOfReportFiles = 0;
-	      for (Measure child : context.getChildrenMeasures(FramaCMetrics.REPORT_FILES_ERROR.key())) {
-	        sumOfReportFiles++;
-	      }
 	      
 		  context.addMeasure(FramaCMetrics.REPORT_FILES_ERROR.key(), SEE_REPORT_FILES_ERROR_MESSAGES);	 
 	    }

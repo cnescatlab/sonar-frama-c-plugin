@@ -37,14 +37,16 @@ import fr.cnes.sonarqube.plugins.framac.languages.FramaCLanguage;
  */
 public class FramaCLanguageProperties {
 		
+	private static final String SONAR_DOT = "sonar.";
 	/** Report sub directory */
-	public static final String REPORT_SUBDIR_KEY = "sonar."+FramaCLanguage.KEY+".report.subdir";
+
+	public static final String REPORT_SUBDIR_KEY = SONAR_DOT+FramaCLanguage.KEY+".report.subdir";
 	public static final String REPORT_SUBDIR_DEFAULT_VALUE = "frama-c-results";
 	/** Report extension */
-	public static final String REPORT_OUT_EXT_KEY = "sonar."+FramaCLanguage.KEY+".report.out.ext";
+	public static final String REPORT_OUT_EXT_KEY = SONAR_DOT+FramaCLanguage.KEY+".report.out.ext";
 	public static final String REPORT_OUT_EXT_DEFAULT_VALUE = ".res.oracle";
 	/** project code file patterns */
-	public static final String EXPECTED_REPORT_INPUT_FILE_TYPES_KEY = "sonar."+FramaCLanguage.KEY+".file.suffixes";
+	public static final String EXPECTED_REPORT_INPUT_FILE_TYPES_KEY = SONAR_DOT+FramaCLanguage.KEY+".file.suffixes";
 	public static final String EXPECTED_REPORT_INPUT_FILE_TYPES_DEFAULT_VALUE = "*.c,*.i";
 	public static final String FILE_SUFFIXES_SEPARATOR = ",";
 

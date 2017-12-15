@@ -1,5 +1,6 @@
 package fr.cnes.sonarqube.plugins.framac.sensor;
 
+import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -38,6 +39,19 @@ public class FramaCMetricsSensorTest {
 	}
 	
 	@Test
+	public void getLineAsIntTest(){
+		int expected = 1;
+		int actual = FramaCMetricsSensor.getLineAsInt("-5", 100);
+		assertEquals(expected, actual);
+		expected = 100;
+		actual = FramaCMetricsSensor.getLineAsInt("200", 100);
+		assertEquals(expected, actual);
+		expected = -1;
+		actual = FramaCMetricsSensor.getLineAsInt("aa", 100);
+		assertEquals(expected, actual);
+	}
+	
+	@Test
 	public void given_sensorDescriptor_when_describe_then_callSensorDescriptorName() {
 		SensorDescriptor sensorDescriptor = Mockito.mock(SensorDescriptor.class);
 		FramaCMetricsSensor framaCMetricsSensor = new FramaCMetricsSensor();
@@ -47,19 +61,21 @@ public class FramaCMetricsSensorTest {
 	
 	@Test
 	public void given_NoReportFile_when_execute_then_reportErrors(){
-//		FramaCMetricsSensor framaCMetricsSensor = Mockito.mock(FramaCMetricsSensor.class);
 		FramaCMetricsSensor framaCMetricsSensor = new FramaCMetricsSensor(){
+			// Stub plugin settings
 			void readPluginSettings(SensorContext context) {};
 		};
+		framaCMetricsSensor.expectedReportInputFileTypes = "*.c";
+		framaCMetricsSensor.reportOutExt = ".res";
+		framaCMetricsSensor.reportSubdir = "reports";
+		
+		// Mock sensor context
 		SensorContext sensorContext = Mockito.mock(SensorContext.class);
 		FileSystem fs = Mockito.mock(FileSystem.class);
 		FilePredicates filePredicates = Mockito.mock(FilePredicates.class);
 		FilePredicate filePredicate = Mockito.mock(FilePredicate.class);
 		InputFile inputFile = Mockito.mock(InputFile.class);
-//		doNothing().when(framaCMetricsSensor).readPluginSettings(sensorContext);
-		framaCMetricsSensor.expectedReportInputFileTypes = "*.c";
-		framaCMetricsSensor.reportOutExt = ".res";
-		framaCMetricsSensor.reportSubdir = "reports";
+
 		Mockito.when(sensorContext.fileSystem()).thenReturn(fs);
 		Mockito.when(fs.predicates()).thenReturn(filePredicates);
 		ArrayList<InputFile> filesC = new ArrayList<InputFile>();
@@ -234,29 +250,35 @@ public class FramaCMetricsSensorTest {
 	
 	@Test
 	public void given_reportFile_when_execute_then_reportIssues(){
-//		FramaCMetricsSensor framaCMetricsSensor = Mockito.mock(FramaCMetricsSensor.class);
 		FramaCMetricsSensor framaCMetricsSensor = new FramaCMetricsSensor(){
-			void readPluginSettings(SensorContext context) {};
+			void readPluginSettings(SensorContext context) {
+				this.expectedReportInputFileTypes = "*.c";
+				this.reportOutExt = ".res";
+				this.reportSubdir = "reports";
+			};
 		};
+
+		// Mock sensor context
 		SensorContext sensorContext = Mockito.mock(SensorContext.class);
 		FileSystem fs = Mockito.mock(FileSystem.class);
 		FilePredicates filePredicates = Mockito.mock(FilePredicates.class);
 		FilePredicate filePredicate = Mockito.mock(FilePredicate.class);
 		InputFile inputFile = Mockito.mock(InputFile.class);
-//		doNothing().when(framaCMetricsSensor).readPluginSettings(sensorContext);
-		framaCMetricsSensor.expectedReportInputFileTypes = "*.c";
-		framaCMetricsSensor.reportOutExt = ".res";
-		framaCMetricsSensor.reportSubdir = "reports";
-		Mockito.when(sensorContext.fileSystem()).thenReturn(fs);
-		Mockito.when(fs.predicates()).thenReturn(filePredicates);
+
+		
+		// Mock input files
 		ArrayList<InputFile> filesC = new ArrayList<InputFile>();
 		filesC.add(inputFile);
-		Mockito.when(filePredicates.matchesPathPatterns(new String[]{framaCMetricsSensor.expectedReportInputFileTypes})).thenReturn(filePredicate);
+		Mockito.when(filePredicates.matchesPathPatterns(
+				new String[]{framaCMetricsSensor.expectedReportInputFileTypes})).thenReturn(filePredicate);
 		Mockito.when(fs.inputFiles(filePredicate)).thenReturn(filesC);
-//		Mockito.doCallRealMethod().when(framaCMetricsSensor).execute(sensorContext);
+		Mockito.when(sensorContext.fileSystem()).thenReturn(fs);
+		Mockito.when(fs.predicates()).thenReturn(filePredicates);		
 		File file = new File("./src/test/resources/test.c");
 		Mockito.when(inputFile.absolutePath()).thenReturn(file.getAbsolutePath());
 		Mockito.when(inputFile.file()).thenReturn(file);
+		
+		// Stub newMeasure
 		NewMeasure<Serializable> newMeasure = new NewMeasure<Serializable>() {
 			
 			@Override
@@ -284,6 +306,8 @@ public class FramaCMetricsSensorTest {
 			}
 		};
 		Mockito.when(sensorContext.<Serializable>newMeasure()).thenReturn(newMeasure);
+		
+		// Stub issue
 		NewIssue newIssue = new NewIssue() {
 			NewIssueLocation newIssueLocation = new NewIssueLocation() {
 				
@@ -360,6 +384,9 @@ public class FramaCMetricsSensorTest {
 			}
 		};
 		Mockito.when(sensorContext.newIssue()).thenReturn(newIssue);
+		
+		// call sensor
 		framaCMetricsSensor.execute(sensorContext);
 	}
+	
 }
