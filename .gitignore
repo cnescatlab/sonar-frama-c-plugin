@@ -20,3 +20,6 @@ buildNumber.properties
 # Web
 /node/
 /node_modules/
+
+*.iml
+.idea

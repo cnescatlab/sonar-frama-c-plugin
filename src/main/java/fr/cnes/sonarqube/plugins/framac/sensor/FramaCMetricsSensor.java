@@ -16,12 +16,14 @@
  */
 package fr.cnes.sonarqube.plugins.framac.sensor;
 
+import fr.cnes.sonarqube.plugins.framac.report.FramaCError;
 import java.io.File;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import java.util.List;
 import org.sonar.api.batch.fs.FilePredicates;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
@@ -59,10 +61,18 @@ public class FramaCMetricsSensor implements Sensor {
 
 	String reportOutExt = null;
 
+	String reportCsvExt = null;
+
 	String reportSubdir = null;
 	
 	FramaCReportReader framaCReportReader = null;
-	
+
+	// For reporting analyse of report file
+	StringBuilder warningMsgs = new StringBuilder();
+	int nbWarningMsgs = 0;
+	StringBuilder errorMsgs = new StringBuilder();
+	int nbErrorMsgs = 0;
+
 	@Override
 	public void describe(SensorDescriptor descriptor) {
 		descriptor.name(getClass().getName());
@@ -85,10 +95,26 @@ public class FramaCMetricsSensor implements Sensor {
 			LOGGER.debug("FramaCSensor : current input file = " + file.absolutePath());
 
 			// Check for report out
-			String fileRelativePathNameReportOut = outReportFileName(file);
+			String outputFileRelativePathNameReportOut = outReportFileName(file);
+
+			// Check for CSV report
+			String csvFileRelativePathNameReportOut = csvReportFileName(file);
 
 			// Analyse report out
-			analyseReportOut(context, file, fileRelativePathNameReportOut);
+			ReportInterface report = analyseReportOut(context, file, outputFileRelativePathNameReportOut);
+
+			// Analyse CSV report
+			List<FramaCError> errors = analyseReportCsv(context, file, csvFileRelativePathNameReportOut);
+
+			// Add a Frama-C report warning
+			computeWarnings(context, file, warningMsgs, nbWarningMsgs);
+			// Add a Frama-C report error
+			computeErrors(context, file, errorMsgs, nbErrorMsgs);
+
+			if(report != null){
+				parseReportMeasures(context, file, report);
+				parseReportIssues(context, file, errors);
+			}
 		}
 		LOGGER.info("FramaCSensor done!");
 	}
@@ -97,6 +123,7 @@ public class FramaCMetricsSensor implements Sensor {
 		// Read Plugin settings
 		expectedReportInputFileTypes = context.settings().getString(FramaCLanguageProperties.EXPECTED_REPORT_INPUT_FILE_TYPES_KEY);
 		reportOutExt = context.settings().getString(FramaCLanguageProperties.REPORT_OUT_EXT_KEY);
+		reportCsvExt = context.settings().getString(FramaCLanguageProperties.REPORT_CSV_EXT_KEY);
 		reportSubdir = context.settings().getString(FramaCLanguageProperties.REPORT_SUBDIR_KEY);
 	}
 
@@ -118,15 +145,23 @@ public class FramaCMetricsSensor implements Sensor {
 
 	/**
 	 * @param file input code file
-	 * @param reportOutExt report file extension
+	 * @return relative CSV report file for this input code file
+	 */
+	private String csvReportFileName(InputFile file) {
+		return relativeReportFileName(file, reportCsvExt);
+	}
+
+	/**
+	 * @param file input code file
+	 * @param extension report file extension
 	 * @return relative report file for this input code file
 	 */
-	private String relativeReportFileName(InputFile file, String reportOutExt) {
+	private String relativeReportFileName(InputFile file, String extension) {
 		String separator = File.separator;
 		@SuppressWarnings("deprecation")
 		String name = file.file().getName();
 		int extensionPoint = name.lastIndexOf('.');
-		return reportSubdir+separator+name.substring(0,extensionPoint)+reportOutExt;
+		return reportSubdir+separator+name.substring(0,extensionPoint)+extension;
 	}
 
 	/**
@@ -137,15 +172,12 @@ public class FramaCMetricsSensor implements Sensor {
 	 * @param file input code file 
 	 * @param fileRelativePathNameReportOut name of the expected report file for this input code file
 	 */
-	private void analyseReportOut(
+	private ReportInterface analyseReportOut(
 			SensorContext context, 
 			InputFile file, 
 			String fileRelativePathNameReportOut) {
 		ReportInterface report = null;
-		StringBuilder warningMsgs = new StringBuilder();
-		int nbWarningMsgs = 0;
-		StringBuilder errorMsgs = new StringBuilder();
-		int nbErrorMsgs = 0;
+
 		LOGGER.debug("file.absolutePath():"+file.absolutePath());
 		LOGGER.debug("Paths.get(file.absolutePath()).getParent():"+Paths.get(file.absolutePath()).getParent());
 		LOGGER.debug("fileRelativePathNameReportOut:"+fileRelativePathNameReportOut);
@@ -173,14 +205,42 @@ public class FramaCMetricsSensor implements Sensor {
 	    	errorMsgs.append("No report file for : "+fileRelativePathNameReportOut);
 	    	nbErrorMsgs++;
 	    }
-		// Add a Frama-C report warning
-		computeWarnings(context, file, warningMsgs, nbWarningMsgs);
-		// Add a Frama-C report error
-		computeErrors(context, file, errorMsgs, nbErrorMsgs);
-		if(report != null){
-			parseReportMeasures(context, file, report);
-			parseReportIssues(context, file, report);
+	    return report;
+	}
+
+	/**
+	 *  Analyze a report file provided by the external tool ICode.
+	 *  Check the report file integrity (exist, not empty and readable)
+	 *
+	 * @param context Sonar sensor context
+	 * @param file input code file
+	 * @param fileRelativePathNameReportOut name of the expected report file for this input code file
+	 */
+	private List<FramaCError> analyseReportCsv(
+		SensorContext context,
+		InputFile file,
+		String fileRelativePathNameReportOut) {
+
+		LOGGER.debug("file.absolutePath():"+file.absolutePath());
+		LOGGER.debug("Paths.get(file.absolutePath()).getParent():"+Paths.get(file.absolutePath()).getParent());
+		LOGGER.debug("fileRelativePathNameReportOut:"+fileRelativePathNameReportOut);
+		List<FramaCError> errors = null;
+		Path fileReportPath = Paths.get(file.absolutePath()).getParent().resolve(fileRelativePathNameReportOut);
+		if(existReportFile(fileReportPath)){
+
+			try (FileChannel reportFile = FileChannel.open(fileReportPath)){
+				framaCReportReader = new FramaCReportReader();
+				errors = framaCReportReader.parseCsv(fileReportPath);
+			} catch (IOException e) {
+				errorMsgs.append("Unexpected error report file for : "+fileRelativePathNameReportOut);
+				nbErrorMsgs++;
+			}
 		}
+		else{
+			errorMsgs.append("No report file for : "+fileRelativePathNameReportOut);
+			nbErrorMsgs++;
+		}
+		return errors;
 	}
 
 	final void computeErrors(SensorContext context, InputFile file, StringBuilder errorMsgs, int nbErrorMsgs) {
@@ -356,12 +416,9 @@ public class FramaCMetricsSensor implements Sensor {
 		.save();
 	}
 		
-	private void parseReportIssues(SensorContext context, InputFile file, ReportInterface report) {
+	private void parseReportIssues(SensorContext context, InputFile file, List<? extends ErrorInterface> errors) {
 		LOGGER.info("Parse and store report issues (doing...)");
 		
-		// Read all report issues
-		ErrorInterface[] errors = report.getErrors();
-
 		// Create issues for this file
 		if(errors != null){
 			InputFile inputFile = file;
