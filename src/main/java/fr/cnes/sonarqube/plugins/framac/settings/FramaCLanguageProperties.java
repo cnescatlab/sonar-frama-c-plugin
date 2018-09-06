@@ -45,6 +45,9 @@ public class FramaCLanguageProperties {
 	/** Report extension */
 	public static final String REPORT_OUT_EXT_KEY = SONAR_DOT+FramaCLanguage.KEY+".report.out.ext";
 	public static final String REPORT_OUT_EXT_DEFAULT_VALUE = ".res.oracle";
+	/** CSV Report extension */
+	public static final String REPORT_CSV_EXT_KEY = SONAR_DOT+FramaCLanguage.KEY+".report.csv.ext";
+	public static final String REPORT_CSV_EXT_DEFAULT_VALUE = ".res.csv";
 	/** project code file patterns */
 	public static final String EXPECTED_REPORT_INPUT_FILE_TYPES_KEY = SONAR_DOT+FramaCLanguage.KEY+".file.suffixes";
 	public static final String EXPECTED_REPORT_INPUT_FILE_TYPES_DEFAULT_VALUE = "*.c,*.i";
@@ -66,6 +69,11 @@ public class FramaCLanguageProperties {
 				PropertyDefinition.builder(REPORT_OUT_EXT_KEY)
 				.defaultValue(REPORT_OUT_EXT_DEFAULT_VALUE).category(FramaCLanguage.NAME)
 				.name("Report file Suffixes").description("The report file have the same name as source file followed by this extension name.")
+				// .onQualifiers(Qualifiers.PROJECT)
+				.build(),
+			    PropertyDefinition.builder(REPORT_CSV_EXT_KEY)
+				.defaultValue(REPORT_CSV_EXT_DEFAULT_VALUE).category(FramaCLanguage.NAME)
+				.name("CSV Report file Suffixes").description("The report file have the same name as source file followed by this extension name.")
 				// .onQualifiers(Qualifiers.PROJECT)
 				.build(),
 				PropertyDefinition.builder(EXPECTED_REPORT_INPUT_FILE_TYPES_KEY)
