@@ -27,7 +27,7 @@ import java.util.List;
  *
  * It contains meta data about definedRules definition.
  */
-@XmlRootElement(name = "framac-definedRules")
+@XmlRootElement(name = "framac-rules")
 public class RulesDefinition {
 
     @XmlElement( name = "rule" )
