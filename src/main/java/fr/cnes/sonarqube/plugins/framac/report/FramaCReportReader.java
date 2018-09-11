@@ -1,56 +1,47 @@
 /*
-	 * This file is part of sonar-frama-c-plugin.
-	 *
-	 * sonar-frama-c-plugin is free software: you can redistribute it and/or modify
-	 * it under the terms of the GNU General Public License as published by
-	 * the Free Software Foundation, either version 3 of the License, or
-	 * (at your option) any later version.
-	 *
-	 * sonar-frama-c-plugin is distributed in the hope that it will be useful,
-	 * but WITHOUT ANY WARRANTY; without even the implied warranty of
-	 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	 * GNU General Public License for more details.
-	 *
-	 * You should have received a copy of the GNU General Public License
-	 * along with sonar-frama-c-plugin.  If not, see <http://www.gnu.org/licenses/>.
-
-*/
+ * This file is part of sonarframac.
+ *
+ * sonarframac is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * sonarframac is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with sonarframac.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package fr.cnes.sonarqube.plugins.framac.report;
 
+import fr.cnes.sonarqube.plugins.framac.measures.CyclomaticMetrics;
 import fr.cnes.sonarqube.plugins.framac.rules.FramaCRulesDefinition;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
 import org.sonar.api.measures.Metric;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
-
-import fr.cnes.sonarqube.plugins.framac.measures.CyclomaticMetrics;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
 
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Path;
+import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Read expected data from a Frama-C report file.
  * 
  * Scan a Frama-C report file for patterns given by Metrics and Rules and produce measures and issues for each match
- * 
- * @author Cyrille FRANCOIS
- *
  */
 public class FramaCReportReader {
 	
@@ -101,12 +92,12 @@ public class FramaCReportReader {
 					String key = rule.getElementsByTagName("key").item(0).getTextContent();
 					if (key.startsWith("CSV")) {
 						String internalKey = rule.getElementsByTagName("internalKey").item(0).getTextContent();
-						LOGGER.debug(String.format("Adding rules to map (%s) (%s)", internalKey, key));
+						LOGGER.debug(String.format("Adding definedRules to map (%s) (%s)", internalKey, key));
 						mapCsvRulePattern.put(internalKey, key);
 					}
 				}
 			} catch (ParserConfigurationException | IOException | SAXException e) {
-				LOGGER.error(String.format("error reading rules file [%s]", pathToRule), e);
+				LOGGER.error(String.format("error reading definedRules file [%s]", pathToRule), e);
 			}
 		}
 	}
@@ -271,7 +262,7 @@ public class FramaCReportReader {
 		kernelMatcher.reset(line);
 		if (kernelMatcher.find()) {
 
-			// Syntax rules violation
+			// Syntax definedRules violation
 			LOGGER.info("Kernel matcher :" + line);
 			
 			// Global SYNTAXE Rule

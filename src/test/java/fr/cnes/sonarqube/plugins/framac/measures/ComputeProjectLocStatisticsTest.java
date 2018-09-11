@@ -1,23 +1,15 @@
 package fr.cnes.sonarqube.plugins.framac.measures;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.mockitoSession;
-
-import org.mockito.Mockito;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
-
 import org.junit.Test;
+import org.mockito.Mockito;
 import org.sonar.api.ce.measure.Component;
-import org.sonar.api.ce.measure.Issue;
 import org.sonar.api.ce.measure.Measure;
 import org.sonar.api.ce.measure.MeasureComputer;
-import org.sonar.api.ce.measure.Settings;
 import org.sonar.api.ce.measure.MeasureComputer.MeasureComputerContext;
 import org.sonar.api.ce.measure.MeasureComputer.MeasureComputerDefinition;
 import org.sonar.api.ce.measure.MeasureComputer.MeasureComputerDefinitionContext;
+
+import java.util.ArrayList;
 
 public class ComputeProjectLocStatisticsTest {
 

@@ -1,13 +1,12 @@
 package fr.cnes.sonarqube.plugins.framac.settings;
 
-import static org.junit.Assert.*;
-
-import java.util.List;
-
+import fr.cnes.sonarqube.plugins.framac.languages.FramaCLanguage;
 import org.junit.Test;
 import org.sonar.api.config.PropertyDefinition;
 
-import fr.cnes.sonarqube.plugins.framac.languages.FramaCLanguage;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 public class FramaCLanguagePropertiesTest {
 

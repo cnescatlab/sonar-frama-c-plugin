@@ -1,30 +1,26 @@
 /*
- * This file is part of sonar-frama-c-plugin.
+ * This file is part of sonarframac.
  *
- * sonar-frama-c-plugin is free software: you can redistribute it and/or modify
+ * sonarframac is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * sonar-frama-c-plugin is distributed in the hope that it will be useful,
+ * sonarframac is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with sonar-frama-c-plugin.  If not, see <http://www.gnu.org/licenses/>.
+ * along with sonarframac.  If not, see <http://www.gnu.org/licenses/>.
  */
 package fr.cnes.sonarqube.plugins.framac.measures;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.regex.Pattern;
-
 import org.sonar.api.measures.Metric;
 import org.sonar.api.measures.Metrics;
+
+import java.util.*;
+import java.util.regex.Pattern;
 
 /**
  * Define Frama-C metrics into Sonar data base and pattern matching into Frama-C report file.
@@ -50,8 +46,6 @@ import org.sonar.api.measures.Metrics;
  * 
  * Each metrics is associated with a expected report pattern in order to import Frama-C metrics measures 
  *
- * @author Cyrille FRANCOIS
- * 
  */
 public class CyclomaticMetrics implements Metrics {
 
@@ -75,7 +69,7 @@ public class CyclomaticMetrics implements Metrics {
 			Metric.ValueType.INT)
 			.setDescription("Number of lines of code (assuming one C statement equals one line of code)")
 			.setDirection(Metric.DIRECTION_WORST) // Metric.DIRECTION_NONE, Metric.DIRECTION_BETTER, Metric.DIRECTION_WORST
-            .setQualitative(false) // by default false, tru => Highlighted into gui		
+            .setQualitative(false) // by definedRules false, tru => Highlighted into gui
 			.setDomain(DOMAIN).create();
 
 	/** Metric for average number of lines of code by module */
@@ -85,7 +79,7 @@ public class CyclomaticMetrics implements Metrics {
 			Metric.ValueType.FLOAT)
 			.setDescription("Number of lines of code (Mean)")
 			.setDirection(Metric.DIRECTION_WORST) // Metric.DIRECTION_NONE, Metric.DIRECTION_BETTER, Metric.DIRECTION_WORST
-            .setQualitative(false) // by default false, tru => Highlighted into gui		
+            .setQualitative(false) // by definedRules false, tru => Highlighted into gui
 			.setDomain(DOMAIN).create();
 
 	/** Metric for the maximum number of lines of code by module */
@@ -95,7 +89,7 @@ public class CyclomaticMetrics implements Metrics {
 			Metric.ValueType.INT)
 			.setDescription("Number of lines of code (Maximum)")
 			.setDirection(Metric.DIRECTION_WORST) // Metric.DIRECTION_NONE, Metric.DIRECTION_BETTER, Metric.DIRECTION_WORST
-            .setQualitative(false) // by default false, tru => Highlighted into gui		
+            .setQualitative(false) // by definedRules false, tru => Highlighted into gui
 			.setDomain(DOMAIN).create();
 
 	/** Metric for the minimum number of lines of code */
@@ -105,7 +99,7 @@ public class CyclomaticMetrics implements Metrics {
 			Metric.ValueType.INT)
 			.setDescription("Number of lines of code (Minimum)")
 			.setDirection(Metric.DIRECTION_WORST) // Metric.DIRECTION_NONE, Metric.DIRECTION_BETTER, Metric.DIRECTION_WORST
-            .setQualitative(false) // by default false, tru => Highlighted into gui		
+            .setQualitative(false) // by definedRules false, tru => Highlighted into gui
 			.setDomain(DOMAIN).create();
 	
 	/** Metric for number of decision points (conditional statements (if) and expressions (? :), switc cases, lazy logical operators, loops)*/
@@ -115,7 +109,7 @@ public class CyclomaticMetrics implements Metrics {
 			Metric.ValueType.INT)
 			.setDescription("Decision points (conditional statements (if) and expressions (? :), switc cases, lazy logical operators, loops)")
 			.setDirection(Metric.DIRECTION_WORST) // Metric.DIRECTION_NONE, Metric.DIRECTION_BETTER, Metric.DIRECTION_WORST
-            .setQualitative(false) // by default false, tru => Highlighted into gui		
+            .setQualitative(false) // by definedRules false, tru => Highlighted into gui
 			.setDomain(DOMAIN).create();
 	
 	/** Metric for number of global variables */
@@ -124,7 +118,7 @@ public class CyclomaticMetrics implements Metrics {
 			"Number of global variables",
 			Metric.ValueType.INT)
 			.setDirection(Metric.DIRECTION_WORST) // Metric.DIRECTION_NONE, Metric.DIRECTION_BETTER, Metric.DIRECTION_WORST
-            .setQualitative(false) // by default false, tru => Highlighted into gui		
+            .setQualitative(false) // by definedRules false, tru => Highlighted into gui
 			.setDomain(DOMAIN).create();
 	
 	/** Metric for number of if statements */
@@ -133,7 +127,7 @@ public class CyclomaticMetrics implements Metrics {
 			"Number of if statements",
 			Metric.ValueType.INT)
 			.setDirection(Metric.DIRECTION_WORST) // Metric.DIRECTION_NONE, Metric.DIRECTION_BETTER, Metric.DIRECTION_WORST
-            .setQualitative(false) // by default false, tru => Highlighted into gui		
+            .setQualitative(false) // by definedRules false, tru => Highlighted into gui
 			.setDomain(DOMAIN).create();
 	
 	/** Metric for number of loop statements */
@@ -142,7 +136,7 @@ public class CyclomaticMetrics implements Metrics {
 			"Number of loop statements",
 			Metric.ValueType.INT)
 			.setDirection(Metric.DIRECTION_WORST) // Metric.DIRECTION_NONE, Metric.DIRECTION_BETTER, Metric.DIRECTION_WORST
-            .setQualitative(false) // by default false, tru => Highlighted into gui		
+            .setQualitative(false) // by definedRules false, tru => Highlighted into gui
 			.setDomain(DOMAIN).create();
 	
 	/** Metric for number of goto statements */
@@ -151,7 +145,7 @@ public class CyclomaticMetrics implements Metrics {
 			"Number of goto statements",
 			Metric.ValueType.INT)
 			.setDirection(Metric.DIRECTION_WORST) // Metric.DIRECTION_NONE, Metric.DIRECTION_BETTER, Metric.DIRECTION_WORST
-            .setQualitative(false) // by default false, tru => Highlighted into gui		
+            .setQualitative(false) // by definedRules false, tru => Highlighted into gui
 			.setDomain(DOMAIN).create();
 	
 	/** Metric for number of assignment statements */
@@ -160,7 +154,7 @@ public class CyclomaticMetrics implements Metrics {
 			"Number of assignment statements",
 			Metric.ValueType.INT)
 			.setDirection(Metric.DIRECTION_WORST) // Metric.DIRECTION_NONE, Metric.DIRECTION_BETTER, Metric.DIRECTION_WORST
-            .setQualitative(false) // by default false, tru => Highlighted into gui		
+            .setQualitative(false) // by definedRules false, tru => Highlighted into gui
 			.setDomain(DOMAIN).create();
 	
 	/** Metric for number of exit point statements */
@@ -170,7 +164,7 @@ public class CyclomaticMetrics implements Metrics {
 			Metric.ValueType.INT)
 			.setDescription("Number of exit point (return statements)")
 			.setDirection(Metric.DIRECTION_WORST) // Metric.DIRECTION_NONE, Metric.DIRECTION_BETTER, Metric.DIRECTION_WORST
-            .setQualitative(false) // by default false, tru => Highlighted into gui		
+            .setQualitative(false) // by definedRules false, tru => Highlighted into gui
 			.setDomain(DOMAIN).create();
 	
 	/** Metric for number of functions declared*/
@@ -179,7 +173,7 @@ public class CyclomaticMetrics implements Metrics {
 			"Number of functions declared",
 			Metric.ValueType.INT)
 			.setDirection(Metric.DIRECTION_WORST) // Metric.DIRECTION_NONE, Metric.DIRECTION_BETTER, Metric.DIRECTION_WORST
-            .setQualitative(false) // by default false, tru => Highlighted into gui		
+            .setQualitative(false) // by definedRules false, tru => Highlighted into gui
 			.setDomain(DOMAIN).create();
 	
 	
@@ -189,7 +183,7 @@ public class CyclomaticMetrics implements Metrics {
 			"Number of function calls",
 			Metric.ValueType.INT)
 			.setDirection(Metric.DIRECTION_WORST) // Metric.DIRECTION_NONE, Metric.DIRECTION_BETTER, Metric.DIRECTION_WORST
-            .setQualitative(false) // by default false, tru => Highlighted into gui		
+            .setQualitative(false) // by definedRules false, tru => Highlighted into gui
 			.setDomain(DOMAIN).create();
 	
 	/** Metric for number of pointer dereferencings */
@@ -198,7 +192,7 @@ public class CyclomaticMetrics implements Metrics {
 			"Number of pointer dereferencings",
 			Metric.ValueType.INT)
 			.setDirection(Metric.DIRECTION_WORST) // Metric.DIRECTION_NONE, Metric.DIRECTION_BETTER, Metric.DIRECTION_WORST
-            .setQualitative(false) // by default false, tru => Highlighted into gui		
+            .setQualitative(false) // by definedRules false, tru => Highlighted into gui
 			.setDomain(DOMAIN).create();
 	
 	/** Metric for cyclomatic complexity */
@@ -207,7 +201,7 @@ public class CyclomaticMetrics implements Metrics {
 			"Cyclomatic complexity",
 			Metric.ValueType.INT)
 			.setDirection(Metric.DIRECTION_WORST) // Metric.DIRECTION_NONE, Metric.DIRECTION_BETTER, Metric.DIRECTION_WORST
-            .setQualitative(false) // by default false, tru => Highlighted into gui		
+            .setQualitative(false) // by definedRules false, tru => Highlighted into gui
 			.setDomain(DOMAIN).create();
 
 	/** Metric for the mean value of cyclomatic complexity */
@@ -216,7 +210,7 @@ public class CyclomaticMetrics implements Metrics {
 			"Cyclomatic complexity (Mean)",
 			Metric.ValueType.FLOAT)
 			.setDirection(Metric.DIRECTION_WORST) // Metric.DIRECTION_NONE, Metric.DIRECTION_BETTER, Metric.DIRECTION_WORST
-            .setQualitative(false) // by default false, tru => Highlighted into gui		
+            .setQualitative(false) // by definedRules false, tru => Highlighted into gui
 			.setDomain(DOMAIN).create();
 
 	/** Metric for the maximum value of cyclomatic complexity */
@@ -225,7 +219,7 @@ public class CyclomaticMetrics implements Metrics {
 			"Cyclomatic complexity (Maximum)",
 			Metric.ValueType.INT)
 			.setDirection(Metric.DIRECTION_WORST) // Metric.DIRECTION_NONE, Metric.DIRECTION_BETTER, Metric.DIRECTION_WORST
-            .setQualitative(false) // by default false, tru => Highlighted into gui		
+            .setQualitative(false) // by definedRules false, tru => Highlighted into gui
 			.setDomain(DOMAIN).create();
 
 	/** Metric for the minimum value of cyclomatic complexity */
@@ -234,7 +228,7 @@ public class CyclomaticMetrics implements Metrics {
 			"Cyclomatic complexity (Minimum)",
 			Metric.ValueType.INT)
 			.setDirection(Metric.DIRECTION_WORST) // Metric.DIRECTION_NONE, Metric.DIRECTION_BETTER, Metric.DIRECTION_WORST
-            .setQualitative(false) // by default false, tru => Highlighted into gui		
+            .setQualitative(false) // by definedRules false, tru => Highlighted into gui
 			.setDomain(DOMAIN).create();
 
 	private static final String PATTERN_ASSIGNEMENT = " = ";

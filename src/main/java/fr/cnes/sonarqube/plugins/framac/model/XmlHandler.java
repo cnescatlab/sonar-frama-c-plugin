@@ -1,0 +1,67 @@
+/*
+ * This file is part of sonarframac.
+ *
+ * sonarframac is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * sonarframac is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with sonarframac.  If not, see <http://www.gnu.org/licenses/>.
+ */
+package fr.cnes.sonarqube.plugins.framac.model;
+
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
+import java.io.File;
+import java.io.InputStream;
+
+/**
+ * Class used to unmarshal xml files (results and definedRules definition).
+ *
+ * It contains useful methods to handle xml files.
+ */
+public class XmlHandler {
+
+    /**
+     * Private constructor for this utility class.
+     */
+    private XmlHandler(){}
+
+    /**
+     * This method use JAXB to unmarshal XML report: it transform simply
+     * XML into our Java Object by reading annotations on model classes.
+     *
+     * @param file File descriptor of the report to import as Java Objects.
+     * @param cls Destination class for unmarshalling.
+     * @return AnalysisReport: the main structure of the report.
+     * @throws JAXBException Exception during conversion can be met.
+     */
+    public static Object unmarshal(final File file, final Class<?> cls) throws JAXBException {
+        final JAXBContext jaxbContext = JAXBContext.newInstance(cls);
+        final Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+        return jaxbUnmarshaller.unmarshal(file);
+    }
+
+    /**
+     * This method use JAXB to unmarshal XML report: it transform simply
+     * XML into our Java Object by reading annotations on model classes.
+     *
+     * @param file Stream of the xml file to import as Java Objects.
+     * @param cls Destination class for unmarshalling.
+     * @return AnalysisReport: the main structure of the report.
+     * @throws JAXBException Exception during conversion can be met.
+     */
+    public static Object unmarshal(final InputStream file, final Class<?> cls) throws JAXBException {
+        final JAXBContext jaxbContext = JAXBContext.newInstance(cls);
+        final Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
+        return jaxbUnmarshaller.unmarshal(file);
+    }
+
+}

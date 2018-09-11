@@ -1,8 +1,5 @@
 package fr.cnes.sonarqube.plugins.framac.measures;
 
-import java.util.ArrayList;
-import java.util.Set;
-
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.sonar.api.ce.measure.Component;
@@ -11,6 +8,8 @@ import org.sonar.api.ce.measure.MeasureComputer;
 import org.sonar.api.ce.measure.MeasureComputer.MeasureComputerContext;
 import org.sonar.api.ce.measure.MeasureComputer.MeasureComputerDefinition;
 import org.sonar.api.ce.measure.MeasureComputer.MeasureComputerDefinitionContext;
+
+import java.util.ArrayList;
 
 public class ComputeProjectCyclomaticStatisticsTest {
 

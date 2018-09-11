@@ -1,13 +1,12 @@
 package fr.cnes.sonarqube.plugins.framac.rules;
 
-import static org.junit.Assert.assertEquals;
-
+import fr.cnes.sonarqube.plugins.framac.languages.FramaCLanguage;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.sonar.api.server.rule.RulesDefinition.Context;
 import org.sonar.api.server.rule.RulesDefinition.NewRepository;
 
-import fr.cnes.sonarqube.plugins.framac.languages.FramaCLanguage;
+import static org.junit.Assert.assertEquals;
 
 public class FramaCRulesDefinitionTest {
 
@@ -23,7 +22,7 @@ public class FramaCRulesDefinitionTest {
 		FramaCRulesDefinition framaCRulesDefinition = new FramaCRulesDefinition(){
 			
 			protected String rulesDefinitionFilePath() {
-				return "/default/bad-framac-rules.xml";
+				return "/rules/bad-framac-definedRules.xml";
 			}
 		};
 		framaCRulesDefinition.define(context);
