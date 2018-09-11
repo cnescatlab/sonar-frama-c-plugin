@@ -17,19 +17,13 @@
 */
 package fr.cnes.sonarqube.plugins.framac;
 
-import org.sonar.api.Plugin;
-
 import fr.cnes.sonarqube.plugins.framac.languages.FramaCLanguage;
 import fr.cnes.sonarqube.plugins.framac.languages.FramaCQualityProfile;
-import fr.cnes.sonarqube.plugins.framac.measures.ComputePluginErrors;
-import fr.cnes.sonarqube.plugins.framac.measures.ComputeProjectCyclomaticStatistics;
-import fr.cnes.sonarqube.plugins.framac.measures.ComputeProjectLocStatistics;
-import fr.cnes.sonarqube.plugins.framac.measures.CyclomaticMetrics;
-import fr.cnes.sonarqube.plugins.framac.measures.FramaCMetrics;
+import fr.cnes.sonarqube.plugins.framac.measures.*;
 import fr.cnes.sonarqube.plugins.framac.rules.FramaCRulesDefinition;
 import fr.cnes.sonarqube.plugins.framac.sensor.FramaCMetricsSensor;
 import fr.cnes.sonarqube.plugins.framac.settings.FramaCLanguageProperties;
-import fr.cnes.sonarqube.plugins.framac.web.FramaCDashboard;
+import org.sonar.api.Plugin;
 
 /**
  * This class is the entry point for all extensions
@@ -54,10 +48,6 @@ public class FramaCPlugin implements Plugin {
 
 		// Rules definition and scan issues
 		context.addExtension(FramaCRulesDefinition.class);
-		
-		// Dashboard
-		context.addExtension(
-				FramaCDashboard.class);
 		
 		// Sonar scanner extension (Sensor)
 		context.addExtension(
