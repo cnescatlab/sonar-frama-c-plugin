@@ -1,20 +1,15 @@
 package fr.cnes.sonarqube.plugins.framac.measures;
 
-import static org.junit.Assert.*;
-
-import java.util.ArrayList;
-import java.util.Set;
-
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.sonar.api.ce.measure.Component;
 import org.sonar.api.ce.measure.Measure;
 import org.sonar.api.ce.measure.MeasureComputer;
-import org.sonar.api.ce.measure.Component.FileAttributes;
-import org.sonar.api.ce.measure.Component.Type;
 import org.sonar.api.ce.measure.MeasureComputer.MeasureComputerContext;
 import org.sonar.api.ce.measure.MeasureComputer.MeasureComputerDefinition;
 import org.sonar.api.ce.measure.MeasureComputer.MeasureComputerDefinitionContext;
+
+import java.util.ArrayList;
 
 public class ComputePluginErrorsTest {
 

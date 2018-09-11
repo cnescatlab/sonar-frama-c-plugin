@@ -1,13 +1,13 @@
 package fr.cnes.sonarqube.plugins.framac.measures;
 
-import static org.junit.Assert.*;
+import org.junit.Test;
+import org.sonar.api.measures.Metric;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.junit.Test;
-import org.sonar.api.measures.Metric;
+import static org.junit.Assert.assertEquals;
 
 public class CyclomaticMetricsTest extends CyclomaticMetrics{
 

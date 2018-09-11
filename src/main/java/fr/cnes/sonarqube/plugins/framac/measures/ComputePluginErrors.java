@@ -1,27 +1,25 @@
 /*
-	 * This file is part of sonar-frama-c-plugin.
-	 *
-	 * sonar-frama-c-plugin is free software: you can redistribute it and/or modify
-	 * it under the terms of the GNU General Public License as published by
-	 * the Free Software Foundation, either version 3 of the License, or
-	 * (at your option) any later version.
-	 *
-	 * sonar-frama-c-plugin is distributed in the hope that it will be useful,
-	 * but WITHOUT ANY WARRANTY; without even the implied warranty of
-	 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	 * GNU General Public License for more details.
-	 *
-	 * You should have received a copy of the GNU General Public License
-	 * along with sonar-frama-c-plugin.  If not, see <http://www.gnu.org/licenses/>.
-
-*/
+ * This file is part of sonarframac.
+ *
+ * sonarframac is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * sonarframac is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with sonarframac.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package fr.cnes.sonarqube.plugins.framac.measures;
 
+import fr.cnes.sonarqube.plugins.framac.sensor.FramaCMetricsSensor;
 import org.sonar.api.ce.measure.Component;
 import org.sonar.api.ce.measure.Measure;
 import org.sonar.api.ce.measure.MeasureComputer;
-
-import fr.cnes.sonarqube.plugins.framac.sensor.FramaCMetricsSensor;
 
 /**
  * Compute a project global Frama-C report error.
@@ -29,9 +27,6 @@ import fr.cnes.sonarqube.plugins.framac.sensor.FramaCMetricsSensor;
  * Frama-C shall provide a report for each project code file
  * 
  * @see FramaCMetricsSensor
- * 
- * @author Cyrille FRANCOIS
- *
  */
 public class ComputePluginErrors implements MeasureComputer {
 	

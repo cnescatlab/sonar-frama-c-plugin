@@ -1,23 +1,11 @@
 package fr.cnes.sonarqube.plugins.framac.sensor;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-
-import java.io.File;
-import java.io.Serializable;
-import java.util.ArrayList;
-
+import fr.cnes.sonarqube.plugins.framac.FramaCPlugin;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.mockito.Mockito;
 import org.sonar.api.Plugin;
-import org.sonar.api.batch.fs.FilePredicate;
-import org.sonar.api.batch.fs.FilePredicates;
-import org.sonar.api.batch.fs.FileSystem;
-import org.sonar.api.batch.fs.InputComponent;
-import org.sonar.api.batch.fs.InputFile;
-import org.sonar.api.batch.fs.TextRange;
+import org.sonar.api.batch.fs.*;
 import org.sonar.api.batch.measure.Metric;
 import org.sonar.api.batch.rule.Severity;
 import org.sonar.api.batch.sensor.SensorContext;
@@ -27,7 +15,13 @@ import org.sonar.api.batch.sensor.issue.NewIssueLocation;
 import org.sonar.api.batch.sensor.measure.NewMeasure;
 import org.sonar.api.rule.RuleKey;
 
-import fr.cnes.sonarqube.plugins.framac.FramaCPlugin;
+import java.io.File;
+import java.io.Serializable;
+import java.util.ArrayList;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 
 public class FramaCMetricsSensorTest {
 	

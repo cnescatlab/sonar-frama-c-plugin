@@ -1,29 +1,27 @@
 /*
-	 * This file is part of sonar-frama-c-plugin.
-	 *
-	 * sonar-frama-c-plugin is free software: you can redistribute it and/or modify
-	 * it under the terms of the GNU General Public License as published by
-	 * the Free Software Foundation, either version 3 of the License, or
-	 * (at your option) any later version.
-	 *
-	 * sonar-frama-c-plugin is distributed in the hope that it will be useful,
-	 * but WITHOUT ANY WARRANTY; without even the implied warranty of
-	 * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	 * GNU General Public License for more details.
-	 *
-	 * You should have received a copy of the GNU General Public License
-	 * along with sonar-frama-c-plugin.  If not, see <http://www.gnu.org/licenses/>.
-
-*/
+ * This file is part of sonarframac.
+ *
+ * sonarframac is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * sonarframac is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with sonarframac.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package fr.cnes.sonarqube.plugins.framac.settings;
 
-import static java.util.Arrays.asList;
+import fr.cnes.sonarqube.plugins.framac.languages.FramaCLanguage;
+import org.sonar.api.config.PropertyDefinition;
 
 import java.util.List;
 
-import org.sonar.api.config.PropertyDefinition;
-
-import fr.cnes.sonarqube.plugins.framac.languages.FramaCLanguage;
+import static java.util.Arrays.asList;
 
 /**
  * Sonar plugin Frama-C properties.
@@ -31,9 +29,6 @@ import fr.cnes.sonarqube.plugins.framac.languages.FramaCLanguage;
  * According to a abstract FramaCLanguage definition, this property class define all plugin's properties:
  * 
  * For all project code file : <b>FILE</b>, Frama-C create a report file <b>FILE{@link FramaCLanguageProperties#REPORT_EXT}</b> into the {@link FramaCLanguageProperties#REPORT_SUBDIR} shall be
- * 
- * @author Cyrille FRANCOIS
- *
  */
 public class FramaCLanguageProperties {
 		

@@ -23,8 +23,7 @@ import java.util.List;
 /**
  * Analyze Frama-C report file
  * 
- * @author Cyrille FRANCOIS
- *
+ *  *
  */
 public class AnalysisProject  implements ReportInterface{
 	

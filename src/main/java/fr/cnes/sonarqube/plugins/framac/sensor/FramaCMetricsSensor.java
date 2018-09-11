@@ -1,29 +1,26 @@
 /*
- * This file is part of sonar-frama-c-plugin.
+ * This file is part of sonarframac.
  *
- * sonar-frama-c-plugin is free software: you can redistribute it and/or modify
+ * sonarframac is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
  *
- * sonar-frama-c-plugin is distributed in the hope that it will be useful,
+ * sonarframac is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with sonar-frama-c-plugin.  If not, see <http://www.gnu.org/licenses/>.
+ * along with sonarframac.  If not, see <http://www.gnu.org/licenses/>.
  */
 package fr.cnes.sonarqube.plugins.framac.sensor;
 
-import fr.cnes.sonarqube.plugins.framac.report.FramaCError;
-import java.io.File;
-import java.io.IOException;
-import java.nio.channels.FileChannel;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-
-import java.util.List;
+import fr.cnes.sonarqube.plugins.framac.measures.CyclomaticMetrics;
+import fr.cnes.sonarqube.plugins.framac.measures.FramaCMetrics;
+import fr.cnes.sonarqube.plugins.framac.report.*;
+import fr.cnes.sonarqube.plugins.framac.rules.FramaCRulesDefinition;
+import fr.cnes.sonarqube.plugins.framac.settings.FramaCLanguageProperties;
 import org.sonar.api.batch.fs.FilePredicates;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
@@ -37,21 +34,19 @@ import org.sonar.api.rule.RuleKey;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
-import fr.cnes.sonarqube.plugins.framac.measures.CyclomaticMetrics;
-import fr.cnes.sonarqube.plugins.framac.measures.FramaCMetrics;
-import fr.cnes.sonarqube.plugins.framac.report.ErrorInterface;
-import fr.cnes.sonarqube.plugins.framac.report.FramaCReportReader;
-import fr.cnes.sonarqube.plugins.framac.report.ReportInterface;
-import fr.cnes.sonarqube.plugins.framac.report.ReportModuleRuleInterface;
-import fr.cnes.sonarqube.plugins.framac.rules.FramaCRulesDefinition;
-import fr.cnes.sonarqube.plugins.framac.settings.FramaCLanguageProperties;
+import java.io.File;
+import java.io.IOException;
+import java.nio.channels.FileChannel;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.List;
 
 
 /**
  * Scan Frama-C report file.
- * For all project code file : <b>FILE</b>, Frama-C create a report file <b>FILE{@link FramaCMetricsSensor#REPORT_EXT}</b> into the {@link FramaCMetricsSensor#REPORT_SUBDIR} shall be
- * 
- * @author Cyrille FRANCOIS
+ * For all project code file : <b>FILE</b>, Frama-C create a report
+ * file <b>FILE{@link FramaCMetricsSensor#REPORT_EXT}</b> into
+ * the {@link FramaCMetricsSensor#REPORT_SUBDIR}
  */
 public class FramaCMetricsSensor implements Sensor {
 	
@@ -121,10 +116,10 @@ public class FramaCMetricsSensor implements Sensor {
 
 	void readPluginSettings(SensorContext context) {
 		// Read Plugin settings
-		expectedReportInputFileTypes = context.settings().getString(FramaCLanguageProperties.EXPECTED_REPORT_INPUT_FILE_TYPES_KEY);
-		reportOutExt = context.settings().getString(FramaCLanguageProperties.REPORT_OUT_EXT_KEY);
-		reportCsvExt = context.settings().getString(FramaCLanguageProperties.REPORT_CSV_EXT_KEY);
-		reportSubdir = context.settings().getString(FramaCLanguageProperties.REPORT_SUBDIR_KEY);
+		expectedReportInputFileTypes = String.valueOf(context.config().get(FramaCLanguageProperties.EXPECTED_REPORT_INPUT_FILE_TYPES_KEY));
+		reportOutExt = String.valueOf(context.config().get(FramaCLanguageProperties.REPORT_OUT_EXT_KEY));
+		reportCsvExt = String.valueOf(context.config().get(FramaCLanguageProperties.REPORT_CSV_EXT_KEY));
+		reportSubdir = String.valueOf(context.config().get(FramaCLanguageProperties.REPORT_SUBDIR_KEY));
 	}
 
 	/**
