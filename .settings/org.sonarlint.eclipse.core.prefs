@@ -1,6 +1,0 @@
-autoEnabled=true
-eclipse.preferences.version=1
-extraProperties=
-moduleKey=fr.cnes.sonarqube.plugins\:sonar-frama-c-plugin
-projectKey=fr.cnes.sonarqube.plugins\:sonar-frama-c-plugin
-serverId=localhost
