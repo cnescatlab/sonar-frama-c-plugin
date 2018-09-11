@@ -1,92 +1,122 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>fr.cnes.sonarqube.plugins</groupId>
-	<artifactId>sonar-frama-c-plugin</artifactId>
-	<packaging>sonar-plugin</packaging>
-	<version>1.0.0-SNAPSHOT</version>
-	<name>Frama-C</name>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>fr.cnes.sonarqube.plugins</groupId>
+    <artifactId>sonarframac</artifactId>
+    <packaging>sonar-plugin</packaging>
+    <version>1.0.0</version>
+    <name>Sonar Frama-C plugin</name>
 
-	<description>Frama-c plugin for Sonarqube</description>
-	<url>https://github.com/lequal/sonar-frama-c-plugin</url>
-	<inceptionYear>2017</inceptionYear>
+    <description>Frama-c plugin for Sonarqube</description>
+    <url>https://github.com/lequal/sonar-frama-c-plugin</url>
+    <inceptionYear>2017</inceptionYear>
 
-	<licenses>
-		<license>
-			<name>GNU General Public License, Version 3.0</name>
-			<url>https://www.gnu.org/licenses/gpl-3.0.en.html</url>
-			<distribution>manual</distribution>
-		</license>
-	</licenses>
+    <licenses>
+        <license>
+            <name>GNU General Public License, Version 3.0</name>
+            <url>https://www.gnu.org/licenses/gpl-3.0.en.html</url>
+            <distribution>manual</distribution>
+        </license>
+    </licenses>
 
-	<!-- optional -->
-	<organization>
-		<name>CNES</name>
-		<url>http://cnes.fr</url>
-	</organization>
+    <!-- optional -->
+    <organization>
+        <name>CNES</name>
+        <url>http://cnes.fr</url>
+    </organization>
 
-	<developers>
-		<developer>
-			<name>Cyrille Francois</name>
-			<url>https://github.com/CfrancCyrille</url>
-			<id>CfrancCyrille</id>
-		</developer>
-		<developer>
-			<name>Nicolas Métivier</name>
-			<url>https://github.com/AT-NicolasMetivier</url>
-			<id>AT-NicolasMetivier</id>
-		</developer>
-	</developers>
+    <developers>
+        <developer>
+            <name>Franck Pujol</name>
+            <organization>ATOS</organization>
+            <url>https://github.com/PujolFranck</url>
+            <id>PujolFranck</id>
+        </developer>
+        <developer>
+            <name>Benoît Garçon</name>
+            <organization>CNES</organization>
+            <url>https://github.com/begarco</url>
+            <id>begarco</id>
+        </developer>
+        <developer>
+            <name>Cyrille Francois</name>
+            <url>https://github.com/CfrancCyrille</url>
+            <id>CfrancCyrille</id>
+        </developer>
+        <developer>
+            <name>Nicolas Métivier</name>
+            <url>https://github.com/AT-NicolasMetivier</url>
+            <id>AT-NicolasMetivier</id>
+        </developer>
+    </developers>
 
-	<properties>
-		<jdk.version>1.8</jdk.version>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<sonar.apiVersion>6.6</sonar.apiVersion>
-		<slf4j.version>1.7.25</slf4j.version>
-		<junit.version>4.12</junit.version>
-		<project.key>framac</project.key>
-		<sonar.sources>src/main/java</sonar.sources>
-	</properties>
+    <properties>
+        <jdk.version>1.8</jdk.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <sonar.apiVersion>6.6</sonar.apiVersion>
+        <slf4j.version>1.7.25</slf4j.version>
+        <junit.version>4.12</junit.version>
+        <project.key>framac</project.key>
+        <sonar.sources>src/main/java</sonar.sources>
+    </properties>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.sonarsource.sonarqube</groupId>
-			<artifactId>sonar-plugin-api</artifactId>
-			<version>${sonar.apiVersion}</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<!-- packaged with the plugin -->
-			<groupId>commons-lang</groupId>
-			<artifactId>commons-lang</artifactId>
-			<version>2.6</version>
-		</dependency>
+    <dependencies>
+        <dependency>
+            <groupId>org.sonarsource.sonarqube</groupId>
+            <artifactId>sonar-plugin-api</artifactId>
+            <version>${sonar.apiVersion}</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <!-- packaged with the plugin -->
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <version>2.6</version>
+        </dependency>
 
-		<!-- unit tests -->
-		<dependency>
-			<groupId>org.sonarsource.sonarqube</groupId>
-			<artifactId>sonar-testing-harness</artifactId>
-			<version>${sonar.apiVersion}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>${junit.version}</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.mockito</groupId>
-			<artifactId>mockito-core</artifactId>
-			<scope>test</scope>
-			<version>2.9.0</version>
-		</dependency>
-	</dependencies>
+        <!-- unit tests -->
+        <dependency>
+            <groupId>org.sonarsource.sonarqube</groupId>
+            <artifactId>sonar-testing-harness</artifactId>
+            <version>${sonar.apiVersion}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-core</artifactId>
+            <scope>test</scope>
+            <version>2.9.0</version>
+        </dependency>
+    </dependencies>
 
-	<build>
-		<plugins>
-		   <plugin>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>properties-maven-plugin</artifactId>
+                <version>1.0.0</version>
+                <executions>
+                    <execution>
+                        <phase>initialize</phase>
+                        <goals>
+                            <goal>read-project-properties</goal>
+                        </goals>
+                        <configuration>
+                            <files>
+                                <file>sonar-project.properties</file>
+                            </files>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>0.7.6.201602180812</version>
@@ -99,76 +129,76 @@
                     </execution>
                 </executions>
             </plugin>
-			<plugin>
-				<groupId>org.sonarsource.sonar-packaging-maven-plugin</groupId>
-				<artifactId>sonar-packaging-maven-plugin</artifactId>
-				<version>1.17</version>
-				<extensions>true</extensions>
-				<configuration>
-					<pluginClass>fr.cnes.sonarqube.plugins.framac.FramaCPlugin</pluginClass>
-					<pluginKey>${project.key}</pluginKey>
-					<pluginName>${project.name}</pluginName>
-					<pluginDescription>${project.description}</pluginDescription>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.6.2</version>
-				<configuration>
-					<source>${jdk.version}</source>
-					<target>${jdk.version}</target>
-					<encoding>${project.build.sourceEncoding}</encoding>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>com.github.eirslett</groupId>
-				<artifactId>frontend-maven-plugin</artifactId>
-				<version>1.6</version>
-				<executions>
-					<execution>
-						<phase>generate-resources</phase>
-						<id>install node and yarn</id>
-						<goals>
-							<goal>install-node-and-yarn</goal>
-						</goals>
-						<configuration>
-							<nodeVersion>v8.5.0</nodeVersion>
-							<yarnVersion>v1.1.0</yarnVersion>
-						</configuration>
-					</execution>
-					<execution>
-						<id>yarn install</id>
-						<goals>
-							<goal>yarn</goal>
-						</goals>
-					</execution>
-					<execution>
-						<phase>generate-resources</phase>
-						<id>yarn run script</id>
-						<goals>
-							<goal>yarn</goal>
-						</goals>
-						<configuration>
-							<arguments>run build</arguments>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<!-- UTF-8 bundles are not supported by Java, so they must be converted 
-					during build -->
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>native2ascii-maven-plugin</artifactId>
-				<version>1.0-beta-1</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>native2ascii</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
+            <plugin>
+                <groupId>org.sonarsource.sonar-packaging-maven-plugin</groupId>
+                <artifactId>sonar-packaging-maven-plugin</artifactId>
+                <version>1.17</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <pluginClass>fr.cnes.sonarqube.plugins.framac.FramaCPlugin</pluginClass>
+                    <pluginKey>${project.key}</pluginKey>
+                    <pluginName>${project.name}</pluginName>
+                    <pluginDescription>${project.description}</pluginDescription>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.6.2</version>
+                <configuration>
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.github.eirslett</groupId>
+                <artifactId>frontend-maven-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <phase>generate-resources</phase>
+                        <id>install node and yarn</id>
+                        <goals>
+                            <goal>install-node-and-yarn</goal>
+                        </goals>
+                        <configuration>
+                            <nodeVersion>v8.5.0</nodeVersion>
+                            <yarnVersion>v1.1.0</yarnVersion>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>yarn install</id>
+                        <goals>
+                            <goal>yarn</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <phase>generate-resources</phase>
+                        <id>yarn run script</id>
+                        <goals>
+                            <goal>yarn</goal>
+                        </goals>
+                        <configuration>
+                            <arguments>run build</arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <!-- UTF-8 bundles are not supported by Java, so they must be converted
+                    during build -->
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>native2ascii-maven-plugin</artifactId>
+                <version>1.0-beta-1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>native2ascii</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
 </project>
