@@ -18,10 +18,9 @@ package fr.cnes.sonarqube.plugins.framac;
 
 import fr.cnes.sonarqube.plugins.framac.languages.FramaCLanguage;
 import fr.cnes.sonarqube.plugins.framac.languages.FramaCQualityProfile;
-import fr.cnes.sonarqube.plugins.framac.measures.*;
 import fr.cnes.sonarqube.plugins.framac.rules.FramaCRulesDefinition;
-import fr.cnes.sonarqube.plugins.framac.sensor.FramaCMetricsSensor;
-import fr.cnes.sonarqube.plugins.framac.settings.FramaCLanguageProperties;
+import fr.cnes.sonarqube.plugins.framac.sensor.FramaCSensor;
+import fr.cnes.sonarqube.plugins.framac.settings.FramaCPluginProperties;
 import org.sonar.api.Plugin;
 
 /**
@@ -33,21 +32,13 @@ public class FramaCPlugin implements Plugin {
 		
 		// Setting plugin FramaC
 		context.addExtensions(FramaCLanguage.class, FramaCQualityProfile.class);
-		context.addExtensions(FramaCLanguageProperties.getProperties());
-
-		// Metrics definition and computed measures
-		context.addExtensions(
-				FramaCMetrics.class, 
-				ComputePluginErrors.class,
-				CyclomaticMetrics.class, 
-				ComputeProjectCyclomaticStatistics.class,
-				ComputeProjectLocStatistics.class);
+		context.addExtensions(FramaCPluginProperties.getProperties());
 
 		// Rules definition and scan issues
 		context.addExtension(FramaCRulesDefinition.class);
 		
 		// Sonar scanner extension (Sensor)
 		context.addExtension(
-				FramaCMetricsSensor.class);	
+				FramaCSensor.class);
 	}
 }

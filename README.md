@@ -21,7 +21,7 @@ You can get Frama-C on GitHub: [Frama-C/Frama-C-snapshot](https://github.com/Fra
 - Run an analysis
 
 ### Features
-- Add support of Frama-C 18 external report
+- Add support of Frama-C 17 external report
 
 ### How to contribute
 If you experienced a problem with the plugin please open an issue. Inside this issue please explain us how to reproduce this issue and paste the log. 

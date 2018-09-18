@@ -1,21 +1,19 @@
 package fr.cnes.sonarqube.plugins.framac.languages;
 
-import fr.cnes.sonarqube.plugins.framac.settings.FramaCLanguageProperties;
 import org.junit.Test;
-import org.mockito.Mockito;
+import org.sonar.api.config.Configuration;
+import org.sonar.api.config.internal.MapSettings;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertArrayEquals;
 
-public class FramaCLanguageTest {	
+public class FramaCLanguageTest {
 
 	@Test
-	public void given_settings_when_getFileSuffixes_then_settings() {
-		String[] expected = new String[]{"*.c","*.i"};
-		org.sonar.api.config.Settings settings = Mockito.mock(org.sonar.api.config.Settings.class);
-		Mockito.when(settings.getStringArray(FramaCLanguageProperties.EXPECTED_REPORT_INPUT_FILE_TYPES_KEY))
-		.thenReturn(new String[]{" "+expected[0]+" ", " "+expected[1]+" "});
-		FramaCLanguage framaCLanguage = new FramaCLanguage(settings);
-		assertEquals(expected, framaCLanguage.getFileSuffixes());
+	public void test_given_settings_when_getFileSuffixes_then_settings() {
+		Configuration settings = new MapSettings().asConfig();
+		FramaCLanguage language = new FramaCLanguage(settings);
+		String[] expected = new String[]{".c",".cc",".i",".h",".C",".CC",".I",".H"};
+		assertArrayEquals(expected, language.getFileSuffixes());
 	}
 
 }

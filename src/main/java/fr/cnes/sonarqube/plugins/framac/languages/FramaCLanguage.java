@@ -16,87 +16,112 @@
  */
 package fr.cnes.sonarqube.plugins.framac.languages;
 
-import fr.cnes.sonarqube.plugins.framac.settings.FramaCLanguageProperties;
-import org.sonar.api.config.Settings;
+import fr.cnes.sonarqube.plugins.framac.settings.FramaCPluginProperties;
+import org.apache.commons.lang.StringUtils;
+import org.sonar.api.config.Configuration;
 import org.sonar.api.resources.AbstractLanguage;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class defines a specific Sonar language for tool FramaC
+ * Declared language i-Code as the parent language for Fortran 77, Fortran 90 & Shell.
+ *
+ * @author lequal
  */
-public final class FramaCLanguage extends AbstractLanguage {
-
-	public static final String NAME = "FramaC";
-	public static final String KEY = "framac";
-
-	private final Settings settings;
+public class FramaCLanguage extends AbstractLanguage {
 
 	/**
-	 * Sonar extension for Frama-C specific properties, Metrics and Rules.
-	 * 
-	 * @param settings Inject Sonar settings into this extension
+	 * Injected SonarQube configuration.
 	 */
-	public FramaCLanguage(Settings settings) {
+	private final Configuration configuration;
+
+	/**
+	 * Name of the language.
+	 */
+	public static final String NAME = "Frama-C";
+	/**
+	 * Key of the language.
+	 */
+	public static final String KEY = "framac";
+
+	/**
+	 * Frama-C extension for Frama-C specific properties, Metrics and Rules.
+	 *
+	 * @param configuration Inject SonarQube configuration into this extension.
+	 */
+	public FramaCLanguage(final Configuration configuration) {
 		super(KEY, NAME);
-		this.settings = settings;
+		this.configuration = configuration;
 	}
 
+	/**
+	 * Returns the list of suffixes which should be associated to this language.
+	 *
+	 * @return A strings' array with file's suffixes.
+	 */
 	@Override
 	public String[] getFileSuffixes() {
-		String[] suffixes = filterEmptyStrings(
-				settings.getStringArray(FramaCLanguageProperties.EXPECTED_REPORT_INPUT_FILE_TYPES_KEY));
+		String[] suffixes = filterEmptyStrings(configuration.getStringArray(getSuffixKey()));
 		if (suffixes.length == 0) {
-			suffixes = FramaCLanguageProperties.EXPECTED_REPORT_INPUT_FILE_TYPES_DEFAULT_VALUE
-					.split(FramaCLanguageProperties.FILE_SUFFIXES_SEPARATOR);
+			suffixes = getDefaultSuffixes().split(",");
 		}
 		return suffixes;
 	}
 
 	/**
-	 * Delete all empty string values into a input String array
-	 * 
-	 * @param stringArray Input String array
-	 * 
-	 * @return Output String array without empty string values
+	 * Return the ey corresponding to the property with suffixes.
+	 *
+	 * @return A String with the key.
 	 */
-	private String[] filterEmptyStrings(String[] stringArray) {
+	public String getSuffixKey() {
+		return FramaCPluginProperties.SUFFIX_KEY;
+	}
+
+	/**
+	 * Return default suffixes for the language.
+	 *
+	 * @return A String containing a coma-separated list.
+	 */
+	public String getDefaultSuffixes() {
+		return FramaCPluginProperties.SUFFIX_DEFAULT;
+	}
+
+	/**
+	 * Delete all empty string values into a input String array.
+	 *
+	 * @param stringArray Input String array.
+	 *
+	 * @return Output String array without empty string values.
+	 */
+	private static String[] filterEmptyStrings(String[] stringArray) {
 		List<String> nonEmptyStrings = new ArrayList<>();
 		for (String string : stringArray) {
-
-			// Add only not empty string values
-			if (!(string.trim()).isEmpty()) {
+			if (StringUtils.isNotBlank(string.trim())) {
 				nonEmptyStrings.add(string.trim());
 			}
 		}
 		return nonEmptyStrings.toArray(new String[nonEmptyStrings.size()]);
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = super.hashCode();
-		result = prime * result + ((settings == null) ? 0 : settings.hashCode());
-		return result;
-	}
-
+	/**
+	 * Assert obj is the same object as this.
+	 *
+	 * @param obj Object to compare with this.
+	 * @return True if obj is this.
+	 */
 	@Override
 	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (!super.equals(obj))
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		FramaCLanguage other = (FramaCLanguage) obj;
-		if (settings == null) {
-			if (other.settings != null)
-				return false;
-		} else if (!settings.equals(other.settings))
-			return false;
-		return true;
+		return obj==this;
 	}
-	
-	
+
+	/**
+	 * Override hashcode because equals is overridden.
+	 *
+	 * @return An integer hashcode.
+	 */
+	@Override
+	public int hashCode() {
+		return super.hashCode();
+	}
 }
