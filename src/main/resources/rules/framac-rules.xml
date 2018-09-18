@@ -1,5 +1,19 @@
 <framac-rules>
 	<rule>
+		<key>FRAMAC.ERROR</key>
+		<name>Frama-C error</name>
+		<internalKey>*</internalKey>
+		<description>This rule is not directly linked to a problem in the code, but it exists to alert users that an error occurred when running Frama-C or reading Frama-C reports.
+		</description>
+		<severity>CRITICAL</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>BUG</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+		<remediationFunctionBaseEffort>30min</remediationFunctionBaseEffort>
+	</rule>
+	<rule>
 		<key>CSV.0</key>
 		<name>Unreferenced rule</name>
 		<internalKey>*</internalKey>
