@@ -86,14 +86,15 @@ public class FramaCSensor implements Sensor {
 
         // If exists, unmarshal each xml result file.
         for(final String reportPath : reportFiles) {
+
             // Analyse CSV report
-            final List<FramaCError> errors = analyseReportCsv(sensorContext, reportPath);
+            final List<FramaCError> errors = analyseReportCsv(reportPath);
             // Retrieve file in a SonarQube format.
             final Map<String, InputFile> scannedFiles = getScannedFiles(fileSystem, errors);
 
             // Handles issues.
             for (final FramaCError issue : errors) {
-                if(isRuleActive(activeRules, issue.getRuleKey())) { // manage active rules
+                if (isRuleActive(activeRules, issue.getRuleKey())) { // manage active rules
                     saveIssue(sensorContext, scannedFiles, issue);
                 } else { // log ignored data
                     LOGGER.info(String.format(
@@ -251,31 +252,24 @@ public class FramaCSensor implements Sensor {
      *  Analyze a report file provided by the external tool Frama-C.
      *  Check the report file integrity (exist, not empty and readable).
      *
-     * @param context SonarQube sensor context.
      * @param resultFile File containing issues in csv format.
      */
-    private List<FramaCError> analyseReportCsv(
-            final SensorContext context,
-            final String resultFile) {
+    private List<FramaCError> analyseReportCsv(final String resultFile) {
 
         List<FramaCError> errors = null;
 
-        try {
-            if (null != resultFile) {
-                final Path path = Paths.get(resultFile);
-                try (FileChannel reportFile = FileChannel.open(path)) {
-                    FramaCReportReader framaCReportReader = new FramaCReportReader();
-                    errors = framaCReportReader.parseCsv(path);
-                } catch (IOException e) {
-                    final String message = String.format("Unexpected error on report file: %s", resultFile);
-                    throw new FramaCException(message);
-                }
-            } else {
+        if (null != resultFile) {
+            final Path path = Paths.get(resultFile);
+            try (FileChannel reportFile = FileChannel.open(path)) {
+                FramaCReportReader framaCReportReader = new FramaCReportReader();
+                errors = framaCReportReader.parseCsv(path);
+            } catch (IOException e) {
                 final String message = String.format("Unexpected error on report file: %s", resultFile);
-                throw new FramaCException(message);
+                LOGGER.warn(message);
             }
-        } catch (FramaCException e) {
-            LOGGER.error(e.getMessage());
+        } else {
+            final String message = String.format("Unexpected error on report file: %s", resultFile);
+            LOGGER.warn(message);
         }
 
         return errors;
