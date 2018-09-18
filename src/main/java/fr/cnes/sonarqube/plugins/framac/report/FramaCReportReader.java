@@ -42,8 +42,6 @@ import java.util.regex.Pattern;
  * Scan a Frama-C report file for patterns given by Metrics and Rules and produce measures and issues for each match
  */
 public class FramaCReportReader {
-	
-	private static final String NO_EXPECTED_VALUE_FOR_METRICS = "No expected value for metrics ";
 
 	private static final String VALUE_MODULE_NAME = "VALUE";
 	private static final String SYNTAX_MODULE_NAME = "SYNTAX";
@@ -55,8 +53,6 @@ public class FramaCReportReader {
 	public static final String WORD_KERNEL = "\\Q[kernel]\\E";
 	public static final String WORD_VALUE = "\\Q[value]\\E";
 	public static final String WORD_WARNING = " warning:";
-	
-	public static final Pattern PATTERN_KERNEL = Pattern.compile(WORD_KERNEL);
 
 	protected static final Map<String,Pattern> mapRulePattern = new HashMap<>();
 	protected static final Map<String,String> mapDefaultCsvRulePattern = new HashMap<>();
@@ -120,7 +116,7 @@ public class FramaCReportReader {
 		mapDefaultCsvRulePattern.put("signed_overflow", CSV_MODULE_NAME + "." + i++);
 		mapDefaultCsvRulePattern.put("unsigned_overflow", CSV_MODULE_NAME + "." + i++);
 		mapDefaultCsvRulePattern.put("signed_downcast", CSV_MODULE_NAME + "." + i++);
-		mapDefaultCsvRulePattern.put("unsigned_downcast", CSV_MODULE_NAME + "." + i++);
+		mapDefaultCsvRulePattern.put("unsigned_downcast", CSV_MODULE_NAME + "." + i);
 	}
 
 	private void syntaxeRulesMatchingPatterns() {
@@ -188,7 +184,7 @@ public class FramaCReportReader {
 				if(nbLines == 1)
 					continue;
 
-				String data[] = line .split("\t");
+				String[] data = line .split("\t");
 				if (data.length >= 6) {
 					String type = (mapCsvRulePattern.size() > 0)
 						? mapCsvRulePattern.get(data[4])
@@ -213,84 +209,6 @@ public class FramaCReportReader {
 		}
 		LOGGER.info("Parsing CSV report: " + fileReportPath.getFileName() + " (done)");
 		return errors;
-	}
-
-
-	private void searchIssues(AnalysisProject res, Matcher kernelMatcher, String line) {
-		// Search KERNEL message pattern
-		kernelMatcher.reset(line);
-		if (kernelMatcher.find()) {
-
-			// Syntax definedRules violation
-			LOGGER.info("Kernel matcher :" + line);
-			
-			// Global SYNTAXE Rule
-			FramaCError err = searchError(line, SYNTAX_MODULE_NAME);
-			if(err != null){
-				res.addError(err);									
-			}
-		}
-	}
-
-	private FramaCError searchError(String line, String ruleModuleKey) {
-		FramaCError err = null;
-		String rule0Key = ruleModuleKey+".0";
-		Pattern pValue0 = mapRulePattern.get(rule0Key);
-		Matcher mValue0 = pValue0.matcher(line);
-		if (mValue0.find()) {
-			int index = 1;
-			boolean ruleFind = false;
-			String ruleKey = ruleModuleKey + "." + index;
-			Pattern pattern = mapRulePattern.get(ruleKey);
-			while (pattern != null && !ruleFind) {
-				Matcher matcher = pattern.matcher(line);
-				if (matcher.find()) {
-					LOGGER.info("Rule = " + ruleKey);
-					err = parseError(ruleKey, matcher, line);
-					LOGGER.info("Rule violation: "+err);
-
-					ruleFind = true;
-				} else {
-					index++;
-					ruleKey = ruleModuleKey + "." + index;
-					pattern = mapRulePattern.get(ruleKey);
-				}
-			}
-			if (!ruleFind) {
-				err = parseError(rule0Key, mValue0, line);
-				LOGGER.info("Rule = " + rule0Key);
-			}
-
-		}
-		return err;
-	}
-
-	private FramaCError parseError(
-			String ruleKey,
-			Matcher matcher, 
-			String line) {
-		String externalRuleKey = ruleKey;
-		String description = line.substring(matcher.start());
-		
-		// Check file and line error: <FILE_PATH>:<LINE>:<PATTERN & DESCRIPTION>
-		int filePathEndIndex = line.indexOf(':');
-		String filePath = "No file error reported";
-		String lineNb = "1";
-		
-		// The index of the first semi-coloms separator shall be before start of PATTERN
-		if(filePathEndIndex > 0 && filePathEndIndex < matcher.start()){
-			filePath = line.substring(0, filePathEndIndex);
-			int lineNbBeginIndex = filePathEndIndex+1;
-			String lineQueue = line.substring(lineNbBeginIndex);
-			LOGGER.info("LineQueue="+lineQueue);
-			int lineNbEndIndex = lineQueue.indexOf(':');
-			// The index of the second semi-coloms separator shall be before start of PATTERN
-			if(lineNbEndIndex > 0 && lineNbEndIndex < matcher.start()){
-				lineNb = lineQueue.substring(0, lineNbEndIndex);
-			}
-		}
-		
-		return new FramaCError(externalRuleKey, description, filePath, lineNb);
 	}
 
 }
