@@ -1,0 +1,6 @@
+directory	file	line	function	property kind	status	property
+.	unspecified_access_call_bts0888.i	4	f	assigns clause	Unknown	assigns \nothing;
+.	unspecified_access_call_bts0888.i	4	f	from clause	Unknown	assigns \result \from \nothing;
+.	unspecified_access_call_bts0888.i	9	main	signed_overflow	Unknown	x + z ≤ 2147483647
+.	unspecified_access_call_bts0888.i	10	main	signed_overflow	Unknown	x + y ≤ 2147483647
+.	unspecified_access_call_bts0888.i	11	main	signed_overflow	Unknown	x + y ≤ 2147483647

@@ -43,28 +43,35 @@ import java.util.regex.Pattern;
  */
 public class FramaCReportReader {
 
-	private static final String VALUE_MODULE_NAME = "VALUE";
-	private static final String SYNTAX_MODULE_NAME = "SYNTAX";
 	private static final String CSV_MODULE_NAME = "CSV";
 	private static final String CSV_DEFAULT_TYPE = CSV_MODULE_NAME + ".0";
 
 	private static final Logger LOGGER = Loggers.get(FramaCReportReader.class);
 	
-	public static final String WORD_KERNEL = "\\Q[kernel]\\E";
-	public static final String WORD_VALUE = "\\Q[value]\\E";
-	public static final String WORD_WARNING = " warning:";
+	// For managing regexp related to kernel error analysis
+	private static final String GROUP_FILE = "file";
+	private static final String GROUP_LINE_NB = "lineNumber";
+	private static final String GROUP_DESCRITPION = "description";
+	private static final String REGEXP_WARNING = String.format("\\[kernel.*\\] (?<%s>.*):(?<%s>.*): Warning:(?<%s>.*)", GROUP_FILE, GROUP_LINE_NB, GROUP_DESCRITPION);
+	private static final String REGEXP_USER_ERROR = String.format("\\[kernel.*\\] (?<%s>.*):(?<%s>.*): User Error:(?<%s>.*)", GROUP_FILE, GROUP_LINE_NB, GROUP_DESCRITPION);
+	private List<Pattern> kernelPatterns = new ArrayList<>();
 
-	protected static final Map<String,Pattern> mapRulePattern = new HashMap<>();
+
 	protected static final Map<String,String> mapDefaultCsvRulePattern = new HashMap<>();
 	protected static Map<String, String> mapCsvRulePattern = new HashMap<>();
 
 
 	public FramaCReportReader() {
 		super();
-		valueRulesMatchingPatterns();
-		syntaxeRulesMatchingPatterns();
 		csvRulesMatchingPatterns();
+		initKernelMatchingPattern();
 		loadXMLRules();
+	}
+
+	/* Initialize the list of regexp  Pattern used to analyse kernel errors */
+	private void initKernelMatchingPattern() {
+		kernelPatterns.add(Pattern.compile(REGEXP_WARNING));
+		kernelPatterns.add(Pattern.compile(REGEXP_USER_ERROR));
 	}
 
 	private void loadXMLRules() {
@@ -119,46 +126,6 @@ public class FramaCReportReader {
 		mapDefaultCsvRulePattern.put("unsigned_downcast", CSV_MODULE_NAME + "." + i);
 	}
 
-	private void syntaxeRulesMatchingPatterns() {
-		Pattern[] patterns = new Pattern[]{
-				Pattern.compile(WORD_KERNEL+WORD_WARNING),
-				Pattern.compile(WORD_KERNEL+WORD_WARNING+" dropping duplicate def'n of func"),
-				Pattern.compile(WORD_KERNEL+WORD_WARNING+" Variable-sized local"),
-				Pattern.compile(WORD_KERNEL+WORD_WARNING+" Clobber list contain \"memory\" argument"),
-				Pattern.compile(WORD_KERNEL+WORD_WARNING+" Too many initializers for structure"),
-				Pattern.compile(WORD_KERNEL+WORD_WARNING+" merging definitions of enum E using int type"),
-				Pattern.compile(WORD_KERNEL+WORD_WARNING+" Calling undeclared function"),
-				Pattern.compile(WORD_KERNEL+WORD_WARNING+" Body of function"),
-				Pattern.compile(WORD_KERNEL+WORD_WARNING+" Neither code nor specification for function"),
-				Pattern.compile(WORD_KERNEL+" imprecise size for variable"),
-				Pattern.compile(WORD_KERNEL+WORD_WARNING+" Unspecified sequence with side effect"),
-				Pattern.compile(WORD_KERNEL+WORD_WARNING+" Floating-point constant")
-		};
-		for (int i = 0; i < patterns.length; i++) {
-			mapRulePattern.put(SYNTAX_MODULE_NAME+"."+i, patterns[i]);			
-		}
-	}
-
-	private void valueRulesMatchingPatterns() {
-		Pattern[] patterns = new Pattern[]{
-				Pattern.compile(WORD_VALUE+WORD_WARNING),
-				Pattern.compile(WORD_VALUE+WORD_WARNING+" accessing uninitialized left-value"),
-				Pattern.compile(WORD_VALUE+WORD_WARNING+" signed overflow"),
-				Pattern.compile(WORD_VALUE+WORD_WARNING+" global initialization of volatile variable"),
-				Pattern.compile(WORD_VALUE+WORD_WARNING+" non-finite"),
-				Pattern.compile(WORD_VALUE+WORD_WARNING+" initialization of volatile variable"),
-				Pattern.compile(WORD_VALUE+WORD_WARNING+" pointer comparison"),
-				Pattern.compile(WORD_VALUE+WORD_WARNING+" division by zero"),
-				Pattern.compile(WORD_VALUE+WORD_WARNING+" locals"),
-				Pattern.compile(WORD_VALUE+WORD_WARNING+" detected recursive call"),
-				Pattern.compile(WORD_VALUE+WORD_WARNING+" during initialization of variable"),
-				Pattern.compile(WORD_VALUE+WORD_WARNING+" ignoring non-existing function")
-		};
-		for (int i = 0; i < patterns.length; i++) {
-			mapRulePattern.put(VALUE_MODULE_NAME+"."+i, patterns[i]);			
-		}
-	}
-
 	private static final Charset ENCODING = StandardCharsets.UTF_8;
 
 	/**
@@ -211,4 +178,45 @@ public class FramaCReportReader {
 		return errors;
 	}
 
+	public List<FramaCError> parseOut(Path fileReportPath) {
+		LOGGER.info("Parsing out report: " + fileReportPath.getFileName() + " (Beginning)");
+
+		List<FramaCError> errors = new ArrayList<>();
+
+		try (Scanner scanner = new Scanner(fileReportPath, ENCODING.name())) {
+			while (scanner.hasNextLine()) {
+				String line = scanner.nextLine();
+				FramaCError error = getKernelError(line);
+				if (error != null &&
+					(error.getDescription() == null	|| error.getDescription().length() == 0)
+					&& (scanner.hasNextLine())) {
+					// Get the descritpion on the next line
+					error.setDescription(scanner.nextLine().trim());
+				}
+				LOGGER.debug("RULE VIOLATION: " + error);
+				errors.add(error);
+			}
+		} catch (IOException e) {
+			LOGGER.error("Error during result parsing : " + e);
+		}
+		LOGGER.info("Parsing out report: " + fileReportPath.getFileName() + " (done)");
+		return errors;
+	}
+
+	protected FramaCError getKernelError(String line) {
+		LOGGER.debug("Kernel Error: Processing line: " + line);
+		FramaCError error = null;
+		for (Pattern p : kernelPatterns) {
+			Matcher matcher = p.matcher(line);
+			if (matcher.matches()) {
+				LOGGER.debug("Match !!!");
+				error = new FramaCError("KERNEL.0",
+					matcher.group(GROUP_DESCRITPION).trim(),
+					matcher.group(GROUP_FILE),
+					matcher.group(GROUP_LINE_NB));
+				break;
+			}
+		}
+		return error;
+	}
 }

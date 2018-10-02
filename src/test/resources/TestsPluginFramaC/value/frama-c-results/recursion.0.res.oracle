@@ -1,24 +1,50 @@
-[kernel] Parsing share/libc/__fc_builtin_for_normalization.i (no preprocessing)
-[kernel] Parsing tests/value/recursion.i (no preprocessing)
-[value] Analyzing an incomplete application starting at main
+[kernel] Parsing recursion.0.i (no preprocessing)
+[value] Analyzing a complete application starting at main
 [value] Computing initial state
 [value] Initial state computed
 [value:initial-state] Values of globals at initialization
-  G ∈ [--..--]
-  x ∈ [--..--]
+  G ∈ {0}
+  x ∈ {0}
   c ∈ [--..--]
-  s ∈ [--..--]
-  pg ∈ {{ NULL ; &S_pg[0] }}
-  S_pg[0..1] ∈ [--..--]
-[value] computing for function ff <- main.
-        Called from tests/value/recursion.i:67.
-tests/value/recursion.i:8:[value] warning: detected recursive call (ff <- ff :: tests/value/recursion.i:67 <- main)
-                 Use -val-ignore-recursive-calls to ignore (beware this will make the analysis
-                 unsound)
-[value] user error: Degeneration occurred:
-                    results are not correct for lines of code that can be reached from the degeneration point.
-[value] ====== VALUES COMPUTED ======
-[value:final-states] Values at end of function ff:
-  NON TERMINATING FUNCTION
-[value:final-states] Values at end of function main:
-  NON TERMINATING FUNCTION
+  s ∈ {0}
+  pg ∈ {0}
+[value] recursion.0.i:39: Warning: 
+  detected recursive call (g <- g :: recursion.0.i:68 <- main)
+  Use -val-ignore-recursive-calls to ignore (beware this will make the analysis
+  unsound)
+[value] User Error: Degeneration occurred:
+  results are not correct for lines of code that can be reached from the degeneration point.
+[metrics] Defined functions (6)
+  =====================
+   escaping_formal (2 calls); f (2 calls); ff (2 calls); g (2 calls);
+   h (2 calls); main (0 call); 
+  
+  Undefined functions (0)
+  =======================
+   
+  
+  'Extern' global variables (0)
+  =============================
+   
+  
+  Potential entry points (1)
+  ==========================
+   main; 
+  
+  Global metrics
+  ============== 
+  Sloc = 32
+  Decision point = 3
+  Global variables = 5
+  If = 3
+  Loop = 0
+  Goto = 0
+  Assignment = 10
+  Exit point = 6
+  Function = 6
+  Function call = 16
+  Pointer dereferencing = 3
+  Cyclomatic complexity = 9
+[report] Dumping properties in './frama-c-results/recursion.0.res.csv'
+[report] Classification
+[report] Output frama-c-results/recursion.0.json

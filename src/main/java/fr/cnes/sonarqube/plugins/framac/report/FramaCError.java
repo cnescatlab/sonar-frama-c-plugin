@@ -21,7 +21,7 @@ package fr.cnes.sonarqube.plugins.framac.report;
  */
 public class FramaCError implements ErrorInterface {
     private final String type;
-    private final String description;
+    private String description;
     private final String filePath;
     private final String line;
 
@@ -30,6 +30,10 @@ public class FramaCError implements ErrorInterface {
       this.description = description;
       this.filePath = filePath;
       this.line = line;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getType() {
