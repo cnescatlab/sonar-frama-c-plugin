@@ -76,9 +76,8 @@ public class FramaCSensor implements Sensor {
             if (line.startsWith("directory\tfile")) {
                 isCsvFile = true;
             }
-        } catch (IOException e) {
-            // Ignore (error will be processed later
-            isCsvFile = false;
+        } catch (IOException ioe) {
+            LOGGER.error(String.format("Error reading file %s", filePath), ioe);
         }
         return isCsvFile;
     }
