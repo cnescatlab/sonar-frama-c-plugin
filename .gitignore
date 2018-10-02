@@ -1,4 +1,6 @@
 target/
+node/
+node_modules/
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup

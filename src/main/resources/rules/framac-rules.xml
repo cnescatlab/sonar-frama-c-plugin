@@ -15,9 +15,9 @@
 	</rule>
 	<rule>
 		<key>CSV.0</key>
-		<name>Unreferenced rule</name>
+		<name>Unreferenced value rule</name>
 		<internalKey>*</internalKey>
-		<description>Unreferenced rule
+		<description>Unreferenced value rule
 		</description>
 		<severity>MAJOR</severity>
 		<cardinality>SINGLE</cardinality>
@@ -505,10 +505,10 @@
         <remediationFunctionBaseEffort>15min</remediationFunctionBaseEffort>
 	</rule>
 		<rule>
-		<key>SYNTAX.0</key>
+		<key>KERNEL.0</key>
 		<name>Rule syntaxe 0</name>
 		<internalKey>*</internalKey>
-		<description>Unreferenced rule
+		<description>Generic kernel rule
 		</description>
 		<severity>MAJOR</severity>
 		<cardinality>SINGLE</cardinality>
@@ -516,160 +516,6 @@
 		<type>CODE_SMELL</type>
 		<tag>value</tag>
 		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
-        <remediationFunctionBaseEffort>30min</remediationFunctionBaseEffort>
-	</rule>
-	<rule>
-		<key>SYNTAX.1</key>
-		<name>Rule syntaxe 1</name>
-		<internalKey>accessing uninitialized left-value</internalKey>
-		<description>accessing uninitialized left-value...
-		</description>
-		<severity>MAJOR</severity>
-		<cardinality>SINGLE</cardinality>
-		<status>READY</status>
-		<type>BUG</type>
-		<tag>value</tag>
-		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
-        <remediationFunctionBaseEffort>15min</remediationFunctionBaseEffort>
-	</rule>
-	<rule>
-		<key>SYNTAX.2</key>
-		<name>Rule syntaxe 2</name> <!-- max size is 200 -->
-		<internalKey>signed overflow</internalKey>
-		<description>signed overflow...
-		</description>
-		<severity>MAJOR</severity>
-		<cardinality>SINGLE</cardinality>
-		<status>READY</status>
-		<type>BUG</type>
-		<tag>value</tag>
-		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
-        <remediationFunctionBaseEffort>20min</remediationFunctionBaseEffort>
-	</rule>
-	<rule>
-		<key>SYNTAX.3</key>
-		<name>Rule syntaxe 3</name> <!-- max size is 200 -->
-		<internalKey>global initialization of volatile variable</internalKey>
-		<description>global initialization of volatile variable...
-		</description>
-		<severity>MAJOR</severity>
-		<cardinality>SINGLE</cardinality>
-		<status>READY</status>
-		<type>CODE_SMELL</type>
-		<tag>value</tag>
-		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
-        <remediationFunctionBaseEffort>15min</remediationFunctionBaseEffort>
-	</rule>
-	<rule>
-		<key>SYNTAX.4</key>
-		<name>Rule syntaxe 4</name> <!-- max size is 200 -->
-		<internalKey>non-finite</internalKey>
-		<description>non-finite...
-		</description>
-		<severity>MAJOR</severity>
-		<cardinality>SINGLE</cardinality>
-		<status>READY</status>
-		<type>BUG</type>
-		<tag>value</tag>
-		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
-        <remediationFunctionBaseEffort>15min</remediationFunctionBaseEffort>
-	</rule>
-	<rule>
-		<key>SYNTAX.5</key>
-		<name>Rule syntaxe 5</name> <!-- max size is 200 -->
-		<internalKey>initialization of volatile variable</internalKey>
-		<description>initialization of volatile variable...
-		</description>
-		<severity>MAJOR</severity>
-		<cardinality>SINGLE</cardinality>
-		<status>READY</status>
-		<type>CODE_SMELL</type>
-		<tag>value</tag>
-		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
-        <remediationFunctionBaseEffort>15min</remediationFunctionBaseEffort>
-	</rule>
-	<rule>
-		<key>SYNTAX.6</key>
-		<name>Rule syntaxe 6</name> <!-- max size is 200 -->
-		<internalKey>pointer comparison</internalKey>
-		<description>pointer comparison...
-		</description>
-		<severity>MAJOR</severity>
-		<cardinality>SINGLE</cardinality>
-		<status>READY</status>
-		<type>CODE_SMELL</type>
-		<tag>value</tag>
-		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
-        <remediationFunctionBaseEffort>15min</remediationFunctionBaseEffort>
-	</rule>
-	<rule>
-		<key>SYNTAX.7</key>
-		<name>Rule syntaxe 7</name> <!-- max size is 200 -->
-		<internalKey>division by zero</internalKey>
-		<description>division by zero...
-		</description>
-		<severity>CRITICAL</severity>
-		<cardinality>SINGLE</cardinality>
-		<status>READY</status>
-		<type>BUG</type>
-		<tag>value</tag>
-		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
-        <remediationFunctionBaseEffort>10min</remediationFunctionBaseEffort>
-	</rule>
-	<rule>
-		<key>SYNTAX.8</key>
-		<name>Rule syntaxe 8</name> <!-- max size is 200 -->
-		<internalKey>locals</internalKey>
-		<description>locals...
-		</description>
-		<severity>MAJOR</severity>
-		<cardinality>SINGLE</cardinality>
-		<status>READY</status>
-		<type>CODE_SMELL</type>
-		<tag>value</tag>
-		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
-        <remediationFunctionBaseEffort>15min</remediationFunctionBaseEffort>
-	</rule>
-	<rule>
-		<key>SYNTAX.9</key>
-		<name>Rule syntaxe 9</name> <!-- max size is 200 -->
-		<internalKey>detected recursive call</internalKey>
-		<description>detected recursive call...
-		</description>
-		<severity>MAJOR</severity>
-		<cardinality>SINGLE</cardinality>
-		<status>READY</status>
-		<type>CODE_SMELL</type>
-		<tag>value</tag>
-		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
-        <remediationFunctionBaseEffort>30min</remediationFunctionBaseEffort>
-	</rule>
-	<rule>
-		<key>SYNTAX.10</key>
-		<name>Rule syntaxe 10</name> <!-- max size is 200 -->
-		<internalKey>during initialization of variable</internalKey>
-		<description>during initialization of variable...
-		</description>
-		<severity>CRITICAL</severity>
-		<cardinality>SINGLE</cardinality>
-		<status>READY</status>
-		<type>CODE_SMELL</type>
-		<tag>value</tag>
-		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
-        <remediationFunctionBaseEffort>15min</remediationFunctionBaseEffort>
-	</rule>
-	<rule>
-		<key>SYNTAX.11</key>
-		<name>Rule syntaxe 11</name> <!-- max size is 200 -->
-		<internalKey>ignoring non-existing function</internalKey>
-		<description>ignoring non-existing function...
-		</description>
-		<severity>MAJOR</severity>
-		<cardinality>SINGLE</cardinality>
-		<status>READY</status>
-		<type>CODE_SMELL</type>
-		<tag>value</tag>
-		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
-        <remediationFunctionBaseEffort>10min</remediationFunctionBaseEffort>
+    <remediationFunctionBaseEffort>30min</remediationFunctionBaseEffort>
 	</rule>
 </framac-rules>

@@ -6,6 +6,11 @@ import fr.cnes.sonarqube.plugins.framac.report.FramaCError;
 import fr.cnes.sonarqube.plugins.framac.report.FramaCReportReader;
 import fr.cnes.sonarqube.plugins.framac.rules.FramaCRulesDefinition;
 import fr.cnes.sonarqube.plugins.framac.settings.FramaCPluginProperties;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.util.Scanner;
 import org.sonar.api.batch.fs.FilePredicate;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
@@ -41,6 +46,7 @@ public class FramaCSensor implements Sensor {
      */
     private static final Logger LOGGER = Loggers.get(FramaCSensor.class);
 
+    private static final Charset ENCODING = StandardCharsets.UTF_8;
     /**
      * Give information about this sensor.
      *
@@ -60,6 +66,27 @@ public class FramaCSensor implements Sensor {
         // This sensor is activated only if a rule from the following repo is activated.
         sensorDescriptor.createIssuesForRuleRepositories(FramaCRulesDefinition.getRepositoryKeyForLanguage());
     }
+
+    /**
+     * Check if a file is a CSV file by analysing the header (first line)
+     * @param filePath : the file path
+     * @return true if the file is a csv file, false otherwise
+     */
+    private boolean isCsvFile(String filePath) {
+        boolean isCsvFile = false;
+        try (BufferedReader br =
+            new BufferedReader(new FileReader(filePath))) {
+            String line = br.readLine();
+            if (line.startsWith("directory\tfile")) {
+                isCsvFile = true;
+            }
+        } catch (IOException e) {
+            //do nothing, if problem, error will be raised by analyse function}
+        }
+        return isCsvFile;
+    }
+
+
 
     /**
      * Execute the analysis.
@@ -87,8 +114,8 @@ public class FramaCSensor implements Sensor {
         // If exists, unmarshal each xml result file.
         for(final String reportPath : reportFiles) {
 
-            // Analyse CSV report
-            final List<FramaCError> errors = analyseReportCsv(reportPath);
+            final List<FramaCError> errors = analyseReport(reportPath);
+
             // Retrieve file in a SonarQube format.
             final Map<String, InputFile> scannedFiles = getScannedFiles(fileSystem, errors);
 
@@ -254,15 +281,20 @@ public class FramaCSensor implements Sensor {
      *
      * @param resultFile File containing issues in csv format.
      */
-    private List<FramaCError> analyseReportCsv(final String resultFile) {
+    private List<FramaCError> analyseReport(final String resultFile) {
 
+        boolean isCsvFile = isCsvFile(resultFile);
         List<FramaCError> errors = null;
 
         if (null != resultFile) {
             final Path path = Paths.get(resultFile);
             try (FileChannel reportFile = FileChannel.open(path)) {
                 FramaCReportReader framaCReportReader = new FramaCReportReader();
-                errors = framaCReportReader.parseCsv(path);
+                if (isCsvFile) {
+                    errors = framaCReportReader.parseCsv(path);
+                } else {
+                    errors = framaCReportReader.parseOut(path);
+                }
             } catch (IOException e) {
                 final String message = String.format("Unexpected error on report file: %s", resultFile);
                 LOGGER.warn(message);
