@@ -1,0 +1,30 @@
+directory	file	line	function	property kind	status	property
+.	split_return.0.i	10	init	assigns clause	Considered valid	assigns \result, *p;
+.	split_return.0.i	10	init	from clause	Considered valid	assigns \result \from \nothing;
+.	split_return.0.i	11	init	from clause	Considered valid	assigns *p \from \nothing;
+.	split_return.0.i	12	init	postcondition	Considered valid	(\result ≡ 0 ∧ \initialized(\old(p))) ∨ \result ≡ 1
+.	split_return.0.i	21	main1	initialization	Unknown	\initialized(&x)
+.	split_return.0.i	27	main1	user assertion	Dead	\false
+.	split_return.0.i	49	Frama_C_show_each_f2	assigns clause	Unknown	assigns \nothing;
+.	split_return.0.i	49	Frama_C_show_each_f2	from clause	Unknown	assigns \result \from \nothing;
+.	split_return.0.i	51	main2	user assertion	Unknown	i2 ≡ 0
+.	split_return.0.i	53	Frama_C_show_each_f2_2	assigns clause	Unknown	assigns \nothing;
+.	split_return.0.i	53	Frama_C_show_each_f2_2	from clause	Unknown	assigns \result \from \nothing;
+.	split_return.0.i	54	main2	user assertion	Unknown	i2 ≢ 0
+.	split_return.0.i	74	Frama_C_show_each_f3	assigns clause	Unknown	assigns \nothing;
+.	split_return.0.i	74	Frama_C_show_each_f3	from clause	Unknown	assigns \result \from \nothing;
+.	split_return.0.i	76	main3	user assertion	Unknown	i3 ≡ 0
+.	split_return.0.i	78	main3	user assertion	Unknown	i3 ≢ 0
+.	split_return.0.i	95	Frama_C_show_each_f4	assigns clause	Unknown	assigns \nothing;
+.	split_return.0.i	95	Frama_C_show_each_f4	from clause	Unknown	assigns \result \from \nothing;
+.	split_return.0.i	97	main4	user assertion	Unknown	i4 ≡ 0
+.	split_return.0.i	99	main4	user assertion	Unknown	i4 ≢ 0
+.	split_return.0.i	118	Frama_C_show_each_f5	assigns clause	Unknown	assigns \nothing;
+.	split_return.0.i	118	Frama_C_show_each_f5	from clause	Unknown	assigns \result \from \nothing;
+.	split_return.0.i	120	main5	user assertion	Unknown	i5 ≡ 0
+.	split_return.0.i	122	main5	user assertion	Unknown	i5 ≢ 0
+.	split_return.0.i	130	f6	user assertion	Unknown	-5 ≤ i ≤ 5
+.	split_return.0.i	153	Frama_C_show_each_NULL	assigns clause	Unknown	assigns \nothing;
+.	split_return.0.i	153	Frama_C_show_each_NULL	from clause	Unknown	assigns \result \from \nothing;
+.	split_return.0.i	172	Frama_C_show_each_then8	assigns clause	Unknown	assigns \nothing;
+.	split_return.0.i	172	Frama_C_show_each_then8	from clause	Unknown	assigns \result \from \nothing;

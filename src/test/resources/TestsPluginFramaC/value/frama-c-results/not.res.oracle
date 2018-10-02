@@ -1,25 +1,44 @@
-[kernel] Parsing share/libc/__fc_builtin_for_normalization.i (no preprocessing)
-[kernel] Parsing tests/value/not.i (no preprocessing)
+[kernel] Parsing not.i (no preprocessing)
 [value] Analyzing a complete application starting at main
 [value] Computing initial state
 [value] Initial state computed
 [value:initial-state] Values of globals at initialization
   x ∈ {0}
-tests/value/not.i:4:[value] warning: initialization of volatile variable loc ignored
-[value] Recording results for main
 [value] done for function main
 [value] ====== VALUES COMPUTED ======
 [value:final-states] Values at end of function main:
   x ∈ {0; 1}
   loc ∈ [--..--]
-[from] Computing for function main
-[from] Done for function main
-[from] ====== DEPENDENCIES COMPUTED ======
-       These dependencies hold at termination for the executions that terminate:
-[from] Function main:
-  x FROM \nothing
-[from] ====== END OF DEPENDENCIES ======
-[inout] Out (internal) for function main:
-          x; loc
-[inout] Inputs for function main:
-          \nothing
+[metrics] Defined functions (1)
+  =====================
+   main (0 call); 
+  
+  Undefined functions (0)
+  =======================
+   
+  
+  'Extern' global variables (0)
+  =============================
+   
+  
+  Potential entry points (1)
+  ==========================
+   main; 
+  
+  Global metrics
+  ============== 
+  Sloc = 5
+  Decision point = 1
+  Global variables = 1
+  If = 1
+  Loop = 0
+  Goto = 0
+  Assignment = 3
+  Exit point = 1
+  Function = 1
+  Function call = 0
+  Pointer dereferencing = 0
+  Cyclomatic complexity = 2
+[report] Dumping properties in './frama-c-results/not.res.csv'
+[report] Classification
+[report] Output frama-c-results/not.json

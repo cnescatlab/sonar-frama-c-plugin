@@ -1,0 +1,13 @@
+directory	file	line	function	property kind	status	property
+.	propagate_bottom.i	5	main	division_by_zero	Invalid or unreachable	0 ≢ 0
+.	propagate_bottom.i	8	main	division_by_zero	Invalid or unreachable	0 ≢ 0
+.	propagate_bottom.i	11	main	division_by_zero	Invalid or unreachable	0 ≢ 0
+.	propagate_bottom.i	14	main	division_by_zero	Invalid or unreachable	0 ≢ 0
+.	propagate_bottom.i	17	main	division_by_zero	Invalid or unreachable	0 ≢ 0
+.	propagate_bottom.i	20	main	division_by_zero	Invalid or unreachable	0 ≢ 0
+.	propagate_bottom.i	25	main	is_nan_or_infinite	Invalid or unreachable	\is_finite((double)(1. / (double)0))
+.	propagate_bottom.i	28	main	is_nan_or_infinite	Invalid or unreachable	\is_finite((double)(1. / (double)0))
+.	propagate_bottom.i	31	main	is_nan_or_infinite	Invalid or unreachable	\is_finite((double)(1. / (double)0))
+.	propagate_bottom.i	34	main	is_nan_or_infinite	Invalid or unreachable	\is_finite((double)(1. / 0.))
+.	propagate_bottom.i	37	main	is_nan_or_infinite	Invalid or unreachable	\is_finite((double)(1. / 0.))
+.	propagate_bottom.i	40	main	is_nan_or_infinite	Invalid or unreachable	\is_finite((double)(1. / 0.))
