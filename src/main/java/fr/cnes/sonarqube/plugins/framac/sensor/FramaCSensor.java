@@ -8,8 +8,6 @@ import fr.cnes.sonarqube.plugins.framac.rules.FramaCRulesDefinition;
 import fr.cnes.sonarqube.plugins.framac.settings.FramaCPluginProperties;
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import org.sonar.api.batch.fs.FilePredicate;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
@@ -78,7 +76,10 @@ public class FramaCSensor implements Sensor {
             if (line.startsWith("directory\tfile")) {
                 isCsvFile = true;
             }
-        } catch (IOException e) {}
+        } catch (IOException e) {
+            // Ignore (error will be processed later
+            isCsvFile = false;
+        }
         return isCsvFile;
     }
 
