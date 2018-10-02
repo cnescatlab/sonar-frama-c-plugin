@@ -10,7 +10,6 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.util.Scanner;
 import org.sonar.api.batch.fs.FilePredicate;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
@@ -46,7 +45,6 @@ public class FramaCSensor implements Sensor {
      */
     private static final Logger LOGGER = Loggers.get(FramaCSensor.class);
 
-    private static final Charset ENCODING = StandardCharsets.UTF_8;
     /**
      * Give information about this sensor.
      *
@@ -80,13 +78,9 @@ public class FramaCSensor implements Sensor {
             if (line.startsWith("directory\tfile")) {
                 isCsvFile = true;
             }
-        } catch (IOException e) {
-            //do nothing, if problem, error will be raised by analyse function}
-        }
+        } catch (IOException e) {}
         return isCsvFile;
     }
-
-
 
     /**
      * Execute the analysis.
