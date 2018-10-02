@@ -187,17 +187,14 @@ public class FramaCReportReader {
 			while (scanner.hasNextLine()) {
 				String line = scanner.nextLine();
 				FramaCError error = getKernelError(line);
-				if (error != null) {
-					if(error.getDescription() == null
-						|| error.getDescription().length() == 0) {
-						// Get the descritpion on the next line
-						if(scanner.hasNextLine()) {
-							error.setDescription(scanner.nextLine().trim());
-						}
-					}
-					LOGGER.debug("RULE VIOLATION: " + error);
-					errors.add(error);
+				if (error != null &&
+					(error.getDescription() == null	|| error.getDescription().length() == 0)
+					&& (scanner.hasNextLine())) {
+					// Get the descritpion on the next line
+					error.setDescription(scanner.nextLine().trim());
 				}
+				LOGGER.debug("RULE VIOLATION: " + error);
+				errors.add(error);
 			}
 		} catch (IOException e) {
 			LOGGER.error("Error during result parsing : " + e);
