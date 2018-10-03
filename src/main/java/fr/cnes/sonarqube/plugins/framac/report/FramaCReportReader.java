@@ -167,7 +167,7 @@ public class FramaCReportReader {
 					String lineNumber = data[2];
 
 					FramaCError error = new FramaCError(type, description, source, lineNumber);
-					LOGGER.debug("RULE VIOLATION: " + error);
+					LOGGER.debug("VALUE RULE VIOLATION: " + error);
 					errors.add(error);
 				}
 			}
@@ -190,11 +190,11 @@ public class FramaCReportReader {
 				if (error != null &&
 					(error.getDescription() == null	|| error.getDescription().length() == 0)
 					&& (scanner.hasNextLine())) {
-					// Get the descritpion on the next line
+					// Get the description on the next line
 					error.setDescription(scanner.nextLine().trim());
+					LOGGER.debug("KERNEL RULE VIOLATION: " + error);
+					errors.add(error);
 				}
-				LOGGER.debug("RULE VIOLATION: " + error);
-				errors.add(error);
 			}
 		} catch (IOException e) {
 			LOGGER.error("Error during result parsing : " + e);
