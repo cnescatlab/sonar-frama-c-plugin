@@ -1,9 +1,9 @@
 package fr.cnes.sonarqube.plugins.framac.report;
 
+import org.junit.Test;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
-
-import org.junit.Test;
 
 public class FramaCReportReaderTest {
 

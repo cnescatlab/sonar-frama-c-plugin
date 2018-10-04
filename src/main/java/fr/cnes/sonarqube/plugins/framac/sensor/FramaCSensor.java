@@ -1,13 +1,26 @@
+/*
+ * This file is part of sonarframac.
+ *
+ * sonarframac is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * sonarframac is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with sonarframac.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package fr.cnes.sonarqube.plugins.framac.sensor;
 
 import fr.cnes.sonarqube.plugins.framac.exceptions.FramaCException;
-import fr.cnes.sonarqube.plugins.framac.languages.FramaCLanguage;
 import fr.cnes.sonarqube.plugins.framac.report.FramaCError;
 import fr.cnes.sonarqube.plugins.framac.report.FramaCReportReader;
 import fr.cnes.sonarqube.plugins.framac.rules.FramaCRulesDefinition;
 import fr.cnes.sonarqube.plugins.framac.settings.FramaCPluginProperties;
-import java.io.BufferedReader;
-import java.io.FileReader;
 import org.sonar.api.batch.fs.FilePredicate;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
@@ -22,7 +35,9 @@ import org.sonar.api.rule.RuleKey;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.nio.file.Path;
@@ -50,9 +65,6 @@ public class FramaCSensor implements Sensor {
      */
     @Override
     public void describe(final SensorDescriptor sensorDescriptor) {
-        // Prevents sensor to be run during all analysis.
-        sensorDescriptor.onlyOnLanguage(FramaCLanguage.KEY);
-
         // Defines sensor name
         sensorDescriptor.name(getClass().getName());
 
@@ -244,14 +256,24 @@ public class FramaCSensor implements Sensor {
 
         // Check if each path is known by the file system and add it to the processable path list,
         // otherwise print a warning and ignore this result file.
-        for(String path : pathArray) {
-            final File file = new File(fileSystem.baseDir(), path);
-            if(file.exists() && file.isFile()) {
-                result.add(path);
-                LOGGER.info(String.format("Results file %s has been found and will be processed.", path));
-            } else {
-                LOGGER.warn(String.format("Results file %s has not been found and wont be processed.", path));
+        for(final String path : pathArray) {
+            // Gather all files corresponding to path pattern.
+            final Iterable<InputFile> inputFiles = fileSystem.inputFiles(fileSystem.predicates().matchesPathPattern(path));
+            // Check results files existence for each input file.
+            for(final InputFile inputFile : inputFiles) {
+                final File file = new File(inputFile.uri().getPath());
+                if (file.exists() && file.isFile()) {
+                    result.add(file.getPath());
+                    LOGGER.info(String.format("Results file %s has been found and will be processed.", file.getPath()));
+                } else {
+                    LOGGER.warn(String.format("Results file %s has not been found and wont be processed.", file.getPath()));
+                }
             }
+        }
+
+        // Warn user if no results file was found.
+        if(result.isEmpty()) {
+            LOGGER.warn("No results file found for Frama-C.");
         }
 
         return result;

@@ -2,10 +2,7 @@ package fr.cnes.sonarqube.plugins.framac.languages;
 
 import org.junit.Assert;
 import org.junit.Test;
-import org.sonar.api.profiles.RulesProfile;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
-
-import static org.junit.Assert.assertEquals;
 
 public class FramaCQualityProfileTest {
 
