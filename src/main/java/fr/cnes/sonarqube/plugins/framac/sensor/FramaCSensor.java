@@ -21,6 +21,7 @@ import fr.cnes.sonarqube.plugins.framac.report.FramaCError;
 import fr.cnes.sonarqube.plugins.framac.report.FramaCReportReader;
 import fr.cnes.sonarqube.plugins.framac.rules.FramaCRulesDefinition;
 import fr.cnes.sonarqube.plugins.framac.settings.FramaCPluginProperties;
+import org.apache.tools.ant.DirectoryScanner;
 import org.sonar.api.batch.fs.FilePredicate;
 import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
@@ -256,18 +257,24 @@ public class FramaCSensor implements Sensor {
 
         // Check if each path is known by the file system and add it to the processable path list,
         // otherwise print a warning and ignore this result file.
-        for(final String path : pathArray) {
-            // Gather all files corresponding to path pattern.
-            final Iterable<InputFile> inputFiles = fileSystem.inputFiles(fileSystem.predicates().matchesPathPattern(path));
-            // Check results files existence for each input file.
-            for(final InputFile inputFile : inputFiles) {
-                final File file = new File(inputFile.uri().getPath());
-                if (file.exists() && file.isFile()) {
-                    result.add(file.getPath());
-                    LOGGER.info(String.format("Results file %s has been found and will be processed.", file.getPath()));
-                } else {
-                    LOGGER.warn(String.format("Results file %s has not been found and wont be processed.", file.getPath()));
-                }
+        // Gather all files corresponding to path pattern.
+        final DirectoryScanner scanner = new DirectoryScanner();
+        // Add user inputs as scope for research
+        scanner.setIncludes(pathArray);
+        // Research must be case sensitive
+        scanner.setCaseSensitive(true);
+        // Set base directory as the current directory
+        scanner.setBasedir(fileSystem.baseDir());
+        // Scan for files
+        scanner.scan();
+        // Check results files existence for each input file.
+        for(final String filename : scanner.getIncludedFiles()) {
+            final File file = new File(filename);
+            if (file.exists() && file.isFile()) {
+                result.add(file.getPath());
+                LOGGER.info(String.format("Results file %s has been found and will be processed.", file.getPath()));
+            } else {
+                LOGGER.warn(String.format("Results file %s has not been found and wont be processed.", file.getPath()));
             }
         }
 
