@@ -77,7 +77,7 @@ public class FramaCPluginProperties {
 	/**
 	 * Default value for the report path property
 	 **/
-	public static final String REPORT_PATH_DEFAULT = "result.res";
+	public static final String REPORT_PATH_DEFAULT = "**/*.csv,**/*.out";
 	/**
 	 * Frama-C launching mode key
 	 */
