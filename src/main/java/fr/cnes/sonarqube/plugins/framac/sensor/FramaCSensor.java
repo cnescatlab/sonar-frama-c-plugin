@@ -43,10 +43,7 @@ import java.io.IOException;
 import java.nio.channels.FileChannel;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * Executed during sonar-scanner call.
@@ -149,18 +146,39 @@ public class FramaCSensor implements Sensor {
     private void executeFramaC(final SensorContext sensorContext, final Configuration config) {
         LOGGER.info("Frama-C auto-launch enabled.");
         final String executable = config.get(FramaCPluginProperties.FRAMAC_PATH_KEY).orElse(FramaCPluginProperties.FRAMAC_PATH_DEFAULT);
-        final String[] files = sensorContext.fileSystem().baseDir().list();
-        final String outputFile = config.get(FramaCPluginProperties.REPORT_PATH_KEY).orElse(FramaCPluginProperties.REPORT_PATH_DEFAULT);
-        final String outputPath = Paths.get(sensorContext.fileSystem().baseDir().toString(),outputFile).toString();
-        final String outputOption = "-o";
-        final String command = String.join(" ", executable, String.join(" ",files), outputOption, outputPath);
+        final FileSystem fs = sensorContext.fileSystem();
 
-        LOGGER.info("Running Frama-C and generating results to "+ outputPath);
+        // Retrieve all files having suffixes given in settings.
+        final Collection<FilePredicate> predicates = new ArrayList<>();
+        final String[] suffixes = config.getStringArray(FramaCPluginProperties.SUFFIX_KEY);
+        for(final String suffix : suffixes) {
+            predicates.add(fs.predicates().hasExtension(suffix.substring(1)));
+        }
+
+        // Retrieve all path of those files for being analyzed by Frama-C.
+        final Iterable<InputFile> inputFiles = fs.inputFiles(fs.predicates().and(
+                fs.predicates().hasType(InputFile.Type.MAIN),
+                fs.predicates().or(predicates)));
+        final List<String> files = new ArrayList<>();
+        for(final InputFile inputFile : inputFiles) {
+            files.add(inputFile.uri().getPath());
+        }
+
+        // Temp files containing output, report paths must be compatible.
+        final String outputPath = Paths.get(sensorContext.fileSystem().baseDir().toString(), "results.out").toString();
+        final String csvPath = Paths.get(sensorContext.fileSystem().baseDir().toString(), "results.csv").toString();
+
+        // The command line to execute Frama-C.
+        final String command = String.format("%s %s -val -then -no-unicode -report-csv %s -kernel-log a:%s",
+                executable, String.join(" ", files), csvPath, outputPath);
+
+        String message = String.format("Running Frama-C and generating results to %s and %s.", outputPath, csvPath);
+        LOGGER.info(message);
         try {
             final Process framac =  Runtime.getRuntime().exec(command);
             int success = framac.waitFor();
             if(0!=success){
-                final String message = String.format("Frama-C auto-launch analysis failed with exit code %d.",success);
+                message = String.format("Frama-C auto-launch analysis failed with exit code %d.",success);
                 throw new FramaCException(message);
             }
             LOGGER.info("Auto-launch successfully executed Frama-C.");
