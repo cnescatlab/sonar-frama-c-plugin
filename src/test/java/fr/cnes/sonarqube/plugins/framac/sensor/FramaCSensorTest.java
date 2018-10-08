@@ -1,6 +1,11 @@
 package fr.cnes.sonarqube.plugins.framac.sensor;
 
 import fr.cnes.sonarqube.plugins.framac.report.FramaCError;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.net.URI;
+import java.nio.file.Paths;
+import java.util.List;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -125,6 +130,68 @@ public class FramaCSensorTest {
 
 		FramaCSensor.saveIssue(context, files, rule);
 		Assert.assertEquals(0, context.allIssues().size());
+	}
+
+	@Test
+	public void method_isCsvFile_with_csvfile()
+		throws URISyntaxException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+		URI uri = getClass().getResource("/TestsPluginFramaC/reports/result.csv").toURI();
+		String filePath = uri.getPath();
+		final FramaCSensor sensor = new FramaCSensor();
+		Method method = sensor.getClass().getDeclaredMethod("isCsvFile", String.class);
+		method.setAccessible(true);
+		Boolean isScv = (Boolean) method.invoke(sensor, filePath);
+		Assert.assertEquals(true, isScv);
+	}
+
+	@Test
+	public void method_isCsvFile_with_outfile()
+		throws URISyntaxException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+		URI uri = getClass().getResource("/TestsPluginFramaC/reports/result.out").toURI();
+		String filePath = uri.getPath();
+		final FramaCSensor sensor = new FramaCSensor();
+		Method method = sensor.getClass().getDeclaredMethod("isCsvFile", String.class);
+		method.setAccessible(true);
+		Boolean isScv = (Boolean) method.invoke(sensor, filePath);
+		Assert.assertEquals(false, isScv);
+	}
+
+	@Test
+	public void method_analyseReports_with_outfile()
+		throws URISyntaxException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+		URI uri = getClass().getResource("/TestsPluginFramaC/reports/result.out").toURI();
+		String filePath = uri.getRawPath();
+		final FramaCSensor sensor = new FramaCSensor();
+		Method method = sensor.getClass().getDeclaredMethod("analyseReport", String.class);
+		method.setAccessible(true);
+
+		List<FramaCError> errors = (List<FramaCError> ) method.invoke(sensor, Paths.get(uri).toFile().getPath());
+		Assert.assertEquals(7, errors.size());
+		FramaCError error = errors.get(0);
+		// Check content of error 1
+		Assert.assertEquals("KERNEL.0", error.getType());
+		Assert.assertEquals("RobotSeeVM_v0001/Keyword.c", error.getFilePath());
+		Assert.assertEquals("43", error.getLine());
+		Assert.assertEquals("expected 'char *' but got argument of type 'unsigned char *': tmp", error.getDescription());
+	}
+
+	@Test
+	public void method_analyseReports_with_csvfile()
+		throws URISyntaxException, NoSuchMethodException, InvocationTargetException, IllegalAccessException {
+		URI uri = getClass().getResource("/TestsPluginFramaC/reports/result.csv").toURI();
+		String filePath = uri.getRawPath();
+		final FramaCSensor sensor = new FramaCSensor();
+		Method method = sensor.getClass().getDeclaredMethod("analyseReport", String.class);
+		method.setAccessible(true);
+
+		List<FramaCError> errors = (List<FramaCError> ) method.invoke(sensor, Paths.get(uri).toFile().getPath());
+		Assert.assertEquals(292, errors.size());
+		FramaCError error = errors.get(0);
+		// Check content of error 1
+		Assert.assertEquals("CSV.0", error.getType());
+		Assert.assertEquals("FRAMAC_SHARE/libc/stdio.h", error.getFilePath());
+		Assert.assertEquals("70", error.getLine());
+		Assert.assertEquals("assigns clause assigns \\nothing;", error.getDescription());
 	}
 	
 }

@@ -1,5 +1,10 @@
 package fr.cnes.sonarqube.plugins.framac.report;
 
+import java.io.File;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.nio.file.Path;
+import java.util.List;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -78,5 +83,39 @@ public class FramaCReportReaderTest {
         assertEquals("17", error.getLine());
         assertEquals("", error.getDescription());
         assertEquals("KERNEL.0", error.getType());
+    }
+
+    @Test
+    public void must_return_framacerror_from_csvfile() throws URISyntaxException {
+        URI uri = getClass().getResource("/TestsPluginFramaC/reports/result.csv").toURI();
+        File csvFile = new File(uri);
+        Path path = csvFile.toPath();
+        FramaCReportReader reader = new FramaCReportReader();
+        List<FramaCError> errors = reader.parseCsv(path);
+        // Check nb errors
+        assertEquals(292, errors.size());
+        FramaCError error = errors.get(0);
+        // Check content of error 1
+        assertEquals("CSV.0", error.getType());
+        assertEquals("FRAMAC_SHARE/libc/stdio.h", error.getFilePath());
+        assertEquals("70", error.getLine());
+        assertEquals("assigns clause assigns \\nothing;", error.getDescription());
+    }
+
+    @Test
+    public void must_return_framacerror_from_outfile() throws URISyntaxException {
+        URI uri = getClass().getResource("/TestsPluginFramaC/reports/result.out").toURI();
+        File csvFile = new File(uri);
+        Path path = csvFile.toPath();
+        FramaCReportReader reader = new FramaCReportReader();
+        List<FramaCError> errors = reader.parseOut(path);
+        // Check nb errors
+        assertEquals(7, errors.size());
+        FramaCError error = errors.get(0);
+        // Check content of error 1
+        assertEquals("KERNEL.0", error.getType());
+        assertEquals("RobotSeeVM_v0001/Keyword.c", error.getFilePath());
+        assertEquals("43", error.getLine());
+        assertEquals("expected 'char *' but got argument of type 'unsigned char *': tmp", error.getDescription());
     }
 }
