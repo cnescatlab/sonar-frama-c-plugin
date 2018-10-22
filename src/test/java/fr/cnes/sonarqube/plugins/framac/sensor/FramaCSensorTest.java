@@ -10,13 +10,16 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
+import org.sonar.api.batch.fs.FileSystem;
 import org.sonar.api.batch.fs.InputFile;
 import org.sonar.api.batch.fs.internal.DefaultFileSystem;
 import org.sonar.api.batch.fs.internal.DefaultInputFile;
 import org.sonar.api.batch.fs.internal.TestInputFileBuilder;
 import org.sonar.api.batch.sensor.SensorDescriptor;
 import org.sonar.api.batch.sensor.internal.SensorContextTester;
+import org.sonar.api.config.Configuration;
 import org.sonar.api.config.internal.MapSettings;
+import org.sonar.api.internal.google.common.collect.Lists;
 
 import java.io.File;
 import java.net.URISyntaxException;
@@ -120,6 +123,35 @@ public class FramaCSensorTest {
 	}
 
 	@Test
+	public void test_get_scanned_files() {
+		final FramaCSensor sensor = new FramaCSensor();
+
+		final List<FramaCError> errors = Lists.newArrayList();
+		final FramaCError error1 = new FramaCError(
+				"example", "this is an example", "badaboum.c", "2");
+		final FramaCError error2 = new FramaCError(
+				"example2", "this is an example too", "miam.c", "5");
+
+		errors.add(error1);
+		errors.add(error2);
+
+		Assert.assertNotNull(sensor);
+
+		Map<String, InputFile> relevantFile = sensor.getScannedFiles(context.fileSystem(), errors);
+
+		Assert.assertEquals(0, relevantFile.size());
+	}
+
+	@Test
+	public void test_check_rules_activation() {
+		final FramaCSensor sensor = new FramaCSensor();
+
+		final boolean active = sensor.isRuleActive(context.activeRules(), "No rules are activated");
+
+		Assert.assertFalse(active);
+	}
+
+	@Test
 	public void test_save_issue_with_unknown_file() {
 		final String ruleKey = "FRAMAC.ERROR";
 		final String issueMessage = "This file does not exist.";
@@ -130,6 +162,31 @@ public class FramaCSensorTest {
 
 		FramaCSensor.saveIssue(context, files, rule);
 		Assert.assertEquals(0, context.allIssues().size());
+	}
+
+	@Test
+	public void test_execute_unmarshall() {
+		final FramaCSensor sensor = new FramaCSensor() {
+			@Override
+			public List<String> getReportFiles(final Configuration config, final FileSystem fileSystem) {
+				List<String> list;
+				try {
+					list = Lists.newArrayList(
+                            new File(getClass().getResource("/TestsPluginFramaC/value/frama-c-results/alias.4.res.oracle").toURI()).getPath(),
+                            new File(getClass().getResource("/TestsPluginFramaC/value/frama-c-results/alias.4.res.csv").toURI()).getPath()
+                    );
+				} catch (URISyntaxException e) {
+					list = Lists.newArrayList();
+				}
+				return list;
+			}
+		};
+
+		final MapSettings settings = new MapSettings();
+		settings.setProperty("sonar.framac.launch", false);
+		context.setSettings(settings);
+
+		sensor.execute(context);
 	}
 
 	@Test

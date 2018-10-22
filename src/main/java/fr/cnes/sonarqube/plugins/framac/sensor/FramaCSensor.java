@@ -237,7 +237,7 @@ public class FramaCSensor implements Sensor {
      * @param errors The Frama-C report content.
      * @return A possibly empty Map of InputFile.
      */
-    private Map<String, InputFile> getScannedFiles(final FileSystem fileSystem, final List<FramaCError> errors) {
+    protected Map<String, InputFile> getScannedFiles(final FileSystem fileSystem, final List<FramaCError> errors) {
         // Contains the result to be returned.
         final Map<String, InputFile> result = new HashMap<>();
 
@@ -266,7 +266,7 @@ public class FramaCSensor implements Sensor {
      * @param fileSystem The current file system.
      * @return Return a list of path 'findable' in the file system.
      */
-    private List<String> getReportFiles(final Configuration config, final FileSystem fileSystem) {
+    protected List<String> getReportFiles(final Configuration config, final FileSystem fileSystem) {
         // Contains the result to be returned.
         final List<String> result = new ArrayList<>();
 
@@ -311,7 +311,7 @@ public class FramaCSensor implements Sensor {
      * @param rule Key (Frama-C) of the rule to check.
      * @return True if the rule is active and false if not or not exists.
      */
-    private boolean isRuleActive(final ActiveRules activeRules, final String rule) {
+    protected boolean isRuleActive(final ActiveRules activeRules, final String rule) {
         final RuleKey ruleKey = RuleKey.of(FramaCRulesDefinition.getRepositoryKeyForLanguage(), rule);
         return activeRules.find(ruleKey)!=null;
     }
