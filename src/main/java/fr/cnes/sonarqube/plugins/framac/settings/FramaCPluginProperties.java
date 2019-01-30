@@ -95,6 +95,22 @@ public class FramaCPluginProperties {
 	 */
 	public static final String AUTOLAUNCH_PROP_DESC = "Auto-launch Frama-C on analysis using indicated location.";
 	/**
+	 * Frama-C command line options key
+	 */
+	public static final String COMMAND_PROP_KEY = PROPERTIES_PREFIX + "command";
+	/**
+	 * Frama-C command line options default value
+	 */
+	public static final String COMMAND_PROP_DEFAULT = "-rte -metrics";
+	/**
+	 * Frama-C command line options name
+	 */
+	public static final String COMMAND_PROP_NAME = "Frama-C command line options";
+	/**
+	 * Frama-C command line options description
+	 */
+	public static final String COMMAND_PROP_DESC = "Command line options for Frama-C (ex: frama-c src/main.c [options] -report result.csv). Useless if autolaunch is disabled.";
+	/**
 	 * Frama-C location's path key
 	 */
 	public static final String FRAMAC_PATH_KEY = PROPERTIES_PREFIX + "path";
@@ -106,6 +122,7 @@ public class FramaCPluginProperties {
 	 * i-Code CNES location's path key
 	 */
 	public static final String FRAMAC_PATH_DESC = "Define Frama-C executable path to auto-launch it on analysis.";
+
 
 	/**
 	 * Private constructor because it is a utility class.
@@ -127,6 +144,14 @@ public class FramaCPluginProperties {
 						.name(AUTOLAUNCH_PROP_NAME)
 						.description(AUTOLAUNCH_PROP_DESC)
 						.type(PropertyType.BOOLEAN)
+						.onQualifiers(Qualifiers.PROJECT)
+						.build()
+				,
+				PropertyDefinition.builder(COMMAND_PROP_KEY)
+						.defaultValue(COMMAND_PROP_DEFAULT)
+						.category(FRAMAC_NAME)
+						.name(COMMAND_PROP_NAME)
+						.description(COMMAND_PROP_DESC)
 						.onQualifiers(Qualifiers.PROJECT)
 						.build()
 				,
