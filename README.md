@@ -7,7 +7,7 @@
 
 SonarQube plugin for the code analysis tool: Frama-C.
 
-SonarQube is an open platform to manage code quality. This plugin adds the ability to import i-Code results for Fortran (77 & 90) & Shell.
+SonarQube is an open platform to manage code quality. This plugin adds the ability to import Frama-C results for C language.
 
 This plugin is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.
 
