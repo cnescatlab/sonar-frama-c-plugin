@@ -146,6 +146,7 @@ public class FramaCSensor implements Sensor {
     private void executeFramaC(final SensorContext sensorContext, final Configuration config) {
         LOGGER.info("Frama-C auto-launch enabled.");
         final String executable = config.get(FramaCPluginProperties.FRAMAC_PATH_KEY).orElse(FramaCPluginProperties.FRAMAC_PATH_DEFAULT);
+        final String commandOptions = config.get(FramaCPluginProperties.COMMAND_PROP_KEY).orElse(FramaCPluginProperties.COMMAND_PROP_DEFAULT);
         final FileSystem fs = sensorContext.fileSystem();
 
         // Retrieve all files having suffixes given in settings.
@@ -169,13 +170,15 @@ public class FramaCSensor implements Sensor {
         final String csvPath = Paths.get(sensorContext.fileSystem().baseDir().toString(), "results.csv").toString();
 
         // The command line to execute Frama-C.
-        final String command = String.format("%s %s -val -then -no-unicode -report-csv %s -kernel-log a:%s",
-                executable, String.join(" ", files), csvPath, outputPath);
+        final String command = String.format("%s %s %s -report-csv %s",
+                executable, String.join(" ", files), commandOptions, csvPath);
 
         String message = String.format("Running Frama-C and generating results to %s and %s.", outputPath, csvPath);
         LOGGER.info(message);
         try {
-            final Process framac =  Runtime.getRuntime().exec(command);
+            ProcessBuilder pb = new ProcessBuilder("sh", "-c", command);
+            pb.redirectOutput(new File(outputPath));
+            final Process framac =  pb.start();
             int success = framac.waitFor();
             if(0!=success){
                 message = String.format("Frama-C auto-launch analysis failed with exit code %d.",success);
