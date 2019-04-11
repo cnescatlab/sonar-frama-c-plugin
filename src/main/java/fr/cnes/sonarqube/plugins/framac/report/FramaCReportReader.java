@@ -82,6 +82,10 @@ public class FramaCReportReader {
 		if (inputStream != null) {
 			try {
 				DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+				
+				// disable external entities
+				factory.setExpandEntityReferences(false);
+				
 				DocumentBuilder builder;
 				builder = factory.newDocumentBuilder();
 				xmlRules = builder.parse(inputStream);
