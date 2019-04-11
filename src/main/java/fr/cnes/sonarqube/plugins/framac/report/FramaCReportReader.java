@@ -84,8 +84,7 @@ public class FramaCReportReader {
 				DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 				
 				// disable external entities
-				factory.setProperty(XMLInputFactory.IS_SUPPORTING_EXTERNAL_ENTITIES, Boolean.FALSE);
-				factory.setProperty(XMLInputFactory.SUPPORT_DTD, Boolean.FALSE);
+				factory.setExpandEntityReferences(false);
 				
 				DocumentBuilder builder;
 				builder = factory.newDocumentBuilder();
