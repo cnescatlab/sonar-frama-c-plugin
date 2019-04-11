@@ -1,0 +1,293 @@
+directory	file	line	function	property kind	status	property
+FRAMAC_SHARE/libc	stdio.h	70	remove	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdio.h	73	rename	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdio.h	79	tmpfile	from clause	Considered valid	assigns \result \from __fc_p_fopen;
+FRAMAC_SHARE/libc	stdio.h	81	tmpfile	postcondition	Considered valid	result_null_or_valid_fd: \result ≡ \null ∨ \subset(\result, &__fc_fopen[0 .. 16 - 1])
+FRAMAC_SHARE/libc	stdio.h	83	tmpfile	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdio.h	86	tmpnam	assigns clause	Considered valid	assigns \result, *(s + (..));
+FRAMAC_SHARE/libc	stdio.h	86	tmpnam	from clause	Considered valid	assigns \result \from *(s + (..));
+FRAMAC_SHARE/libc	stdio.h	87	tmpnam	from clause	Considered valid	assigns *(s + (..)) \from \nothing;
+FRAMAC_SHARE/libc	stdio.h	94	fclose	from clause	Considered valid	assigns \result \from stream, stream->__fc_FILE_id;
+FRAMAC_SHARE/libc	stdio.h	95	fclose	postcondition	Considered valid	result_zero_or_EOF: \result ≡ 0 ∨ \result ≡ -1
+FRAMAC_SHARE/libc	stdio.h	98	fclose	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdio.h	102	fflush	from clause	Considered valid	assigns \result \from stream, stream->__fc_FILE_id;
+FRAMAC_SHARE/libc	stdio.h	103	fflush	postcondition	Considered valid	result_zero_or_EOF: \result ≡ 0 ∨ \result ≡ -1
+FRAMAC_SHARE/libc	stdio.h	106	fflush	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdio.h	110	fopen	from clause	Considered valid	assigns \result \from (indirect: *(filename + (..))), (indirect: *(mode + (..))), __fc_p_fopen;
+FRAMAC_SHARE/libc	stdio.h	112	fopen	postcondition	Considered valid	result_null_or_valid_fd: \result ≡ \null ∨ \subset(\result, &__fc_fopen[0 .. 16 - 1])
+FRAMAC_SHARE/libc	stdio.h	114	fopen	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdio.h	118	fdopen	assigns clause	Considered valid	assigns \result, __fc_fopen[fd];
+FRAMAC_SHARE/libc	stdio.h	118	fdopen	from clause	Considered valid	assigns \result \from (indirect: fd), (indirect: *(mode + (0 ..))), (indirect: __fc_fopen[fd]), __fc_p_fopen;
+FRAMAC_SHARE/libc	stdio.h	118	fdopen	from clause	Considered valid	assigns __fc_fopen[fd] \from (indirect: fd), (indirect: *(mode + (0 ..))), (indirect: __fc_fopen[fd]), __fc_p_fopen;
+FRAMAC_SHARE/libc	stdio.h	121	fdopen	postcondition	Considered valid	result_null_or_valid_fd: \result ≡ \null ∨ \subset(\result, &__fc_fopen[0 .. 16 - 1])
+FRAMAC_SHARE/libc	stdio.h	126	freopen	assigns clause	Considered valid	assigns *stream;
+FRAMAC_SHARE/libc	stdio.h	127	freopen	postcondition	Considered valid	result_null_or_same: \result ≡ \null ∨ \result ≡ \old(stream)
+FRAMAC_SHARE/libc	stdio.h	133	setbuf	assigns clause	Considered valid	assigns *stream;
+FRAMAC_SHARE/libc	stdio.h	133	setbuf	from clause	Considered valid	assigns *stream \from buf;
+FRAMAC_SHARE/libc	stdio.h	137	setvbuf	assigns clause	Considered valid	assigns *stream;
+FRAMAC_SHARE/libc	stdio.h	137	setvbuf	from clause	Considered valid	assigns *stream \from buf, mode, size;
+FRAMAC_SHARE/libc	stdio.h	166	vfprintf	assigns clause	Considered valid	assigns *stream;
+FRAMAC_SHARE/libc	stdio.h	166	vfprintf	from clause	Considered valid	assigns *stream \from *(format + (..)), arg;
+FRAMAC_SHARE/libc	stdio.h	171	vfscanf	assigns clause	Considered valid	assigns *stream;
+FRAMAC_SHARE/libc	stdio.h	171	vfscanf	from clause	Considered valid	assigns *stream \from *(format + (..)), *stream;
+FRAMAC_SHARE/libc	stdio.h	177	vprintf	assigns clause	Considered valid	assigns *__fc_stdout;
+FRAMAC_SHARE/libc	stdio.h	177	vprintf	from clause	Considered valid	assigns *__fc_stdout \from arg;
+FRAMAC_SHARE/libc	stdio.h	181	vscanf	assigns clause	Considered valid	assigns *__fc_stdin;
+FRAMAC_SHARE/libc	stdio.h	181	vscanf	from clause	Considered valid	assigns *__fc_stdin \from *(format + (..));
+FRAMAC_SHARE/libc	stdio.h	186	vsnprintf	assigns clause	Considered valid	assigns *(s + (0 .. n - 1));
+FRAMAC_SHARE/libc	stdio.h	186	vsnprintf	from clause	Considered valid	assigns *(s + (0 .. n - 1)) \from *(format + (..)), arg;
+FRAMAC_SHARE/libc	stdio.h	192	vsprintf	assigns clause	Considered valid	assigns *(s + (0 ..));
+FRAMAC_SHARE/libc	stdio.h	192	vsprintf	from clause	Considered valid	assigns *(s + (0 ..)) \from *(format + (..)), arg;
+FRAMAC_SHARE/libc	stdio.h	203	fgetc	assigns clause	Considered valid	assigns *stream;
+FRAMAC_SHARE/libc	stdio.h	209	fgets	assigns clause	Considered valid	assigns *(s + (0 .. size)), \result;
+FRAMAC_SHARE/libc	stdio.h	209	fgets	from clause	Considered valid	assigns *(s + (0 .. size)) \from (indirect: size), (indirect: *stream);
+FRAMAC_SHARE/libc	stdio.h	210	fgets	from clause	Considered valid	assigns \result \from s, (indirect: size), (indirect: *stream);
+FRAMAC_SHARE/libc	stdio.h	211	fgets	postcondition	Considered valid	result_null_or_same: \result ≡ \null ∨ \result ≡ \old(s)
+FRAMAC_SHARE/libc	stdio.h	213	fgets	postcondition	Considered valid	terminated_string_on_success: \result ≢ \null ⇒ valid_string(\old(s))
+FRAMAC_SHARE/libc	stdio.h	218	fputc	assigns clause	Considered valid	assigns *stream;
+FRAMAC_SHARE/libc	stdio.h	221	fputs	assigns clause	Considered valid	assigns *stream;
+FRAMAC_SHARE/libc	stdio.h	221	fputs	from clause	Considered valid	assigns *stream \from *(s + (..));
+FRAMAC_SHARE/libc	stdio.h	225	getc	assigns clause	Considered valid	assigns \result, *stream;
+FRAMAC_SHARE/libc	stdio.h	225	getc	from clause	Considered valid	assigns \result \from *stream;
+FRAMAC_SHARE/libc	stdio.h	225	getc	from clause	Considered valid	assigns *stream \from *stream;
+FRAMAC_SHARE/libc	stdio.h	228	getchar	from clause	Considered valid	assigns \result \from *__fc_stdin;
+FRAMAC_SHARE/libc	stdio.h	229	getchar	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdio.h	232	gets	assigns clause	Considered valid	assigns *(s + (..)), \result;
+FRAMAC_SHARE/libc	stdio.h	232	gets	from clause	Considered valid	assigns *(s + (..)) \from *__fc_stdin;
+FRAMAC_SHARE/libc	stdio.h	233	gets	from clause	Considered valid	assigns \result \from s, __fc_stdin;
+FRAMAC_SHARE/libc	stdio.h	234	gets	postcondition	Considered valid	result_null_or_same: \result ≡ \old(s) ∨ \result ≡ \null
+FRAMAC_SHARE/libc	stdio.h	238	putc	assigns clause	Considered valid	assigns *stream;
+FRAMAC_SHARE/libc	stdio.h	238	putc	from clause	Considered valid	assigns *stream \from c;
+FRAMAC_SHARE/libc	stdio.h	241	putchar	assigns clause	Considered valid	assigns *__fc_stdout;
+FRAMAC_SHARE/libc	stdio.h	241	putchar	from clause	Considered valid	assigns *__fc_stdout \from c;
+FRAMAC_SHARE/libc	stdio.h	244	puts	assigns clause	Considered valid	assigns *__fc_stdout;
+FRAMAC_SHARE/libc	stdio.h	244	puts	from clause	Considered valid	assigns *__fc_stdout \from *(s + (..));
+FRAMAC_SHARE/libc	stdio.h	247	ungetc	assigns clause	Considered valid	assigns *stream;
+FRAMAC_SHARE/libc	stdio.h	247	ungetc	from clause	Considered valid	assigns *stream \from c;
+FRAMAC_SHARE/libc	stdio.h	253	fread	assigns clause	Considered valid	assigns *((char *)ptr + (0 .. nmemb * size - 1)), \result;
+FRAMAC_SHARE/libc	stdio.h	253	fread	from clause	Considered valid	assigns *((char *)ptr + (0 .. nmemb * size - 1)) \from size, nmemb, *stream;
+FRAMAC_SHARE/libc	stdio.h	254	fread	from clause	Considered valid	assigns \result \from size, *stream;
+FRAMAC_SHARE/libc	stdio.h	255	fread	postcondition	Considered valid	size_read: \result ≤ \old(nmemb)
+FRAMAC_SHARE/libc	stdio.h	256	fread	postcondition	Considered valid	initialization: \initialized((char *)\old(ptr) + (0 .. \result * \old(size) - 1))
+FRAMAC_SHARE/libc	stdio.h	266	fwrite	assigns clause	Considered valid	assigns *stream, \result;
+FRAMAC_SHARE/libc	stdio.h	266	fwrite	from clause	Considered valid	assigns *stream \from *((char *)ptr + (0 .. nmemb * size - 1));
+FRAMAC_SHARE/libc	stdio.h	266	fwrite	from clause	Considered valid	assigns \result \from *((char *)ptr + (0 .. nmemb * size - 1));
+FRAMAC_SHARE/libc	stdio.h	267	fwrite	postcondition	Considered valid	size_written: \result ≤ \old(nmemb)
+FRAMAC_SHARE/libc	stdio.h	274	fgetpos	assigns clause	Considered valid	assigns *pos;
+FRAMAC_SHARE/libc	stdio.h	274	fgetpos	from clause	Considered valid	assigns *pos \from *stream;
+FRAMAC_SHARE/libc	stdio.h	281	fseek	assigns clause	Considered valid	assigns *stream, \result, __fc_errno;
+FRAMAC_SHARE/libc	stdio.h	281	fseek	from clause	Considered valid	assigns *stream \from *stream, (indirect: offset), (indirect: whence);
+FRAMAC_SHARE/libc	stdio.h	282	fseek	from clause	Considered valid	assigns \result \from (indirect: *stream), (indirect: offset), (indirect: whence);
+FRAMAC_SHARE/libc	stdio.h	282	fseek	from clause	Considered valid	assigns __fc_errno \from (indirect: *stream), (indirect: offset), (indirect: whence);
+FRAMAC_SHARE/libc	stdio.h	287	fsetpos	assigns clause	Considered valid	assigns *stream;
+FRAMAC_SHARE/libc	stdio.h	287	fsetpos	from clause	Considered valid	assigns *stream \from *pos;
+FRAMAC_SHARE/libc	stdio.h	292	ftell	assigns clause	Considered valid	assigns \result, __fc_errno;
+FRAMAC_SHARE/libc	stdio.h	292	ftell	from clause	Considered valid	assigns \result \from (indirect: *stream);
+FRAMAC_SHARE/libc	stdio.h	292	ftell	from clause	Considered valid	assigns __fc_errno \from (indirect: *stream);
+FRAMAC_SHARE/libc	stdio.h	294	ftell	postcondition	Considered valid	success_or_error: \result ≡ -1 ∨ (\result ≥ 0 ∧ __fc_errno ≡ \old(__fc_errno))
+FRAMAC_SHARE/libc	stdio.h	298	rewind	assigns clause	Considered valid	assigns *stream;
+FRAMAC_SHARE/libc	stdio.h	298	rewind	from clause	Considered valid	assigns *stream \from \nothing;
+FRAMAC_SHARE/libc	stdio.h	301	clearerr	assigns clause	Considered valid	assigns *stream;
+FRAMAC_SHARE/libc	stdio.h	301	clearerr	from clause	Considered valid	assigns *stream \from \nothing;
+FRAMAC_SHARE/libc	stdio.h	304	feof	from clause	Considered valid	assigns \result \from *stream;
+FRAMAC_SHARE/libc	stdio.h	305	feof	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdio.h	307	fileno	from clause	Considered valid	assigns \result \from *stream;
+FRAMAC_SHARE/libc	stdio.h	308	fileno	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdio.h	310	flockfile	assigns clause	Considered valid	assigns *stream;
+FRAMAC_SHARE/libc	stdio.h	310	flockfile	from clause	Considered valid	assigns *stream \from \nothing;
+FRAMAC_SHARE/libc	stdio.h	313	funlockfile	assigns clause	Considered valid	assigns *stream;
+FRAMAC_SHARE/libc	stdio.h	313	funlockfile	from clause	Considered valid	assigns *stream \from \nothing;
+FRAMAC_SHARE/libc	stdio.h	316	ftrylockfile	assigns clause	Considered valid	assigns \result, *stream;
+FRAMAC_SHARE/libc	stdio.h	316	ftrylockfile	from clause	Considered valid	assigns \result \from \nothing;
+FRAMAC_SHARE/libc	stdio.h	316	ftrylockfile	from clause	Considered valid	assigns *stream \from \nothing;
+FRAMAC_SHARE/libc	stdio.h	319	ferror	from clause	Considered valid	assigns \result \from *stream;
+FRAMAC_SHARE/libc	stdio.h	320	ferror	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdio.h	322	perror	assigns clause	Considered valid	assigns __fc_stdout;
+FRAMAC_SHARE/libc	stdio.h	322	perror	from clause	Considered valid	assigns __fc_stdout \from __fc_errno, *(s + (..));
+FRAMAC_SHARE/libc	stdio.h	325	getc_unlocked	assigns clause	Considered valid	assigns \result, *stream;
+FRAMAC_SHARE/libc	stdio.h	325	getc_unlocked	from clause	Considered valid	assigns \result \from *stream;
+FRAMAC_SHARE/libc	stdio.h	325	getc_unlocked	from clause	Considered valid	assigns *stream \from *stream;
+FRAMAC_SHARE/libc	stdio.h	327	getchar_unlocked	from clause	Considered valid	assigns \result \from *__fc_stdin;
+FRAMAC_SHARE/libc	stdio.h	328	getchar_unlocked	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdio.h	329	putc_unlocked	assigns clause	Considered valid	assigns *stream;
+FRAMAC_SHARE/libc	stdio.h	329	putc_unlocked	from clause	Considered valid	assigns *stream \from c;
+FRAMAC_SHARE/libc	stdio.h	331	putchar_unlocked	assigns clause	Considered valid	assigns *__fc_stdout;
+FRAMAC_SHARE/libc	stdio.h	331	putchar_unlocked	from clause	Considered valid	assigns *__fc_stdout \from c;
+FRAMAC_SHARE/libc	stdio.h	334	clearerr_unlocked	assigns clause	Considered valid	assigns *stream;
+FRAMAC_SHARE/libc	stdio.h	334	clearerr_unlocked	from clause	Considered valid	assigns *stream \from \nothing;
+FRAMAC_SHARE/libc	stdio.h	336	feof_unlocked	from clause	Considered valid	assigns \result \from *stream;
+FRAMAC_SHARE/libc	stdio.h	337	feof_unlocked	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdio.h	338	ferror_unlocked	from clause	Considered valid	assigns \result \from *stream;
+FRAMAC_SHARE/libc	stdio.h	339	ferror_unlocked	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdio.h	340	fileno_unlocked	from clause	Considered valid	assigns \result \from *stream;
+FRAMAC_SHARE/libc	stdio.h	341	fileno_unlocked	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdio.h	365	popen	assigns clause	Considered valid	assigns \result, __fc_fopen[0 ..];
+FRAMAC_SHARE/libc	stdio.h	365	popen	from clause	Considered valid	assigns \result \from (indirect: *command), (indirect: *type), __fc_p_fopen;
+FRAMAC_SHARE/libc	stdio.h	367	popen	from clause	Considered valid	assigns __fc_fopen[0 ..] \from (indirect: *command), (indirect: *type), __fc_fopen[0 ..];
+FRAMAC_SHARE/libc	stdio.h	370	popen	postcondition	Considered valid	result_error_or_valid_open_pipe: \result ≡ \null ∨ (\subset(\result, &__fc_fopen[0 .. 16 - 1]) ∧ is_open_pipe(\result))
+FRAMAC_SHARE/libc	stdio.h	379	pclose	from clause	Considered valid	assigns \result \from (indirect: *stream);
+FRAMAC_SHARE/libc	stdio.h	380	pclose	postcondition	Considered valid	closed_stream: ¬is_open_pipe(\old(stream))
+FRAMAC_SHARE/libc	stdio.h	382	pclose	assigns clause	Considered valid	assigns \nothing;
+RobotSeeVM_v0001	CallStack.c	41	Push	precondition	Unknown	CallStackIndex < CallStackSize
+RobotSeeVM_v0001	CallStack.c	45	Push	mem_access	Unknown	\valid((DATATYPE *)CallStack + (int)CallStackIndex)
+RobotSeeVM_v0001	CallStack.c	50	Pop	precondition	Unknown	CallStackIndex > 0
+RobotSeeVM_v0001	CallStack.c	59	Pop	initialization	Unknown	\initialized((DATATYPE *)CallStack + (int)CallStackIndex)
+RobotSeeVM_v0001	CallStack.c	59	Pop	mem_access	Unknown	\valid_read((DATATYPE *)CallStack + (int)CallStackIndex)
+RobotSeeVM_v0001	CallStack.c	62	Top	precondition	Unknown	CallStackIndex > 0
+RobotSeeVM_v0001	CallStack.c	70	Top	initialization	Unknown	\initialized(((DATATYPE *)CallStack + (int)CallStackIndex) - 1)
+RobotSeeVM_v0001	CallStack.c	70	Top	mem_access	Unknown	\valid_read(((DATATYPE *)CallStack + (int)CallStackIndex) - 1)
+RobotSeeVM_v0001	ExecutionEngine.c	165	StartVM	initialization	Unknown	\initialized(&opcode)
+RobotSeeVM_v0001	ExecutionEngine.c	169	StartVM	precondition of Push	Unknown	CallStackIndex < CallStackSize
+RobotSeeVM_v0001	ExecutionEngine.c	170	StartVM	precondition of Push	Unknown	CallStackIndex < CallStackSize
+RobotSeeVM_v0001	ExecutionEngine.c	170	StartVM	precondition of Top	Unknown	CallStackIndex > 0
+RobotSeeVM_v0001	ExecutionEngine.c	172	StartVM	precondition of Push	Unknown	CallStackIndex < CallStackSize
+RobotSeeVM_v0001	ExecutionEngine.c	175	StartVM	precondition of Pop	Unknown	CallStackIndex > 0
+RobotSeeVM_v0001	ExecutionEngine.c	176	StartVM	precondition of Pop	Unknown	CallStackIndex > 0
+RobotSeeVM_v0001	ExecutionEngine.c	177	StartVM	precondition of Top	Unknown	CallStackIndex > 0
+RobotSeeVM_v0001	ExecutionEngine.c	178	StartVM	precondition of Pop	Unknown	CallStackIndex > 0
+RobotSeeVM_v0001	ExecutionEngine.c	179	StartVM	precondition of Pop	Unknown	CallStackIndex > 0
+RobotSeeVM_v0001	Keyword.c	39	Keyword	precondition of Push	Unknown	CallStackIndex < CallStackSize
+RobotSeeVM_v0001	Keyword.c	44	Keyword	precondition of Push	Unknown	CallStackIndex < CallStackSize
+RobotSeeVM_v0001	Keyword.c	48	Keyword	precondition of Pop	Unknown	CallStackIndex > 0
+RobotSeeVM_v0001	Keyword.c	49	Keyword	precondition of sprintf_va_1	Valid	valid_read_string(format)
+RobotSeeVM_v0001	Keyword.c	49	sprintf_va_1	assigns clause	Considered valid	assigns \result, *(s + (0 ..));
+RobotSeeVM_v0001	Keyword.c	49	sprintf_va_1	from clause	Considered valid	assigns *(s + (0 ..)) \from (indirect: *(format + (0 ..))), param0;
+RobotSeeVM_v0001	Keyword.c	49	sprintf_va_1	from clause	Considered valid	assigns \result \from (indirect: *(format + (0 ..))), param0;
+RobotSeeVM_v0001	Keyword.c	49	sprintf_va_1	precondition	Valid	valid_read_string(format)
+RobotSeeVM_v0001	Keyword.c	51	Keyword	precondition of Push	Valid	CallStackIndex < CallStackSize
+RobotSeeVM_v0001	Keyword.c	55	Keyword	precondition of Pop	Unknown	CallStackIndex > 0
+RobotSeeVM_v0001	Keyword.c	56	Keyword	precondition of sprintf_va_2	Valid	valid_read_string(format)
+RobotSeeVM_v0001	Keyword.c	56	sprintf_va_2	assigns clause	Considered valid	assigns \result, *(s + (0 ..));
+RobotSeeVM_v0001	Keyword.c	56	sprintf_va_2	from clause	Considered valid	assigns *(s + (0 ..)) \from (indirect: *(format + (0 ..))), param0;
+RobotSeeVM_v0001	Keyword.c	56	sprintf_va_2	from clause	Considered valid	assigns \result \from (indirect: *(format + (0 ..))), param0;
+RobotSeeVM_v0001	Keyword.c	56	sprintf_va_2	precondition	Valid	valid_read_string(format)
+RobotSeeVM_v0001	Keyword.c	58	Keyword	precondition of Push	Valid	CallStackIndex < CallStackSize
+RobotSeeVM_v0001	Keyword.c	62	usleep	assigns clause	Unknown	assigns \nothing;
+RobotSeeVM_v0001	Keyword.c	62	usleep	from clause	Unknown	assigns \result \from x_0;
+RobotSeeVM_v0001	Keyword.c	62	Keyword	precondition of Top	Unknown	CallStackIndex > 0
+RobotSeeVM_v0001	Keyword.c	62	Keyword	signed_overflow	Unknown	-2147483648 ≤ tmp_0 * (long)1000
+RobotSeeVM_v0001	Keyword.c	62	Keyword	signed_overflow	Unknown	tmp_0 * (long)1000 ≤ 2147483647
+RobotSeeVM_v0001	Keyword.c	66	Keyword	precondition of Push	Valid	CallStackIndex < CallStackSize
+RobotSeeVM_v0001	Keyword.c	66	abs	assigns clause	Unknown	assigns \nothing;
+RobotSeeVM_v0001	Keyword.c	66	abs	from clause	Unknown	assigns \result \from x_0;
+RobotSeeVM_v0001	Keyword.c	66	Keyword	precondition of Pop	Unknown	CallStackIndex > 0
+RobotSeeVM_v0001	Keyword.c	71	Keyword	precondition of Pop	Unknown	CallStackIndex > 0
+RobotSeeVM_v0001	Keyword.c	72	Keyword	precondition of Pop	Unknown	CallStackIndex > 0
+RobotSeeVM_v0001	Keyword.c	73	Keyword	precondition of Pop	Unknown	CallStackIndex > 0
+RobotSeeVM_v0001	Keyword.c	74	Keyword	precondition of sprintf_va_3	Valid	valid_read_string(format)
+RobotSeeVM_v0001	Keyword.c	74	sprintf_va_3	assigns clause	Considered valid	assigns \result, *(s + (0 ..));
+RobotSeeVM_v0001	Keyword.c	74	sprintf_va_3	from clause	Considered valid	assigns *(s + (0 ..)) \from (indirect: *(format + (0 ..))), param2, param1, param0;
+RobotSeeVM_v0001	Keyword.c	74	sprintf_va_3	from clause	Considered valid	assigns \result \from (indirect: *(format + (0 ..))), param2, param1, param0;
+RobotSeeVM_v0001	Keyword.c	74	sprintf_va_3	precondition	Valid	valid_read_string(format)
+RobotSeeVM_v0001	Keyword.c	77	Keyword	precondition of sprintf_va_4	Valid	valid_read_string(format)
+RobotSeeVM_v0001	Keyword.c	77	sprintf_va_4	assigns clause	Considered valid	assigns \result, *(s + (0 ..));
+RobotSeeVM_v0001	Keyword.c	77	sprintf_va_4	from clause	Considered valid	assigns *(s + (0 ..)) \from (indirect: *(format + (0 ..))), param1, param0;
+RobotSeeVM_v0001	Keyword.c	77	sprintf_va_4	from clause	Considered valid	assigns \result \from (indirect: *(format + (0 ..))), param1, param0;
+RobotSeeVM_v0001	Keyword.c	77	sprintf_va_4	precondition	Valid	valid_read_string(format)
+RobotSeeVM_v0001	Keyword.c	79	Keyword	signed_overflow	Unknown	-2147483648 ≤ temp1 + (long)(temp2 + temp3)
+RobotSeeVM_v0001	Keyword.c	79	Keyword	signed_overflow	Unknown	temp1 + (long)(temp2 + temp3) ≤ 2147483647
+RobotSeeVM_v0001	Keyword.c	79	Keyword	signed_overflow	Unknown	-2147483648 ≤ temp2 + temp3
+RobotSeeVM_v0001	Keyword.c	79	Keyword	signed_overflow	Unknown	temp2 + temp3 ≤ 2147483647
+RobotSeeVM_v0001	Keyword.c	81	Keyword	precondition of sprintf_va_5	Valid	valid_read_string(format)
+RobotSeeVM_v0001	Keyword.c	81	sprintf_va_5	assigns clause	Considered valid	assigns \result, *(s + (0 ..));
+RobotSeeVM_v0001	Keyword.c	81	sprintf_va_5	from clause	Considered valid	assigns *(s + (0 ..)) \from (indirect: *(format + (0 ..))), param0;
+RobotSeeVM_v0001	Keyword.c	81	sprintf_va_5	from clause	Considered valid	assigns \result \from (indirect: *(format + (0 ..))), param0;
+RobotSeeVM_v0001	Keyword.c	81	sprintf_va_5	precondition	Valid	valid_read_string(format)
+RobotSeeVM_v0001	Keyword.c	83	Keyword	precondition of Push	Valid	CallStackIndex < CallStackSize
+RobotSeeVM_v0001	Operator.c	37	Operator	precondition of Pop	Unknown	CallStackIndex > 0
+RobotSeeVM_v0001	Operator.c	38	Operator	precondition of Push	Valid	CallStackIndex < CallStackSize
+RobotSeeVM_v0001	Operator.c	40	Operator	precondition of Push	Valid	CallStackIndex < CallStackSize
+RobotSeeVM_v0001	Operator.c	44	Operator	precondition of Pop	Unknown	CallStackIndex > 0
+RobotSeeVM_v0001	Operator.c	44	Operator	precondition of Pop	Unknown	CallStackIndex > 0
+RobotSeeVM_v0001	Operator.c	45	Operator	precondition of Push	Valid	CallStackIndex < CallStackSize
+RobotSeeVM_v0001	Operator.c	49	Operator	precondition of Pop	Unknown	CallStackIndex > 0
+RobotSeeVM_v0001	Operator.c	49	Operator	signed_overflow	Unknown	-2147483648 ≤ tmp_5 * tmp_6
+RobotSeeVM_v0001	Operator.c	49	Operator	signed_overflow	Unknown	tmp_5 * tmp_6 ≤ 2147483647
+RobotSeeVM_v0001	Operator.c	49	Operator	precondition of Pop	Unknown	CallStackIndex > 0
+RobotSeeVM_v0001	Operator.c	50	Operator	precondition of Push	Valid	CallStackIndex < CallStackSize
+RobotSeeVM_v0001	Operator.c	54	Operator	precondition of Pop	Unknown	CallStackIndex > 0
+RobotSeeVM_v0001	Operator.c	54	Operator	signed_overflow	Unknown	-2147483648 ≤ tmp_8 + tmp_9
+RobotSeeVM_v0001	Operator.c	54	Operator	signed_overflow	Unknown	tmp_8 + tmp_9 ≤ 2147483647
+RobotSeeVM_v0001	Operator.c	54	Operator	precondition of Pop	Unknown	CallStackIndex > 0
+RobotSeeVM_v0001	Operator.c	55	Operator	precondition of Push	Valid	CallStackIndex < CallStackSize
+RobotSeeVM_v0001	Operator.c	59	Operator	precondition of Pop	Unknown	CallStackIndex > 0
+RobotSeeVM_v0001	Operator.c	59	Operator	signed_overflow	Unknown	-2147483648 ≤ tmp_11 - tmp_12
+RobotSeeVM_v0001	Operator.c	59	Operator	signed_overflow	Unknown	tmp_11 - tmp_12 ≤ 2147483647
+RobotSeeVM_v0001	Operator.c	59	Operator	precondition of Pop	Unknown	CallStackIndex > 0
+RobotSeeVM_v0001	Operator.c	60	Operator	precondition of Push	Valid	CallStackIndex < CallStackSize
+RobotSeeVM_v0001	Operator.c	64	Operator	precondition of Pop	Unknown	CallStackIndex > 0
+RobotSeeVM_v0001	Operator.c	64	Operator	signed_overflow	Unknown	tmp_14 / tmp_15 ≤ 2147483647
+RobotSeeVM_v0001	Operator.c	64	Operator	division_by_zero	Unknown	tmp_15 ≢ 0
+RobotSeeVM_v0001	Operator.c	64	Operator	precondition of Pop	Unknown	CallStackIndex > 0
+RobotSeeVM_v0001	Operator.c	65	Operator	precondition of Push	Valid	CallStackIndex < CallStackSize
+RobotSeeVM_v0001	Operator.c	69	Operator	precondition of Pop	Unknown	CallStackIndex > 0
+RobotSeeVM_v0001	Operator.c	69	Operator	precondition of Pop	Unknown	CallStackIndex > 0
+RobotSeeVM_v0001	Operator.c	70	Operator	precondition of Push	Valid	CallStackIndex < CallStackSize
+RobotSeeVM_v0001	Operator.c	72	Operator	precondition of Push	Valid	CallStackIndex < CallStackSize
+RobotSeeVM_v0001	Operator.c	76	Operator	precondition of Pop	Valid	CallStackIndex > 0
+RobotSeeVM_v0001	Operator.c	76	Operator	precondition of Top	Unknown	CallStackIndex > 0
+RobotSeeVM_v0001	Operator.c	80	Operator	precondition of Pop	Unknown	CallStackIndex > 0
+RobotSeeVM_v0001	Operator.c	80	Operator	precondition of Pop	Unknown	CallStackIndex > 0
+RobotSeeVM_v0001	Operator.c	81	Operator	precondition of Push	Valid	CallStackIndex < CallStackSize
+RobotSeeVM_v0001	Operator.c	83	Operator	precondition of Push	Valid	CallStackIndex < CallStackSize
+RobotSeeVM_v0001	Operator.c	87	Operator	precondition of Pop	Unknown	CallStackIndex > 0
+RobotSeeVM_v0001	Operator.c	87	Operator	precondition of Pop	Unknown	CallStackIndex > 0
+RobotSeeVM_v0001	Operator.c	88	Operator	precondition of Push	Valid	CallStackIndex < CallStackSize
+RobotSeeVM_v0001	Operator.c	92	Operator	precondition of Pop	Unknown	CallStackIndex > 0
+RobotSeeVM_v0001	Operator.c	93	Operator	precondition of Pop	Unknown	CallStackIndex > 0
+RobotSeeVM_v0001	Operator.c	97	Operator	precondition of Pop	Unknown	CallStackIndex > 0
+RobotSeeVM_v0001	Operator.c	98	Operator	signed_overflow	Unknown	-2147483648 ≤ tmp_34 * tmp_35
+RobotSeeVM_v0001	Operator.c	98	Operator	signed_overflow	Unknown	tmp_34 * tmp_35 ≤ 2147483647
+RobotSeeVM_v0001	Operator.c	98	Operator	precondition of Pop	Unknown	CallStackIndex > 0
+RobotSeeVM_v0001	Operator.c	102	Operator	precondition of Pop	Unknown	CallStackIndex > 0
+RobotSeeVM_v0001	Operator.c	103	Operator	signed_overflow	Unknown	-2147483648 ≤ tmp_37 + tmp_38
+RobotSeeVM_v0001	Operator.c	103	Operator	signed_overflow	Unknown	tmp_37 + tmp_38 ≤ 2147483647
+RobotSeeVM_v0001	Operator.c	103	Operator	precondition of Pop	Unknown	CallStackIndex > 0
+RobotSeeVM_v0001	Operator.c	107	Operator	precondition of Pop	Unknown	CallStackIndex > 0
+RobotSeeVM_v0001	Operator.c	108	Operator	signed_overflow	Unknown	-2147483648 ≤ tmp_40 - tmp_41
+RobotSeeVM_v0001	Operator.c	108	Operator	signed_overflow	Unknown	tmp_40 - tmp_41 ≤ 2147483647
+RobotSeeVM_v0001	Operator.c	108	Operator	precondition of Pop	Unknown	CallStackIndex > 0
+RobotSeeVM_v0001	Operator.c	112	Operator	precondition of Pop	Unknown	CallStackIndex > 0
+RobotSeeVM_v0001	Operator.c	113	Operator	signed_overflow	Unknown	tmp_43 / tmp_44 ≤ 2147483647
+RobotSeeVM_v0001	Operator.c	113	Operator	division_by_zero	Unknown	tmp_44 ≢ 0
+RobotSeeVM_v0001	Operator.c	113	Operator	precondition of Pop	Unknown	CallStackIndex > 0
+RobotSeeVM_v0001	Operator.c	117	Operator	precondition of Pop	Unknown	CallStackIndex > 0
+RobotSeeVM_v0001	Operator.c	117	Operator	precondition of Pop	Unknown	CallStackIndex > 0
+RobotSeeVM_v0001	Operator.c	118	Operator	precondition of Push	Valid	CallStackIndex < CallStackSize
+RobotSeeVM_v0001	Operator.c	120	Operator	precondition of Push	Valid	CallStackIndex < CallStackSize
+RobotSeeVM_v0001	Operator.c	124	Operator	precondition of Pop	Unknown	CallStackIndex > 0
+RobotSeeVM_v0001	Operator.c	125	Operator	precondition of Pop	Unknown	CallStackIndex > 0
+RobotSeeVM_v0001	RamVar.c	40	setVar	mem_access	Unknown	\valid((DATATYPE *)RamVar + (int)Reference)
+RobotSeeVM_v0001	RamVar.c	47	getVar	initialization	Unknown	\initialized((DATATYPE *)RamVar + (int)Reference)
+RobotSeeVM_v0001	RamVar.c	47	getVar	mem_access	Unknown	\valid_read((DATATYPE *)RamVar + (int)Reference)
+RobotSeeVM_v0001	StringFifo.c	45	StringPush	mem_access	Unknown	\valid(StringFifo + tmp)
+RobotSeeVM_v0001	StringFifo.c	46	StringPush	mem_access	Unknown	\valid(StringFifo + StringFifoIndex)
+RobotSeeVM_v0001	ports.c	57	malloc	assigns clause	Unknown	assigns \nothing;
+RobotSeeVM_v0001	ports.c	57	malloc	from clause	Unknown	assigns \result \from x_0;
+RobotSeeVM_v0001	ports.c	75	CallBackConsoleOut	precondition of printf_va_1	Unknown	valid_read_string(param0)
+RobotSeeVM_v0001	ports.c	75	CallBackConsoleOut	precondition of printf_va_1	Valid	valid_read_string(format)
+RobotSeeVM_v0001	ports.c	75	printf_va_1	assigns clause	Considered valid	assigns \result, __fc_stdout->__fc_FILE_data;
+RobotSeeVM_v0001	ports.c	75	printf_va_1	from clause	Considered valid	assigns \result \from (indirect: __fc_stdout->__fc_FILE_id), __fc_stdout->__fc_FILE_data, (indirect: *(format + (0 ..))), *(param0 + (0 ..));
+RobotSeeVM_v0001	ports.c	75	printf_va_1	from clause	Considered valid	assigns __fc_stdout->__fc_FILE_data \from (indirect: __fc_stdout->__fc_FILE_id), __fc_stdout->__fc_FILE_data, (indirect: *(format + (0 ..))), *(param0 + (0 ..));
+RobotSeeVM_v0001	ports.c	75	printf_va_1	precondition	Unknown	valid_read_string(param0)
+RobotSeeVM_v0001	ports.c	75	printf_va_1	precondition	Valid	valid_read_string(format)
+RobotSeeVM_v0001	ports.c	80	CallBackErrorOut	precondition of printf_va_2	Valid	valid_read_string(format)
+RobotSeeVM_v0001	ports.c	80	CallBackErrorOut	precondition of printf_va_2	Valid	valid_read_string(param0)
+RobotSeeVM_v0001	ports.c	80	printf_va_2	assigns clause	Considered valid	assigns \result, __fc_stdout->__fc_FILE_data;
+RobotSeeVM_v0001	ports.c	80	printf_va_2	from clause	Considered valid	assigns \result \from (indirect: __fc_stdout->__fc_FILE_id), __fc_stdout->__fc_FILE_data, (indirect: *(format + (0 ..))), *(param0 + (0 ..));
+RobotSeeVM_v0001	ports.c	80	printf_va_2	from clause	Considered valid	assigns __fc_stdout->__fc_FILE_data \from (indirect: __fc_stdout->__fc_FILE_id), __fc_stdout->__fc_FILE_data, (indirect: *(format + (0 ..))), *(param0 + (0 ..));
+RobotSeeVM_v0001	ports.c	80	printf_va_2	precondition	Valid	valid_read_string(format)
+RobotSeeVM_v0001	ports.c	80	printf_va_2	precondition	Valid	valid_read_string(param0)
+RobotSeeVM_v0001	ports.c	85	CallBackErrorCode	precondition of printf_va_3	Valid	valid_read_string(format)
+RobotSeeVM_v0001	ports.c	85	printf_va_3	assigns clause	Considered valid	assigns \result, __fc_stdout->__fc_FILE_data;
+RobotSeeVM_v0001	ports.c	85	printf_va_3	from clause	Considered valid	assigns \result \from (indirect: __fc_stdout->__fc_FILE_id), __fc_stdout->__fc_FILE_data, (indirect: *(format + (0 ..))), param0;
+RobotSeeVM_v0001	ports.c	85	printf_va_3	from clause	Considered valid	assigns __fc_stdout->__fc_FILE_data \from (indirect: __fc_stdout->__fc_FILE_id), __fc_stdout->__fc_FILE_data, (indirect: *(format + (0 ..))), param0;
+RobotSeeVM_v0001	ports.c	85	printf_va_3	precondition	Valid	valid_read_string(format)
+RobotSeeVM_v0001	ports.c	90	CallBackDebugOut	precondition of printf_va_4	Dead	valid_read_string(format)
+RobotSeeVM_v0001	ports.c	90	CallBackDebugOut	precondition of printf_va_4	Dead	valid_read_string(param0)
+RobotSeeVM_v0001	ports.c	90	printf_va_4	assigns clause	Considered valid	assigns \result, __fc_stdout->__fc_FILE_data;
+RobotSeeVM_v0001	ports.c	90	printf_va_4	from clause	Considered valid	assigns \result \from (indirect: __fc_stdout->__fc_FILE_id), __fc_stdout->__fc_FILE_data, (indirect: *(format + (0 ..))), *(param0 + (0 ..));
+RobotSeeVM_v0001	ports.c	90	printf_va_4	from clause	Considered valid	assigns __fc_stdout->__fc_FILE_data \from (indirect: __fc_stdout->__fc_FILE_id), __fc_stdout->__fc_FILE_data, (indirect: *(format + (0 ..))), *(param0 + (0 ..));
+RobotSeeVM_v0001	ports.c	90	printf_va_4	precondition	Valid	valid_read_string(format)
+RobotSeeVM_v0001	ports.c	90	printf_va_4	precondition	Valid	valid_read_string(param0)
+RobotSeeVM_v0001	ports.c	98	CallBackGetProgramByte	index_bound	Unknown	address < 72

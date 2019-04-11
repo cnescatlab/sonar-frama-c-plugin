@@ -1,0 +1,4 @@
+directory	file	line	function	property kind	status	property
+.	copy_logic.i	16	main	user assertion	Unknown	q(y) ∧ p(x)
+.	copy_logic.i	17	main	signed_overflow	Unknown	y + x ≤ 2147483647
+.	copy_logic.i	18	main	user assertion	Unknown	g(x) ≡ f(y)

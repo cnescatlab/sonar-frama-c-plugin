@@ -14,17 +14,18 @@
  * You should have received a copy of the GNU General Public License
  * along with sonarframac.  If not, see <http://www.gnu.org/licenses/>.
  */
-package fr.cnes.sonarqube.plugins.framac.report;
+package fr.cnes.sonarqube.plugins.framac.exceptions;
 
 /**
- * Error definition
+ * Use this exception when there is a runtime error on i-Code execution.
  */
-public interface ErrorInterface {
+public final class FramaCException extends Exception {
 
-	String getLineDescriptor();
-
-	String getRuleKey();
-
-	String getDescription();
+	/**
+	 * Default constructor.
+	 */
+	public FramaCException(final String message) {
+		super(message);
+	}
 
 }

@@ -1,0 +1,5 @@
+directory	file	line	function	property kind	status	property
+.	alias.4.i	82	Frama_C_show_each_d0	assigns clause	Unknown	assigns \nothing;
+.	alias.4.i	82	Frama_C_show_each_d0	from clause	Unknown	assigns \result \from \nothing;
+.	alias.4.i	84	Frama_C_show_each_d2	assigns clause	Unknown	assigns \nothing;
+.	alias.4.i	84	Frama_C_show_each_d2	from clause	Unknown	assigns \result \from \nothing;

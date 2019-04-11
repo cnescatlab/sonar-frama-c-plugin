@@ -1,0 +1,473 @@
+[kernel] Warning: your preprocessor is not known to handle option `-nostdinc'. If pre-processing fails because of it, please add -no-cpp-frama-c-compliant option to Frama-C's command-line. If you do not want to see this warning again, explicitly use option -cpp-frama-c-compliant.
+[kernel] Parsing RobotSeeVM_v0001/CallStack.c (with preprocessing)
+[kernel] Parsing RobotSeeVM_v0001/ExecutionEngine.c (with preprocessing)
+[kernel] Parsing RobotSeeVM_v0001/InitHardware.c (with preprocessing)
+[kernel] Parsing RobotSeeVM_v0001/Keyword.c (with preprocessing)
+[kernel:typing:incompatible-types-call] RobotSeeVM_v0001/Keyword.c:43: Warning: 
+  expected 'char *' but got argument of type 'unsigned char *': tmp
+[kernel:typing:implicit-function-declaration] RobotSeeVM_v0001/Keyword.c:62: Warning: 
+  Calling undeclared function usleep. Old style K&R code?
+[kernel:typing:implicit-function-declaration] RobotSeeVM_v0001/Keyword.c:66: Warning: 
+  Calling undeclared function abs. Old style K&R code?
+[kernel] Parsing RobotSeeVM_v0001/Operator.c (with preprocessing)
+[kernel] Parsing RobotSeeVM_v0001/ports.c (with preprocessing)
+[kernel:typing:implicit-function-declaration] RobotSeeVM_v0001/ports.c:57: Warning: 
+  Calling undeclared function malloc. Old style K&R code?
+[kernel] Parsing RobotSeeVM_v0001/RamVar.c (with preprocessing)
+[kernel] Parsing RobotSeeVM_v0001/RobotSeeVM_Debugger.c (with preprocessing)
+[kernel] Parsing RobotSeeVM_v0001/StringFifo.c (with preprocessing)
+[variadic] RobotSeeVM_v0001/Keyword.c:49: Warning: 
+  Incorrect type for argument 3. The argument will be cast from DATATYPE to int.
+[variadic] RobotSeeVM_v0001/Keyword.c:56: Warning: 
+  Incorrect type for argument 3. The argument will be cast from DATATYPE to unsigned int.
+[variadic] RobotSeeVM_v0001/Keyword.c:74: Warning: 
+  Incorrect type for argument 3. The argument will be cast from DATATYPE to int.
+[variadic] RobotSeeVM_v0001/Keyword.c:74: Warning: 
+  Incorrect type for argument 4. The argument will be cast from DATATYPE to int.
+[variadic] RobotSeeVM_v0001/Keyword.c:74: Warning: 
+  Incorrect type for argument 5. The argument will be cast from DATATYPE to int.
+[variadic] RobotSeeVM_v0001/Keyword.c:77: Warning: 
+  Incorrect type for argument 3. The argument will be cast from DATATYPE to int.
+[variadic] RobotSeeVM_v0001/Keyword.c:77: Warning: 
+  Incorrect type for argument 4. The argument will be cast from DATATYPE to int.
+[variadic] RobotSeeVM_v0001/Keyword.c:81: Warning: 
+  Incorrect type for argument 3. The argument will be cast from DATATYPE to int.
+[variadic] RobotSeeVM_v0001/ports.c:85: Warning: 
+  Incorrect type for argument 2. The argument will be cast from int to unsigned int.
+[value] Analyzing a complete application starting at main
+[value] Computing initial state
+[value] Initial state computed
+[value:initial-state] Values of globals at initialization
+  __fc_errno ∈ [--..--]
+  __fc_stdin ∈ {{ NULL ; &S___fc_stdin[0] }}
+  __fc_stdout ∈ {{ NULL ; &S___fc_stdout[0] }}
+  __fc_fopen[0..15] ∈ {0}
+  __fc_p_fopen ∈ {{ &__fc_fopen[0] }}
+  VMStates ∈ {0}
+  VMOldStates ∈ {0}
+  ProgramCounter ∈ {0}
+  LineNumber ∈ {0}
+  program[0..1] ∈ {100}
+         [2] ∈ {112}
+         [3] ∈ {0}
+         [4] ∈ {100}
+         [5] ∈ {7}
+         [6] ∈ {112}
+         [7] ∈ {1}
+         [8] ∈ {102}
+         [9] ∈ {0}
+         [10] ∈ {53}
+         [11] ∈ {164}
+         [12] ∈ {1}
+         [13] ∈ {255}
+         [14] ∈ {102}
+         [15] ∈ {4}
+         [16] ∈ {53}
+         [17] ∈ {115}
+         [18] ∈ {72}
+         [19] ∈ {115}
+         [20] ∈ {69}
+         [21] ∈ {115}
+         [22] ∈ {76}
+         [23] ∈ {115}
+         [24] ∈ {76}
+         [25] ∈ {115}
+         [26] ∈ {79}
+         [27] ∈ {115}
+         [28] ∈ {13}
+         [29] ∈ {115}
+         [30] ∈ {10}
+         [31] ∈ {115}
+         [32] ∈ {0}
+         [33] ∈ {102}
+         [34] ∈ {1}
+         [35] ∈ {53}
+         [36] ∈ {118}
+         [37] ∈ {0}
+         [38] ∈ {102}
+         [39] ∈ {2}
+         [40] ∈ {53}
+         [41] ∈ {100}
+         [42] ∈ {10}
+         [43] ∈ {118}
+         [44] ∈ {0}
+         [45] ∈ {100}
+         [46] ∈ {1}
+         [47] ∈ {102}
+         [48] ∈ {6}
+         [49] ∈ {112}
+         [50] ∈ {1}
+         [51] ∈ {100}
+         [52] ∈ {1}
+         [53] ∈ {118}
+         [54] ∈ {0}
+         [55] ∈ {111}
+         [56] ∈ {45}
+         [57] ∈ {112}
+         [58] ∈ {0}
+         [59] ∈ {100}
+         [60] ∈ {50}
+         [61] ∈ {118}
+         [62] ∈ {0}
+         [63] ∈ {175}
+         [64..65] ∈ {61}
+         [66] ∈ {95}
+         [67] ∈ {11}
+         [68] ∈ {106}
+         [69] ∈ {0}
+         [70] ∈ {106}
+         [71] ∈ {11}
+  StringFifo ∈ {0}
+  StringFifoSize ∈ {0}
+  StringFifoIndex ∈ {0}
+  CallStack ∈ {0}
+  CallStackSize ∈ {0}
+  CallStackIndex ∈ {0}
+  MaxVarIndex ∈ {0}
+  RamVar ∈ {0}
+  S___fc_stdin[0..1] ∈ [--..--]
+  S___fc_stdout[0..1] ∈ [--..--]
+[kernel:annot:missing-spec] RobotSeeVM_v0001/ports.c:57: Warning: 
+  Neither code nor specification for function malloc, generating default assigns from the prototype
+[value] RobotSeeVM_v0001/ports.c:57: allocating variable __malloc_main_l57
+[value] RobotSeeVM_v0001/ports.c:58: allocating variable __malloc_main_l58
+[value] RobotSeeVM_v0001/ports.c:59: allocating variable __malloc_main_l59
+[value] RobotSeeVM_v0001/ExecutionEngine.c:73: entering loop for the first time
+[value] using specification for function printf_va_2
+[value:alarm] RobotSeeVM_v0001/ports.c:98: Warning: 
+  accessing out of bounds index. assert address < 72;
+[value:alarm] RobotSeeVM_v0001/ExecutionEngine.c:165: Warning: 
+  accessing uninitialized left-value. assert \initialized(&opcode);
+[value:alarm] RobotSeeVM_v0001/CallStack.c:45: Warning: 
+  out of bounds write.
+  assert \valid((DATATYPE *)CallStack + (int)CallStackIndex);
+[value] using specification for function printf_va_3
+[value:alarm] RobotSeeVM_v0001/StringFifo.c:45: Warning: 
+  out of bounds write.
+  assert \valid(StringFifo + tmp);
+  (tmp from StringFifoIndex++)
+[value:alarm] RobotSeeVM_v0001/ExecutionEngine.c:170: Warning: 
+  function Top: precondition got status unknown.
+[value:alarm] RobotSeeVM_v0001/CallStack.c:70: Warning: 
+  accessing uninitialized left-value.
+  assert \initialized(((DATATYPE *)CallStack + (int)CallStackIndex) - 1);
+[value:alarm] RobotSeeVM_v0001/CallStack.c:70: Warning: 
+  out of bounds read.
+  assert \valid_read(((DATATYPE *)CallStack + (int)CallStackIndex) - 1);
+[value:alarm] RobotSeeVM_v0001/RamVar.c:47: Warning: 
+  accessing uninitialized left-value.
+  assert \initialized((DATATYPE *)RamVar + (int)Reference);
+[value:alarm] RobotSeeVM_v0001/RamVar.c:47: Warning: 
+  out of bounds read. assert \valid_read((DATATYPE *)RamVar + (int)Reference);
+[value:alarm] RobotSeeVM_v0001/Operator.c:37: Warning: 
+  function Pop: precondition got status unknown.
+[value:alarm] RobotSeeVM_v0001/CallStack.c:59: Warning: 
+  accessing uninitialized left-value.
+  assert \initialized((DATATYPE *)CallStack + (int)CallStackIndex);
+[value:alarm] RobotSeeVM_v0001/CallStack.c:59: Warning: 
+  out of bounds read.
+  assert \valid_read((DATATYPE *)CallStack + (int)CallStackIndex);
+[value:alarm] RobotSeeVM_v0001/Operator.c:44: Warning: 
+  function Pop: precondition got status unknown.
+[value:alarm] RobotSeeVM_v0001/Operator.c:44: Warning: 
+  function Pop: precondition got status invalid.
+[value:alarm] RobotSeeVM_v0001/Operator.c:49: Warning: 
+  function Pop: precondition got status unknown.
+[value:alarm] RobotSeeVM_v0001/Operator.c:49: Warning: 
+  function Pop: precondition got status invalid.
+[value:alarm] RobotSeeVM_v0001/Operator.c:54: Warning: 
+  function Pop: precondition got status unknown.
+[value:alarm] RobotSeeVM_v0001/Operator.c:54: Warning: 
+  function Pop: precondition got status invalid.
+[value:alarm] RobotSeeVM_v0001/Operator.c:59: Warning: 
+  function Pop: precondition got status unknown.
+[value:alarm] RobotSeeVM_v0001/Operator.c:59: Warning: 
+  function Pop: precondition got status invalid.
+[value:alarm] RobotSeeVM_v0001/Operator.c:64: Warning: 
+  function Pop: precondition got status unknown.
+[value:alarm] RobotSeeVM_v0001/Operator.c:64: Warning: 
+  function Pop: precondition got status invalid.
+[value:alarm] RobotSeeVM_v0001/Operator.c:69: Warning: 
+  function Pop: precondition got status unknown.
+[value:alarm] RobotSeeVM_v0001/Operator.c:69: Warning: 
+  function Pop: precondition got status invalid.
+[value:alarm] RobotSeeVM_v0001/Operator.c:76: Warning: 
+  function Top: precondition got status unknown.
+[value:alarm] RobotSeeVM_v0001/RamVar.c:40: Warning: 
+  out of bounds write. assert \valid((DATATYPE *)RamVar + (int)Reference);
+[value:alarm] RobotSeeVM_v0001/Operator.c:80: Warning: 
+  function Pop: precondition got status unknown.
+[value:alarm] RobotSeeVM_v0001/Operator.c:80: Warning: 
+  function Pop: precondition got status invalid.
+[value:alarm] RobotSeeVM_v0001/Operator.c:87: Warning: 
+  function Pop: precondition got status unknown.
+[value:alarm] RobotSeeVM_v0001/Operator.c:87: Warning: 
+  function Pop: precondition got status invalid.
+[value:alarm] RobotSeeVM_v0001/Operator.c:92: Warning: 
+  function Pop: precondition got status unknown.
+[value:alarm] RobotSeeVM_v0001/Operator.c:97: Warning: 
+  function Pop: precondition got status unknown.
+[value:alarm] RobotSeeVM_v0001/Operator.c:102: Warning: 
+  function Pop: precondition got status unknown.
+[value:alarm] RobotSeeVM_v0001/Operator.c:107: Warning: 
+  function Pop: precondition got status unknown.
+[value:alarm] RobotSeeVM_v0001/Operator.c:112: Warning: 
+  function Pop: precondition got status unknown.
+[value:alarm] RobotSeeVM_v0001/Operator.c:117: Warning: 
+  function Pop: precondition got status unknown.
+[value:alarm] RobotSeeVM_v0001/Operator.c:117: Warning: 
+  function Pop: precondition got status invalid.
+[value:alarm] RobotSeeVM_v0001/Operator.c:124: Warning: 
+  function Pop: precondition got status unknown.
+[value] using specification for function printf_va_1
+[value:alarm] RobotSeeVM_v0001/ports.c:75: Warning: 
+  function printf_va_1: precondition valid_read_string(param0) got status invalid.
+[value:alarm] RobotSeeVM_v0001/Keyword.c:48: Warning: 
+  function Pop: precondition got status unknown.
+[value] using specification for function sprintf_va_1
+[value:alarm] RobotSeeVM_v0001/ports.c:75: Warning: 
+  function printf_va_1: precondition valid_read_string(param0) got status unknown.
+[value:alarm] RobotSeeVM_v0001/Keyword.c:55: Warning: 
+  function Pop: precondition got status unknown.
+[value] using specification for function sprintf_va_2
+[value:alarm] RobotSeeVM_v0001/Keyword.c:62: Warning: 
+  function Top: precondition got status unknown.
+[kernel:annot:missing-spec] RobotSeeVM_v0001/Keyword.c:62: Warning: 
+  Neither code nor specification for function usleep, generating default assigns from the prototype
+[value] using specification for function usleep
+[value:alarm] RobotSeeVM_v0001/Keyword.c:66: Warning: 
+  function Pop: precondition got status unknown.
+[kernel:annot:missing-spec] RobotSeeVM_v0001/Keyword.c:66: Warning: 
+  Neither code nor specification for function abs, generating default assigns from the prototype
+[value] using specification for function abs
+[value:alarm] RobotSeeVM_v0001/Keyword.c:71: Warning: 
+  function Pop: precondition got status unknown.
+[value:alarm] RobotSeeVM_v0001/Keyword.c:72: Warning: 
+  function Pop: precondition got status invalid.
+[value:alarm] RobotSeeVM_v0001/ExecutionEngine.c:175: Warning: 
+  function Pop: precondition got status unknown.
+[value:alarm] RobotSeeVM_v0001/ExecutionEngine.c:176: Warning: 
+  function Pop: precondition got status unknown.
+[value:alarm] RobotSeeVM_v0001/ExecutionEngine.c:177: Warning: 
+  function Top: precondition got status unknown.
+[value:alarm] RobotSeeVM_v0001/ExecutionEngine.c:178: Warning: 
+  function Pop: precondition got status unknown.
+[value:alarm] RobotSeeVM_v0001/ExecutionEngine.c:179: Warning: 
+  function Pop: precondition got status unknown.
+[value:alarm] RobotSeeVM_v0001/ExecutionEngine.c:169: Warning: 
+  function Push: precondition got status unknown.
+[value:alarm] RobotSeeVM_v0001/ExecutionEngine.c:170: Warning: 
+  function Push: precondition got status unknown.
+[value:alarm] RobotSeeVM_v0001/ExecutionEngine.c:172: Warning: 
+  function Push: precondition got status unknown.
+[value:alarm] RobotSeeVM_v0001/Operator.c:44: Warning: 
+  function Pop: precondition got status unknown.
+[value:alarm] RobotSeeVM_v0001/Operator.c:49: Warning: 
+  function Pop: precondition got status unknown.
+[value:alarm] RobotSeeVM_v0001/Operator.c:49: Warning: 
+  signed overflow.
+  assert -2147483648 ≤ tmp_5 * tmp_6;
+  (tmp_5 from Pop(& ErrVal), tmp_6 from Pop(& ErrVal))
+[value:alarm] RobotSeeVM_v0001/Operator.c:49: Warning: 
+  signed overflow.
+  assert tmp_5 * tmp_6 ≤ 2147483647;
+  (tmp_5 from Pop(& ErrVal), tmp_6 from Pop(& ErrVal))
+[value:alarm] RobotSeeVM_v0001/Operator.c:54: Warning: 
+  function Pop: precondition got status unknown.
+[value:alarm] RobotSeeVM_v0001/Operator.c:54: Warning: 
+  signed overflow.
+  assert -2147483648 ≤ tmp_8 + tmp_9;
+  (tmp_8 from Pop(& ErrVal), tmp_9 from Pop(& ErrVal))
+[value:alarm] RobotSeeVM_v0001/Operator.c:54: Warning: 
+  signed overflow.
+  assert tmp_8 + tmp_9 ≤ 2147483647;
+  (tmp_8 from Pop(& ErrVal), tmp_9 from Pop(& ErrVal))
+[value:alarm] RobotSeeVM_v0001/Operator.c:59: Warning: 
+  function Pop: precondition got status unknown.
+[value:alarm] RobotSeeVM_v0001/Operator.c:59: Warning: 
+  signed overflow.
+  assert -2147483648 ≤ tmp_11 - tmp_12;
+  (tmp_11 from Pop(& ErrVal), tmp_12 from Pop(& ErrVal))
+[value:alarm] RobotSeeVM_v0001/Operator.c:59: Warning: 
+  signed overflow.
+  assert tmp_11 - tmp_12 ≤ 2147483647;
+  (tmp_11 from Pop(& ErrVal), tmp_12 from Pop(& ErrVal))
+[value:alarm] RobotSeeVM_v0001/Operator.c:64: Warning: 
+  function Pop: precondition got status unknown.
+[value:alarm] RobotSeeVM_v0001/Operator.c:64: Warning: 
+  division by zero. assert tmp_15 ≢ 0;
+                    (tmp_15 from Pop(& ErrVal))
+[value:alarm] RobotSeeVM_v0001/Operator.c:64: Warning: 
+  signed overflow.
+  assert tmp_14 / tmp_15 ≤ 2147483647;
+  (tmp_14 from Pop(& ErrVal), tmp_15 from Pop(& ErrVal))
+[value:alarm] RobotSeeVM_v0001/Operator.c:69: Warning: 
+  function Pop: precondition got status unknown.
+[value:alarm] RobotSeeVM_v0001/Operator.c:80: Warning: 
+  function Pop: precondition got status unknown.
+[value:alarm] RobotSeeVM_v0001/Operator.c:87: Warning: 
+  function Pop: precondition got status unknown.
+[value:alarm] RobotSeeVM_v0001/Operator.c:93: Warning: 
+  function Pop: precondition got status unknown.
+[value:alarm] RobotSeeVM_v0001/Operator.c:98: Warning: 
+  function Pop: precondition got status unknown.
+[value:alarm] RobotSeeVM_v0001/Operator.c:98: Warning: 
+  signed overflow.
+  assert -2147483648 ≤ tmp_34 * tmp_35;
+  (tmp_34 from getVar((unsigned short)temp1, & ErrVal), tmp_35 from
+  Pop(& ErrVal))
+[value:alarm] RobotSeeVM_v0001/Operator.c:98: Warning: 
+  signed overflow.
+  assert tmp_34 * tmp_35 ≤ 2147483647;
+  (tmp_34 from getVar((unsigned short)temp1, & ErrVal), tmp_35 from
+  Pop(& ErrVal))
+[value:alarm] RobotSeeVM_v0001/Operator.c:103: Warning: 
+  function Pop: precondition got status unknown.
+[value:alarm] RobotSeeVM_v0001/Operator.c:103: Warning: 
+  signed overflow.
+  assert tmp_37 + tmp_38 ≤ 2147483647;
+  (tmp_37 from getVar((unsigned short)temp1, & ErrVal), tmp_38 from
+  Pop(& ErrVal))
+[value:alarm] RobotSeeVM_v0001/Operator.c:108: Warning: 
+  function Pop: precondition got status unknown.
+[value:alarm] RobotSeeVM_v0001/Operator.c:108: Warning: 
+  signed overflow.
+  assert tmp_40 - tmp_41 ≤ 2147483647;
+  (tmp_40 from getVar((unsigned short)temp1, & ErrVal), tmp_41 from
+  Pop(& ErrVal))
+[value:alarm] RobotSeeVM_v0001/Operator.c:113: Warning: 
+  function Pop: precondition got status unknown.
+[value:alarm] RobotSeeVM_v0001/Operator.c:113: Warning: 
+  division by zero. assert tmp_44 ≢ 0;
+                    (tmp_44 from Pop(& ErrVal))
+[value:alarm] RobotSeeVM_v0001/Operator.c:117: Warning: 
+  function Pop: precondition got status unknown.
+[value:alarm] RobotSeeVM_v0001/Operator.c:125: Warning: 
+  function Pop: precondition got status unknown.
+[value:alarm] RobotSeeVM_v0001/Keyword.c:39: Warning: 
+  function Push: precondition got status unknown.
+[value:alarm] RobotSeeVM_v0001/Keyword.c:44: Warning: 
+  function Push: precondition got status unknown.
+[value:alarm] RobotSeeVM_v0001/Keyword.c:62: Warning: 
+  signed overflow.
+  assert -2147483648 ≤ tmp_0 * (long)1000;
+  (tmp_0 from Top(& ErrVal))
+[value:alarm] RobotSeeVM_v0001/Keyword.c:62: Warning: 
+  signed overflow.
+  assert tmp_0 * (long)1000 ≤ 2147483647;
+  (tmp_0 from Top(& ErrVal))
+[value:alarm] RobotSeeVM_v0001/Keyword.c:72: Warning: 
+  function Pop: precondition got status unknown.
+[value:alarm] RobotSeeVM_v0001/Keyword.c:73: Warning: 
+  function Pop: precondition got status unknown.
+[value] using specification for function sprintf_va_3
+[value] using specification for function sprintf_va_4
+[value:alarm] RobotSeeVM_v0001/Keyword.c:79: Warning: 
+  signed overflow. assert -2147483648 ≤ temp2 + temp3;
+[value:alarm] RobotSeeVM_v0001/Keyword.c:79: Warning: 
+  signed overflow. assert temp2 + temp3 ≤ 2147483647;
+[value:alarm] RobotSeeVM_v0001/Keyword.c:79: Warning: 
+  signed overflow. assert temp1 + (long)(temp2 + temp3) ≤ 2147483647;
+[value] using specification for function sprintf_va_5
+[value:alarm] RobotSeeVM_v0001/Operator.c:103: Warning: 
+  signed overflow.
+  assert -2147483648 ≤ tmp_37 + tmp_38;
+  (tmp_37 from getVar((unsigned short)temp1, & ErrVal), tmp_38 from
+  Pop(& ErrVal))
+[value:alarm] RobotSeeVM_v0001/Operator.c:108: Warning: 
+  signed overflow.
+  assert -2147483648 ≤ tmp_40 - tmp_41;
+  (tmp_40 from getVar((unsigned short)temp1, & ErrVal), tmp_41 from
+  Pop(& ErrVal))
+[value:alarm] RobotSeeVM_v0001/Operator.c:113: Warning: 
+  signed overflow.
+  assert tmp_43 / tmp_44 ≤ 2147483647;
+  (tmp_43 from getVar((unsigned short)temp1, & ErrVal), tmp_44 from
+  Pop(& ErrVal))
+[value:alarm] RobotSeeVM_v0001/Keyword.c:79: Warning: 
+  signed overflow. assert -2147483648 ≤ temp1 + (long)(temp2 + temp3);
+[value:alarm] RobotSeeVM_v0001/StringFifo.c:46: Warning: 
+  out of bounds write. assert \valid(StringFifo + StringFifoIndex);
+[value] done for function main
+[value] ====== VALUES COMPUTED ======
+[value:final-states] Values at end of function CallBackGetProgramByte:
+  PipeLine ∈ [--..--]
+  __retres ∈ {0; 32}
+[value:final-states] Values at end of function ChangeState:
+  VMStates ∈ [0..9]
+  VMOldStates ∈ [0..2147483647]
+[value:final-states] Values at end of function DebugEnable:
+  __retres ∈ {1}
+[value:final-states] Values at end of function DebuggerEOhook:
+  
+[value:final-states] Values at end of function FetchProgram:
+  ProgramCounter ∈ [--..--]
+  PipeLine ∈ [--..--]
+  ErrVal ∈ {0; 32}
+[value:final-states] Values at end of function GetString:
+  StringFifoIndex ∈ {0}
+[value:final-states] Values at end of function Pop:
+  CallStackIndex ∈ [0..127]
+  __retres ∈ [--..--]
+[value:final-states] Values at end of function Push:
+  CallStackIndex ∈ [1..128]
+  __retres ∈ {0}
+  __malloc_main_l58[0..511] ∈ [--..--] or UNINITIALIZED
+[value:final-states] Values at end of function ResetCallStack:
+  CallStackIndex ∈ {0}
+[value:final-states] Values at end of function StringPush:
+  StringFifoIndex ∈ [1..255]
+  __retres ∈ {0; 1}
+  __malloc_main_l57[0..255] ∈ [--..--] or UNINITIALIZED
+[value:final-states] Values at end of function Top:
+  __retres ∈ [--..--]
+[value:final-states] Values at end of function getVar:
+  ErrVal ∈ {0; 16}
+  ErrVal ∈ {0; 16}
+  ErrVal ∈ {0; 16}
+  __retres ∈ [--..--]
+[value:final-states] Values at end of function initCallStack:
+  CallStack ∈ {{ NULL ; (unsigned long)&__malloc_main_l58 }}
+  CallStackSize ∈ {128}
+  CallStackIndex ∈ {0}
+[value:final-states] Values at end of function initFileSystem:
+  
+[value:final-states] Values at end of function initHardware:
+  
+[value:final-states] Values at end of function initRAMArray:
+  MaxVarIndex ∈ {8000}
+  RamVar ∈ {{ NULL ; (unsigned long)&__malloc_main_l59 }}
+[value:final-states] Values at end of function initStringFIFO:
+  StringFifo ∈ {{ NULL ; (unsigned char *)&__malloc_main_l57 }}
+  StringFifoSize ∈ {255}
+  StringFifoIndex ∈ {0}
+[value:final-states] Values at end of function CallBackConsoleOut:
+  S___fc_stdout[0..1] ∈ [--..--]
+[value:final-states] Values at end of function CallBackErrorOut:
+  S___fc_stdout[0..1] ∈ [--..--]
+[value:final-states] Values at end of function CallBackErrorCode:
+  S___fc_stdout[0..1] ∈ [--..--]
+[value:final-states] Values at end of function setVar:
+  __retres ∈ {0; 16}
+  __malloc_main_l59[0..31999] ∈ [--..--] or UNINITIALIZED
+[value:final-states] Values at end of function Operator:
+  temp1 ∈ [--..--] or UNINITIALIZED
+  ErrVal ∈ {0; 16}
+  CallStackIndex ∈ [0..32767]
+  __retres ∈ {0; 8; 16}
+  __malloc_main_l58[0..511] ∈ [--..--] or UNINITIALIZED
+  __malloc_main_l59[0..31999] ∈ [--..--] or UNINITIALIZED
+[value:final-states] Values at end of function Keyword:
+  ErrVal ∈ {0}
+  temp1 ∈ [--..--] or UNINITIALIZED
+  Output[0..31] ∈ [--..--] or UNINITIALIZED
+  StringFifoIndex ∈ [0..32767]
+  CallStackIndex ∈ [0..32767]
+  S___fc_stdout[0..1] ∈ [--..--]
+  __malloc_main_l58[0..511] ∈ [--..--] or UNINITIALIZED
+  __malloc_main_l59[0..31999] ∈ [--..--] or UNINITIALIZED
+[value:final-states] Values at end of function StartVM:
+  NON TERMINATING FUNCTION
+[value:final-states] Values at end of function main:
+  NON TERMINATING FUNCTION
+[report] Dumping properties in './reports/result.csv'

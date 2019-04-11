@@ -1,0 +1,521 @@
+<framac-rules>
+	<rule>
+		<key>FRAMAC.ERROR</key>
+		<name>Frama-C error</name>
+		<internalKey>*</internalKey>
+		<description>This rule is not directly linked to a problem in the code, but it exists to alert users that an error occurred when running Frama-C or reading Frama-C reports.
+		</description>
+		<severity>CRITICAL</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>BUG</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+		<remediationFunctionBaseEffort>30min</remediationFunctionBaseEffort>
+	</rule>
+	<rule>
+		<key>CSV.0</key>
+		<name>Unreferenced value rule</name>
+		<internalKey>*</internalKey>
+		<description>Unreferenced value rule
+		</description>
+		<severity>MAJOR</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>CODE_SMELL</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+		<remediationFunctionBaseEffort>30min</remediationFunctionBaseEffort>
+	</rule>
+	<rule>
+		<key>CSV.1</key>
+		<name>division by zero</name>
+		<internalKey>division_by_zero</internalKey>
+		<description>Integer division by zero
+		</description>
+		<severity>MAJOR</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>BUG</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+		<remediationFunctionBaseEffort>20min</remediationFunctionBaseEffort>
+	</rule>
+	<rule>
+		<key>CSV.2</key>
+		<name>mem access</name>
+		<internalKey>mem_access</internalKey>
+		<description>Invalid pointer dereferencing
+		</description>
+		<severity>MAJOR</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>BUG</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+		<remediationFunctionBaseEffort>20min</remediationFunctionBaseEffort>
+	</rule>
+	<rule>
+		<key>CSV.3</key>
+		<name>index bound</name>
+		<internalKey>index_bound</internalKey>
+		<description>Array access out of bounds
+		</description>
+		<severity>MAJOR</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>BUG</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+		<remediationFunctionBaseEffort>20min</remediationFunctionBaseEffort>
+	</rule>
+	<rule>
+		<key>CSV.4</key>
+		<name>shift</name>
+		<internalKey>shift</internalKey>
+		<description>Invalid shift
+		</description>
+		<severity>MAJOR</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>BUG</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+		<remediationFunctionBaseEffort>20min</remediationFunctionBaseEffort>
+	</rule>
+	<rule>
+		<key>CSV.5</key>
+		<name>ptr comparison</name>
+		<internalKey>ptr_comparison</internalKey>
+		<description>Invalid pointer comparison
+		</description>
+		<severity>MAJOR</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>BUG</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+		<remediationFunctionBaseEffort>20min</remediationFunctionBaseEffort>
+	</rule>
+	<rule>
+		<key>CSV.6</key>
+		<name>differing blocks</name>
+		<internalKey>differing_blocks</internalKey>
+		<description>Operation on pointers within different blocks
+		</description>
+		<severity>MAJOR</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>BUG</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+		<remediationFunctionBaseEffort>20min</remediationFunctionBaseEffort>
+	</rule>
+	<rule>
+		<key>CSV.7</key>
+		<name>separation</name>
+		<internalKey>separation</internalKey>
+		<description>Unsequenced side-effects on non-separated memory
+		</description>
+		<severity>MAJOR</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>BUG</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+		<remediationFunctionBaseEffort>20min</remediationFunctionBaseEffort>
+	</rule>
+	<rule>
+		<key>CSV.8</key>
+		<name>overlap</name>
+		<internalKey>overlap</internalKey>
+		<description>Overlap between left- and right-hand-side in assignment
+		</description>
+		<severity>MAJOR</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>BUG</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+		<remediationFunctionBaseEffort>20min</remediationFunctionBaseEffort>
+	</rule>
+	<rule>
+		<key>CSV.9</key>
+		<name>initialization</name>
+		<internalKey>initialization</internalKey>
+		<description>Uninitialized memory read
+		</description>
+		<severity>MAJOR</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>BUG</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+		<remediationFunctionBaseEffort>20min</remediationFunctionBaseEffort>
+	</rule>
+	<rule>
+		<key>CSV.10</key>
+		<name>dangling pointer</name>
+		<internalKey>dangling_pointer</internalKey>
+		<description>Read of a dangling pointer
+		</description>
+		<severity>MAJOR</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>BUG</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+		<remediationFunctionBaseEffort>20min</remediationFunctionBaseEffort>
+	</rule>
+	<rule>
+		<key>CSV.11</key>
+		<name>is nan or infinite</name>
+		<internalKey>is_nan_or_infinite</internalKey>
+		<description>Non-finite (nan or infinite) floating-point value
+		</description>
+		<severity>MAJOR</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>BUG</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+		<remediationFunctionBaseEffort>20min</remediationFunctionBaseEffort>
+	</rule>
+	<rule>
+		<key>CSV.12</key>
+		<name>is nan</name>
+		<internalKey>is_nan</internalKey>
+		<description>NaN floating-point value
+		</description>
+		<severity>MAJOR</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>BUG</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+		<remediationFunctionBaseEffort>20min</remediationFunctionBaseEffort>
+	</rule>
+	<rule>
+		<key>CSV.13</key>
+		<name>float to int</name>
+		<internalKey>float_to_int</internalKey>
+		<description>Overflow in float to int conversion
+		</description>
+		<severity>MAJOR</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>BUG</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+		<remediationFunctionBaseEffort>20min</remediationFunctionBaseEffort>
+	</rule>
+	<rule>
+		<key>CSV.14</key>
+		<name>function pointer</name>
+		<internalKey>function_pointer</internalKey>
+		<description>Pointer to a function with non-compatible type
+		</description>
+		<severity>MAJOR</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>BUG</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+		<remediationFunctionBaseEffort>20min</remediationFunctionBaseEffort>
+	</rule>
+	<rule>
+		<key>CSV.15</key>
+		<name>initialization of union</name>
+		<internalKey>initialization_of_union</internalKey>
+		<description>Uninitialized memory read of union
+		</description>
+		<severity>MAJOR</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>BUG</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+		<remediationFunctionBaseEffort>20min</remediationFunctionBaseEffort>
+	</rule>
+	<rule>
+		<key>CSV.16</key>
+		<name>signed overflow</name>
+		<internalKey>signed_overflow</internalKey>
+		<description>Integer overflow or downcast
+		</description>
+		<severity>MAJOR</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>BUG</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+		<remediationFunctionBaseEffort>20min</remediationFunctionBaseEffort>
+	</rule>
+	<rule>
+		<key>CSV.17</key>
+		<name>unsigned overflow</name>
+		<internalKey>unsigned_overflow</internalKey>
+		<description>Integer overflow or downcast
+		</description>
+		<severity>MAJOR</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>BUG</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+		<remediationFunctionBaseEffort>20min</remediationFunctionBaseEffort>
+	</rule>
+	<rule>
+		<key>CSV.18</key>
+		<name>signed downcast</name>
+		<internalKey>signed_downcast</internalKey>
+		<description>Integer overflow or downcast
+		</description>
+		<severity>MAJOR</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>BUG</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+		<remediationFunctionBaseEffort>20min</remediationFunctionBaseEffort>
+	</rule>
+	<rule>
+		<key>CSV.19</key>
+		<name>unsigned downcast</name>
+		<internalKey>unsigned_downcast</internalKey>
+		<description>Integer overflow or downcast
+		</description>
+		<severity>MAJOR</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>BUG</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+		<remediationFunctionBaseEffort>20min</remediationFunctionBaseEffort>
+	</rule>
+
+	<rule>
+		<key>CSV.20</key>
+		<name>User assertion</name> <!-- max size is 200 -->
+		<internalKey>User assertion</internalKey>
+		<description>User assertion...
+		</description>
+		<severity>INFO</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>CODE_SMELL</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+		<remediationFunctionBaseEffort>0min</remediationFunctionBaseEffort>
+	</rule>
+	<rule>
+		<key>CSV.22</key>
+		<name>Assigns clause</name> <!-- max size is 200 -->
+		<internalKey>Assigns clause</internalKey>
+		<description>Assigns clause...
+		</description>
+		<severity>INFO</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>CODE_SMELL</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+		<remediationFunctionBaseEffort>0min</remediationFunctionBaseEffort>
+	</rule>
+	<rule>
+		<key>CSV.23</key>
+		<name>From clause</name> <!-- max size is 200 -->
+		<internalKey>From clause</internalKey>
+		<description>From clause...
+		</description>
+		<severity>INFO</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>CODE_SMELL</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+		<remediationFunctionBaseEffort>0min</remediationFunctionBaseEffort>
+	</rule>
+	<rule>
+		<key>VALUE.0</key>
+		<name>Rule value 0</name>
+		<internalKey>*</internalKey>
+		<description>Unreferenced rule
+		</description>
+		<severity>MAJOR</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>CODE_SMELL</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+        <remediationFunctionBaseEffort>30min</remediationFunctionBaseEffort>
+	</rule>
+	<rule>
+		<key>VALUE.1</key>
+		<name>Rule value 1</name>
+		<internalKey>dropping duplicate def'n of func</internalKey>
+		<description>dropping duplicate def'n of func...
+		</description>
+		<severity>MAJOR</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>CODE_SMELL</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+        <remediationFunctionBaseEffort>15min</remediationFunctionBaseEffort>
+	</rule>
+	<rule>
+		<key>VALUE.2</key>
+		<name>Rule value 2</name> <!-- max size is 200 -->
+		<internalKey>Variable-sized local</internalKey>
+		<description>Variable-sized local...
+		</description>
+		<severity>MAJOR</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>CODE_SMELL</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+        <remediationFunctionBaseEffort>15min</remediationFunctionBaseEffort>
+	</rule>
+	<rule>
+		<key>VALUE.3</key>
+		<name>Rule value 3</name> <!-- max size is 200 -->
+		<internalKey>Clobber list contain \"memory\" argument</internalKey>
+		<description>Clobber list contain \"memory\" argument...
+		</description>
+		<severity>MAJOR</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>CODE_SMELL</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+        <remediationFunctionBaseEffort>30min</remediationFunctionBaseEffort>
+	</rule>
+	<rule>
+		<key>VALUE.4</key>
+		<name>Rule value 4</name> <!-- max size is 200 -->
+		<internalKey>Too many initializers for structure</internalKey>
+		<description>Too many initializers for structure...
+		</description>
+		<severity>MAJOR</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>BUG</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+        <remediationFunctionBaseEffort>15min</remediationFunctionBaseEffort>
+	</rule>
+	<rule>
+		<key>VALUE.5</key>
+		<name>Rule value 5</name> <!-- max size is 200 -->
+		<internalKey>merging definitions of enum E using int type</internalKey>
+		<description>merging definitions of enum E using int type...
+		</description>
+		<severity>MAJOR</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>CODE_SMELL</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+        <remediationFunctionBaseEffort>15min</remediationFunctionBaseEffort>
+	</rule>
+	<rule>
+		<key>VALUE.6</key>
+		<name>Rule value 6</name> <!-- max size is 200 -->
+		<internalKey>Calling undeclared function</internalKey>
+		<description>Calling undeclared function...
+		</description>
+		<severity>MAJOR</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>CODE_SMELL</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+        <remediationFunctionBaseEffort>5min</remediationFunctionBaseEffort>
+	</rule>
+	<rule>
+		<key>VALUE.7</key>
+		<name>Rule value 7</name> <!-- max size is 200 -->
+		<internalKey>Body of function</internalKey>
+		<description>Body of function...
+		</description>
+		<severity>MAJOR</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>CODE_SMELL</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+        <remediationFunctionBaseEffort>15min</remediationFunctionBaseEffort>
+	</rule>
+	<rule>
+		<key>VALUE.8</key>
+		<name>Rule value 8</name> <!-- max size is 200 -->
+		<internalKey>Neither code nor specification for function</internalKey>
+		<description>Neither code nor specification for function...
+		</description>
+		<severity>MAJOR</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>BUG</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+        <remediationFunctionBaseEffort>15min</remediationFunctionBaseEffort>
+	</rule>
+	<rule>
+		<key>VALUE.9</key>
+		<name>Rule value 9</name> <!-- max size is 200 -->
+		<internalKey>imprecise size for variable</internalKey>
+		<description>imprecise size for variable...
+		</description>
+		<severity>MAJOR</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>CODE_SMELL</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+        <remediationFunctionBaseEffort>15min</remediationFunctionBaseEffort>
+	</rule>
+	<rule>
+		<key>VALUE.10</key>
+		<name>Rule value 10</name> <!-- max size is 200 -->
+		<internalKey>Unspecified sequence with side effect</internalKey>
+		<description>Unspecified sequence with side effect...
+		</description>
+		<severity>MAJOR</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>BUG</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+        <remediationFunctionBaseEffort>15min</remediationFunctionBaseEffort>
+	</rule>
+	<rule>
+		<key>VALUE.11</key>
+		<name>Rule value 11</name> <!-- max size is 200 -->
+		<internalKey>Floating-point constant</internalKey>
+		<description>Floating-point constant...
+		</description>
+		<severity>MAJOR</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>CODE_SMELL</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+        <remediationFunctionBaseEffort>15min</remediationFunctionBaseEffort>
+	</rule>
+		<rule>
+		<key>KERNEL.0</key>
+		<name>Rule syntaxe 0</name>
+		<internalKey>*</internalKey>
+		<description>Generic kernel rule
+		</description>
+		<severity>MAJOR</severity>
+		<cardinality>SINGLE</cardinality>
+		<status>READY</status>
+		<type>CODE_SMELL</type>
+		<tag>value</tag>
+		<remediationFunction>CONSTANT_ISSUE</remediationFunction>
+    <remediationFunctionBaseEffort>30min</remediationFunctionBaseEffort>
+	</rule>
+</framac-rules>

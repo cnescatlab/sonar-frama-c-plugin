@@ -1,10 +1,16 @@
-[kernel] Parsing share/libc/__fc_builtin_for_normalization.i (no preprocessing)
-[kernel] Parsing tests/value/alias.i (no preprocessing)
-[value] Analyzing a complete application starting at main6
+[kernel] Parsing alias.4.i (no preprocessing)
+[kernel:typing:incompatible-types-call] alias.4.i:45: Warning: 
+  expected 'char *' but got argument of type 'int *': & A
+[kernel:typing:incompatible-types-call] alias.4.i:46: Warning: 
+  expected 'char *' but got argument of type 'int *': & A
+[kernel:typing:incompatible-types-call] alias.4.i:47: Warning: 
+  expected 'char *' but got argument of type 'int (*)[5]': & p
+[kernel:typing:incompatible-types-call] alias.4.i:268: Warning: 
+  expected 'char *' but got argument of type 'int *': p2
+[value] Analyzing a complete application starting at main
 [value] Computing initial state
 [value] Initial state computed
 [value:initial-state] Values of globals at initialization
-  NULL[rbits 0 to 2047] ∈ [--..--]
   A ∈ {0}
   B ∈ {0}
   C ∈ {0}
@@ -58,47 +64,81 @@
   U ∈ {0}
   char1 ∈ {0}
   ll1 ∈ {0}
-tests/value/alias.i:185:[value] entering loop for the first time
-tests/value/alias.i:191:[value] warning: pointer comparison. assert \pointer_comparable((void *)PTR2, (void *)PTR1);
-tests/value/alias.i:199:[value] warning: signed overflow. assert c + 1 ≤ 2147483647;
-[value] Recording results for main6
-[value] done for function main6
+[value] alias.4.i:82: Frama_C_show_each_d0: [-2147483648..2147483647]
+[value] alias.4.i:84: Frama_C_show_each_d2: [-2147483648..2147483647]
+[value] done for function main
 [value] ====== VALUES COMPUTED ======
-[value:final-states] Values at end of function main6:
-  p[0] ∈ {0}
-   [1] ∈ {0; 77}
-   [2..4] ∈ {0}
-  q[0] ∈ {1}
-   [1] ∈ {2}
-   [2] ∈ {3; 77}
-   [3] ∈ {4}
-   [4] ∈ {5}
-  u ∈ {0; 1}
-  v ∈ {0; 1}
-  w ∈ {0; 1}
-  x ∈ [0..99]
-  y ∈ {0; 3; 77}
-  z ∈ {-33}
-  PTR1 ∈ {{ &p[1] ; &q[2] }}
-  PTR2 ∈ [--..--]
-  i_0 ∈ {100}
-[from] Computing for function main6
-[from] Done for function main6
-[from] ====== DEPENDENCIES COMPUTED ======
-       These dependencies hold at termination for the executions that terminate:
-[from] Function main6:
-  p[1] FROM c (and SELF)
-  q[2] FROM c (and SELF)
-  u FROM c
-  v FROM c
-  w FROM c
-  x FROM \nothing (and SELF)
-  y FROM p[1]; q[2]; c
-  z FROM NULL[0..3]; PTR2; c
-  PTR1 FROM c
-  PTR2 FROM NULL[0..3]; PTR2
-[from] ====== END OF DEPENDENCIES ======
-[inout] Out (internal) for function main6:
-          p[1]; q[2]; u; v; w; x; y; z; PTR1; PTR2; i_0
-[inout] Inputs for function main6:
-          NULL[0..3]; p[1]; q[2]; u; v; PTR1; PTR2; c
+[value:final-states] Values at end of function f:
+  x_0 ∈ {{ &A + {1} ; &p + {1} }}
+  A[bits 0 to 7] ∈ {2; 4}
+   [bits 8 to 15] ∈ {1; 2}
+   [bits 16 to 31]# ∈ {1; 516}%32, bits 16 to 31 
+  B ∈ {3; 4}
+  p[0][bits 0 to 15]# ∈ {0; 1} repeated %8 
+   {[0][bits 16 to 31]; [1..4]} ∈ {0}
+[value:final-states] Values at end of function main:
+  A ∈ {516}
+  B ∈ {4}
+  p[0][bits 0 to 15]# ∈ {1} repeated %8 
+   {[0][bits 16 to 31]; [1..4]} ∈ {0}
+  p2[0] ∈ {0; 7}
+    [1] ∈ {0; 6}
+    [2..4] ∈ {0}
+  q2[0] ∈ {1}
+    [1] ∈ {2; 7}
+    [2] ∈ {3; 6}
+    [3] ∈ {4}
+    [4] ∈ {5}
+  p3[0] ∈ {0}
+    [1] ∈ [--..--]
+    [2..4] ∈ {0}
+  t ∈ {1; 2; 4}
+  u ∈ {2; 3; 4; 5}
+  v ∈ {1; 2; 4; 5}
+  w ∈ {1; 2; 4; 5}
+  x ∈ {1; 4}
+  y ∈ {2; 4; 5}
+  z ∈ {3; 5}
+  t2 ∈ {0; 3; 6}
+  v2 ∈ {0; 2; 7}
+  PTR1 ∈ {{ &x ; &y }}
+  PTR2 ∈ {{ &y ; &z }}
+  PTR3 ∈ {{ &x ; &y }}
+  PTR4 ∈ {{ &p2[1] ; &q2[2] }}
+  vol ∈ [--..--]
+[metrics] Defined functions (9)
+  =====================
+   f (3 calls); f2 (1 call); main (0 call); main11 (0 call); main3 (0 call);
+   main4 (0 call); main5 (0 call); main6 (0 call); main8 (0 call); 
+  
+  Undefined functions (0)
+  =======================
+   
+  
+  'Extern' global variables (0)
+  =============================
+   
+  
+  Potential entry points (7)
+  ==========================
+   main; main11; main3; main4; main5; main6; main8; 
+  
+  Global metrics
+  ============== 
+  Sloc = 265
+  Decision point = 40
+  Global variables = 45
+  If = 40
+  Loop = 4
+  Goto = 2
+  Assignment = 177
+  Exit point = 9
+  Function = 9
+  Function call = 7
+  Pointer dereferencing = 61
+  Cyclomatic complexity = 49
+[report] Dumping properties in './frama-c-results/alias.4.res.csv'
+[report] Classification
+[report] Output frama-c-results/alias.4.json
+[report] Reviews     :    4
+[report] Unclassified:    4

@@ -1,35 +1,43 @@
 package fr.cnes.sonarqube.plugins.framac.settings;
 
-import static java.util.Arrays.asList;
-import static org.junit.Assert.*;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import org.junit.Before;
+import fr.cnes.sonarqube.plugins.framac.languages.FramaCLanguage;
 import org.junit.Test;
 import org.sonar.api.config.PropertyDefinition;
 
-import fr.cnes.sonarqube.plugins.framac.languages.FramaCLanguage;
+import java.util.List;
+
+import static org.junit.Assert.assertEquals;
 
 public class FramaCLanguagePropertiesTest {
 
 	@Test
 	public void test() {		
-		List<PropertyDefinition> actual = FramaCLanguageProperties.getProperties();
-		assertEquals(3, actual.size());
+		List<PropertyDefinition> actual = FramaCPluginProperties.getProperties();
+		assertEquals(5, actual.size());
 		PropertyDefinition reportSubDirectory = actual.get(0);
 		assertEquals(FramaCLanguage.NAME, reportSubDirectory.category());
-		assertEquals(FramaCLanguageProperties.REPORT_SUBDIR_DEFAULT_VALUE, reportSubDirectory.defaultValue());
-		assertEquals(FramaCLanguageProperties.REPORT_SUBDIR_KEY, reportSubDirectory.key());
-		PropertyDefinition reportExtensions = actual.get(1);
+		assertEquals(FramaCPluginProperties.AUTOLAUNCH_PROP_DEFAULT, reportSubDirectory.defaultValue());
+		assertEquals(FramaCPluginProperties.AUTOLAUNCH_PROP_KEY, reportSubDirectory.key());
+
+		PropertyDefinition reportCommandLineOptions = actual.get(1);
+		assertEquals(FramaCLanguage.NAME, reportCommandLineOptions.category());
+		assertEquals(FramaCPluginProperties.COMMAND_PROP_DEFAULT, reportCommandLineOptions.defaultValue());
+		assertEquals(FramaCPluginProperties.COMMAND_PROP_KEY, reportCommandLineOptions.key());
+
+		PropertyDefinition reportExtensions = actual.get(2);
 		assertEquals(FramaCLanguage.NAME, reportExtensions.category());
-		assertEquals(FramaCLanguageProperties.REPORT_OUT_EXT_DEFAULT_VALUE, reportExtensions.defaultValue());
-		assertEquals(FramaCLanguageProperties.REPORT_OUT_EXT_KEY, reportExtensions.key());
-		PropertyDefinition reportInputFileType = actual.get(2);
+		assertEquals(FramaCPluginProperties.FRAMAC_PATH_DEFAULT, reportExtensions.defaultValue());
+		assertEquals(FramaCPluginProperties.FRAMAC_PATH_KEY, reportExtensions.key());
+
+		PropertyDefinition csvReportExtension = actual.get(3);
+		assertEquals(FramaCLanguage.NAME, csvReportExtension.category());
+		assertEquals(FramaCPluginProperties.SUFFIX_DEFAULT, csvReportExtension.defaultValue());
+		assertEquals(FramaCPluginProperties.SUFFIX_KEY, csvReportExtension.key());
+
+		PropertyDefinition reportInputFileType = actual.get(4);
 		assertEquals(FramaCLanguage.NAME, reportInputFileType.category());
-		assertEquals(FramaCLanguageProperties.EXPECTED_REPORT_INPUT_FILE_TYPES_DEFAULT_VALUE, reportInputFileType.defaultValue());
-		assertEquals(FramaCLanguageProperties.EXPECTED_REPORT_INPUT_FILE_TYPES_KEY, reportInputFileType.key());
+		assertEquals(FramaCPluginProperties.REPORT_PATH_DEFAULT, reportInputFileType.defaultValue());
+		assertEquals(FramaCPluginProperties.REPORT_PATH_KEY, reportInputFileType.key());
 	}
 
 }
