@@ -83,7 +83,7 @@ public class FramaCSensor implements Sensor {
         try (BufferedReader br =
             new BufferedReader(new FileReader(filePath))) {
             String line = br.readLine();
-            if (line.startsWith("directory\tfile")) {
+            if (line != null && line.startsWith("directory\tfile")) {
                 isCsvFile = true;
             }
         } catch (IOException ioe) {
