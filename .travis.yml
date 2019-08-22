@@ -3,8 +3,7 @@ sudo: false
 install: true
 
 jdk:
-  - oraclejdk8
-
+  - openjdk8
 cache:
   directories:
     - '$HOME/.m2/repository'
@@ -15,11 +14,20 @@ addons:
   sonarcloud:
     organization: "lequal"
 
-jdk:
-  - oraclejdk8
-
 script:
   - mvn clean org.jacoco:jacoco-maven-plugin:prepare-agent package sonar:sonar
+  - cp target/sonarframac-*.jar target/sonarframac.jar
 
 notifications:
   email: false
+
+deploy:
+  file: target/sonarframac.jar
+  provider: releases
+  api_key:
+    secure: I+2O/1wVFEX6iIh6Q+mCGlCSCgsS1/p2EIpF8ztHucyu3JGU6FrGrb7FHTjGyNAO4S0Nv1MgLiw+6vQDDzcPwEkbFVw7A8WE8DOSSnzTYuwhpk92DjzNRJuc+NaSa2ecZoqjujVmfN4ydRueb8Kh3dQ2QE7FJuGKC2Awje7tBgMTD3klUY9XKLkSxIvIs22hCNKET8k7gCCuBzqN5KtIPPwh09WEXtlRkiJd++4XLkjZXh0PtRYqncIxT1VXG8oM0EY7dRBUhyWVOpF9b6G9aEZYidjMDPg2qDdHaUG+9MfBTvvSj6n5Msrz6faHONjtN1uUnJ+cQUtastBfwFJlD+bfiPefie9O+z50FdnP65p8HJT0W2Vff+fS8KQ9ZktPPTnwe83yoxMTrSlYmVsY2egRXgDLRJqkHW6hABEl+OYqLoBfP+4oAUbPfwTDzAc5saSG3emuhRd3knZhgP1wTpt0+mKgavOVgk/cHVnvORFiKXsa5yS2sG3MxCzOdHEqG01ZN3ExVNi1JdPhf+tw9191rIOJo5KMX+d5DSHYGukmrxLZiF1joKXIDaUzFzDSRzR2nkVQfqaQ6VYXfEipxHs+trAva2DcNUiaBqyHdbANI57GpiVGv9cgLTMubz8haQluQxN51r/q26aVR+Lr7C+lcKFfWmRanhwQIK97Zcg=
+  file: target/sonarframac.jar
+  skip_cleanup: true
+  draft: true
+  on:
+    branch: master
