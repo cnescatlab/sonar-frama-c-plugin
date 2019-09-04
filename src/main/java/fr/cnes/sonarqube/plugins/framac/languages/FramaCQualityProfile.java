@@ -24,18 +24,12 @@ import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
-import java.io.FileReader;
 import java.io.InputStream;
 
 /**
  * Built-in quality profile format since SonarQube 6.6.
  */
 public final class FramaCQualityProfile implements BuiltInQualityProfilesDefinition {
-
-    /**
-     * Logger for this class.
-     **/
-    private static final Logger LOGGER = Loggers.get(FramaCQualityProfile.class);
 
     /**
      * Display name for the built-in quality profile.
