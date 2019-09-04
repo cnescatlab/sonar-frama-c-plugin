@@ -22,16 +22,19 @@ package fr.cnes.sonarqube.plugins.framac.model;
  * It contains data about defined rule.
  */
 public class Rule {
-    public static final String key = "";
-    public static final String name = "";
-    public static final String internalKey = "";
-    public static final String description = "";
-    public static final String severity = "";
-    public static final String cardinality= "";
-    public static final String status = "";
-    public static final String type = "";
-    public static final String tag = "";
-    public static final String remediationFunction = "";
-    public static final String remediationFunctionBaseEffort = "";
+    private String key;
+    private String name;
+    private String internalKey;
+    private String description;
+    private String severity;
+    private String cardinality;
+    private String status;
+    private String type;
+    private String tag;
+    private String remediationFunction;
+    private String remediationFunctionBaseEffort;
 
+    public String getKey() {
+        return key;
+    }
 }

@@ -69,7 +69,7 @@ public final class FramaCQualityProfile implements BuiltInQualityProfilesDefinit
         final RulesDefinition rules = (RulesDefinition) XmlHandler.unmarshal(stream, RulesDefinition.class);
         // Activate all Frama-C definedRules.
         for (final Rule rule : rules.getDefinedRules()) {
-            defaultProfile.activateRule(FramaCRulesDefinition.getRepositoryKeyForLanguage(), rule.key);
+            defaultProfile.activateRule(FramaCRulesDefinition.getRepositoryKeyForLanguage(), rule.getKey());
         }
 
         Thread.currentThread().setContextClassLoader(threadClassLoader);
