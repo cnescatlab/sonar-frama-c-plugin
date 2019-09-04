@@ -16,10 +16,9 @@
  */
 package fr.cnes.sonarqube.plugins.framac.model;
 
-import javax.xml.bind.JAXBContext;
+import com.thoughtworks.xstream.XStream;
+
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
-import java.io.File;
 import java.io.InputStream;
 
 /**
@@ -43,10 +42,10 @@ public class XmlHandler {
      * @return AnalysisReport: the main structure of the report.
      * @throws JAXBException Exception during conversion can be met.
      */
-    public static Object unmarshal(final InputStream file, final Class<?> cls) throws JAXBException {
-        final JAXBContext jaxbContext = JAXBContext.newInstance(cls);
-        final Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-        return jaxbUnmarshaller.unmarshal(file);
+    public static Object unmarshal(final InputStream file, final Class<?> cls){
+        XStream xStream = new XStream();
+        xStream.processAnnotations(cls);
+        return xStream.fromXML(file);
     }
 
 }

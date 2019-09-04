@@ -24,7 +24,7 @@ import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
 import org.sonar.api.utils.log.Logger;
 import org.sonar.api.utils.log.Loggers;
 
-import javax.xml.bind.JAXBException;
+import java.io.FileReader;
 import java.io.InputStream;
 
 /**
@@ -69,17 +69,15 @@ public final class FramaCQualityProfile implements BuiltInQualityProfilesDefinit
         ClassLoader threadClassLoader = Thread.currentThread().getContextClassLoader();
         Thread.currentThread().setContextClassLoader(this.getClass().getClassLoader());
 
-        try {
-            // Retrieve all defined definedRules.
-            final InputStream stream = getClass().getResourceAsStream(path);
-            final RulesDefinition rules = (RulesDefinition) XmlHandler.unmarshal(stream, RulesDefinition.class);
-            // Activate all Frama-C definedRules.
-            for (final Rule rule : rules.getDefinedRules()) {
-                defaultProfile.activateRule(FramaCRulesDefinition.getRepositoryKeyForLanguage(), rule.key);
-            }
-        } catch (JAXBException e) {
-            LOGGER.warn(e.getLocalizedMessage(), e);
+
+        // Retrieve all defined definedRules.
+        final InputStream stream = getClass().getResourceAsStream(path);
+        final RulesDefinition rules = (RulesDefinition) XmlHandler.unmarshal(stream, RulesDefinition.class);
+        // Activate all Frama-C definedRules.
+        for (final Rule rule : rules.getDefinedRules()) {
+            defaultProfile.activateRule(FramaCRulesDefinition.getRepositoryKeyForLanguage(), rule.key);
         }
+
         Thread.currentThread().setContextClassLoader(threadClassLoader);
         // Save the definedRules profile.
         defaultProfile.setDefault(true);

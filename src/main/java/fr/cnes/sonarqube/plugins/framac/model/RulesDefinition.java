@@ -16,10 +16,12 @@
  */
 package fr.cnes.sonarqube.plugins.framac.model;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+
+import com.thoughtworks.xstream.annotations.XStreamAlias;
+import com.thoughtworks.xstream.annotations.XStreamImplicitCollection;
+import com.thoughtworks.xstream.annotations.XStreamInclude;
+
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -27,11 +29,13 @@ import java.util.List;
  *
  * It contains meta data about definedRules definition.
  */
-@XmlRootElement(name = "framac-rules")
+@XStreamAlias("framac-rules")
+@XStreamImplicitCollection("definedRules")
+@XStreamInclude(Rule.class)
 public class RulesDefinition {
 
-    @XmlElement( name = "rule" )
-    public Rule[] definedRules;
+    @XStreamAlias("rule")
+    public List<Rule> definedRules;
 
     /**
      * Getter for accessing definedRules (definition).
@@ -41,7 +45,7 @@ public class RulesDefinition {
         // Retrieve issues (called definedRules)
         List<Rule> rules;
         if(this.definedRules !=null) {
-            rules = Arrays.asList(this.definedRules);
+            rules = this.definedRules;
         } else {
             rules = new ArrayList<>();
         }
