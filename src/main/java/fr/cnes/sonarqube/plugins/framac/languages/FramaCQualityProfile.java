@@ -21,8 +21,6 @@ import fr.cnes.sonarqube.plugins.framac.model.RulesDefinition;
 import fr.cnes.sonarqube.plugins.framac.model.XmlHandler;
 import fr.cnes.sonarqube.plugins.framac.rules.FramaCRulesDefinition;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
 
 import java.io.InputStream;
 

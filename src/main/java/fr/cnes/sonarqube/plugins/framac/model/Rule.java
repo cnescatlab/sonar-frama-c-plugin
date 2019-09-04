@@ -23,16 +23,6 @@ package fr.cnes.sonarqube.plugins.framac.model;
  */
 public class Rule {
     private String key;
-    private String name;
-    private String internalKey;
-    private String description;
-    private String severity;
-    private String cardinality;
-    private String status;
-    private String type;
-    private String tag;
-    private String remediationFunction;
-    private String remediationFunctionBaseEffort;
 
     public String getKey() {
         return key;
