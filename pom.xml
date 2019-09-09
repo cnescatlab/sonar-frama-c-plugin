@@ -40,6 +40,12 @@
             <id>begarco</id>
         </developer>
         <developer>
+            <name>Louis Martin</name>
+            <organization>CNES</organization>
+            <url>https://github.com/louisjdmartin</url>
+            <id>louisjdmartin</id>
+        </developer>
+        <developer>
             <name>Cyrille Francois</name>
             <url>https://github.com/CfrancCyrille</url>
             <id>CfrancCyrille</id>
