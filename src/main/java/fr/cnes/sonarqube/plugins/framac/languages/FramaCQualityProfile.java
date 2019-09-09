@@ -56,11 +56,6 @@ public final class FramaCQualityProfile implements BuiltInQualityProfilesDefinit
         final NewBuiltInQualityProfile defaultProfile =
                 context.createBuiltInQualityProfile(FRAMA_C_RULES_PROFILE_NAME, language);
 
-        // Had to add that as from "not really a good idea" in
-        // https://stackoverflow.com/questions/51518781/jaxb-not-available-on-tomcat-9-and-java-9-10
-        ClassLoader threadClassLoader = Thread.currentThread().getContextClassLoader();
-        Thread.currentThread().setContextClassLoader(this.getClass().getClassLoader());
-
 
         // Retrieve all defined definedRules.
         final InputStream stream = getClass().getResourceAsStream(path);
@@ -69,8 +64,6 @@ public final class FramaCQualityProfile implements BuiltInQualityProfilesDefinit
         for (final Rule rule : rules.getDefinedRules()) {
             defaultProfile.activateRule(FramaCRulesDefinition.getRepositoryKeyForLanguage(), rule.getKey());
         }
-
-        Thread.currentThread().setContextClassLoader(threadClassLoader);
         // Save the definedRules profile.
         defaultProfile.setDefault(true);
         defaultProfile.done();
