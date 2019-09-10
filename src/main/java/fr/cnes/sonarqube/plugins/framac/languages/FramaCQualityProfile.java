@@ -21,21 +21,13 @@ import fr.cnes.sonarqube.plugins.framac.model.RulesDefinition;
 import fr.cnes.sonarqube.plugins.framac.model.XmlHandler;
 import fr.cnes.sonarqube.plugins.framac.rules.FramaCRulesDefinition;
 import org.sonar.api.server.profile.BuiltInQualityProfilesDefinition;
-import org.sonar.api.utils.log.Logger;
-import org.sonar.api.utils.log.Loggers;
 
-import javax.xml.bind.JAXBException;
 import java.io.InputStream;
 
 /**
  * Built-in quality profile format since SonarQube 6.6.
  */
 public final class FramaCQualityProfile implements BuiltInQualityProfilesDefinition {
-
-    /**
-     * Logger for this class.
-     **/
-    private static final Logger LOGGER = Loggers.get(FramaCQualityProfile.class);
 
     /**
      * Display name for the built-in quality profile.
@@ -64,16 +56,13 @@ public final class FramaCQualityProfile implements BuiltInQualityProfilesDefinit
         final NewBuiltInQualityProfile defaultProfile =
                 context.createBuiltInQualityProfile(FRAMA_C_RULES_PROFILE_NAME, language);
 
-        try {
-            // Retrieve all defined definedRules.
-            final InputStream stream = getClass().getResourceAsStream(path);
-            final RulesDefinition rules = (RulesDefinition) XmlHandler.unmarshal(stream, RulesDefinition.class);
-            // Activate all Frama-C definedRules.
-            for (final Rule rule : rules.getDefinedRules()) {
-                defaultProfile.activateRule(FramaCRulesDefinition.getRepositoryKeyForLanguage(), rule.key);
-            }
-        } catch (JAXBException e) {
-            LOGGER.warn(e.getLocalizedMessage(), e);
+
+        // Retrieve all defined definedRules.
+        final InputStream stream = getClass().getResourceAsStream(path);
+        final RulesDefinition rules = (RulesDefinition) XmlHandler.unmarshal(stream, RulesDefinition.class);
+        // Activate all Frama-C definedRules.
+        for (final Rule rule : rules.getDefinedRules()) {
+            defaultProfile.activateRule(FramaCRulesDefinition.getRepositoryKeyForLanguage(), rule.getKey());
         }
         // Save the definedRules profile.
         defaultProfile.setDefault(true);

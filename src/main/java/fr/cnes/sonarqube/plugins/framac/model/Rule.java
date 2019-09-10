@@ -16,36 +16,15 @@
  */
 package fr.cnes.sonarqube.plugins.framac.model;
 
-import javax.xml.bind.annotation.XmlElement;
-
 /**
  * Class used to unmarshal i-Code xml file.
  *
  * It contains data about defined rule.
  */
 public class Rule {
+    private String key;
 
-    @XmlElement
-    public String key;
-    @XmlElement
-    public String name;
-    @XmlElement
-    public String internalKey;
-    @XmlElement
-    public String description;
-    @XmlElement
-    public String severity;
-    @XmlElement
-    public String cardinality;
-    @XmlElement
-    public String status;
-    @XmlElement
-    public String type;
-    @XmlElement
-    public String tag;
-    @XmlElement
-    public String remediationFunction;
-    @XmlElement
-    public String remediationFunctionBaseEffort;
-
+    public String getKey() {
+        return key;
+    }
 }

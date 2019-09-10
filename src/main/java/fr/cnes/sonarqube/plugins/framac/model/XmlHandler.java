@@ -16,10 +16,9 @@
  */
 package fr.cnes.sonarqube.plugins.framac.model;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Unmarshaller;
-import java.io.File;
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.mapper.MapperWrapper;
+
 import java.io.InputStream;
 
 /**
@@ -41,12 +40,21 @@ public class XmlHandler {
      * @param file Stream of the xml file to import as Java Objects.
      * @param cls Destination class for unmarshalling.
      * @return AnalysisReport: the main structure of the report.
-     * @throws JAXBException Exception during conversion can be met.
      */
-    public static Object unmarshal(final InputStream file, final Class<?> cls) throws JAXBException {
-        final JAXBContext jaxbContext = JAXBContext.newInstance(cls);
-        final Unmarshaller jaxbUnmarshaller = jaxbContext.createUnmarshaller();
-        return jaxbUnmarshaller.unmarshal(file);
+    public static Object unmarshal(final InputStream file, final Class<?> cls){
+        XStream xStream = new XStream() {
+            @Override
+            protected MapperWrapper wrapMapper(MapperWrapper next) {
+                return new MapperWrapper(next) {
+                    @Override
+                    public boolean shouldSerializeMember(Class definedIn, String fieldName) {
+                        return definedIn != Object.class && super.shouldSerializeMember(definedIn, fieldName);
+                    }
+                };
+            }
+        };
+        xStream.processAnnotations(cls);
+        return xStream.fromXML(file);
     }
 
 }
