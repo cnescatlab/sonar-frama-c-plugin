@@ -1,0 +1,410 @@
+directory	file	line	function	property kind	status	property
+.	main.c	56	main	precondition of printf_va_1	Valid	valid_read_string(format)
+.	main.c	56	printf_va_1	assigns clause	Considered valid	assigns \result, __fc_stdout->__fc_FILE_data;
+.	main.c	56	printf_va_1	from clause	Considered valid	assigns \result \from (indirect: __fc_stdout->__fc_FILE_id), __fc_stdout->__fc_FILE_data, (indirect: *(format + (0 ..)));
+.	main.c	56	printf_va_1	from clause	Considered valid	assigns __fc_stdout->__fc_FILE_data \from (indirect: __fc_stdout->__fc_FILE_id), __fc_stdout->__fc_FILE_data, (indirect: *(format + (0 ..)));
+.	main.c	56	printf_va_1	precondition	Valid	valid_read_string(format)
+.	main.c	59	main	precondition of printf_va_2	Dead	valid_read_string(format)
+.	main.c	59	printf_va_2	assigns clause	Considered valid	assigns \result, __fc_stdout->__fc_FILE_data;
+.	main.c	59	printf_va_2	from clause	Considered valid	assigns \result \from (indirect: __fc_stdout->__fc_FILE_id), __fc_stdout->__fc_FILE_data, (indirect: *(format + (0 ..))), param0;
+.	main.c	59	printf_va_2	from clause	Considered valid	assigns __fc_stdout->__fc_FILE_data \from (indirect: __fc_stdout->__fc_FILE_id), __fc_stdout->__fc_FILE_data, (indirect: *(format + (0 ..))), param0;
+.	main.c	59	printf_va_2	precondition	Valid	valid_read_string(format)
+.	main.c	62	main	precondition of printf_va_3	Dead	valid_read_string(format)
+.	main.c	62	printf_va_3	assigns clause	Considered valid	assigns \result, __fc_stdout->__fc_FILE_data;
+.	main.c	62	printf_va_3	from clause	Considered valid	assigns \result \from (indirect: __fc_stdout->__fc_FILE_id), __fc_stdout->__fc_FILE_data, (indirect: *(format + (0 ..))), param0;
+.	main.c	62	printf_va_3	from clause	Considered valid	assigns __fc_stdout->__fc_FILE_data \from (indirect: __fc_stdout->__fc_FILE_id), __fc_stdout->__fc_FILE_data, (indirect: *(format + (0 ..))), param0;
+.	main.c	62	printf_va_3	precondition	Valid	valid_read_string(format)
+.	main.c	66	main	precondition of printf_va_4	Dead	valid_read_string(format)
+.	main.c	66	printf_va_4	assigns clause	Considered valid	assigns \result, __fc_stdout->__fc_FILE_data;
+.	main.c	66	printf_va_4	from clause	Considered valid	assigns \result \from (indirect: __fc_stdout->__fc_FILE_id), __fc_stdout->__fc_FILE_data, (indirect: *(format + (0 ..))), param0;
+.	main.c	66	printf_va_4	from clause	Considered valid	assigns __fc_stdout->__fc_FILE_data \from (indirect: __fc_stdout->__fc_FILE_id), __fc_stdout->__fc_FILE_data, (indirect: *(format + (0 ..))), param0;
+.	main.c	66	printf_va_4	precondition	Valid	valid_read_string(format)
+FRAMAC_SHARE/libc	stdio.h	71	remove	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdio.h	74	rename	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdio.h	80	tmpfile	from clause	Considered valid	assigns \result \from __fc_p_fopen;
+FRAMAC_SHARE/libc	stdio.h	82	tmpfile	postcondition	Considered valid	result_null_or_valid_fd: \result ≡ \null ∨ \subset(\result, &__fc_fopen[0 .. 16 - 1])
+FRAMAC_SHARE/libc	stdio.h	84	tmpfile	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdio.h	87	tmpnam	assigns clause	Considered valid	assigns \result, *(s + (..));
+FRAMAC_SHARE/libc	stdio.h	87	tmpnam	from clause	Considered valid	assigns \result \from *(s + (..));
+FRAMAC_SHARE/libc	stdio.h	88	tmpnam	from clause	Considered valid	assigns *(s + (..)) \from \nothing;
+FRAMAC_SHARE/libc	stdio.h	95	fclose	from clause	Considered valid	assigns \result \from stream, stream->__fc_FILE_id;
+FRAMAC_SHARE/libc	stdio.h	96	fclose	postcondition	Considered valid	result_zero_or_EOF: \result ≡ 0 ∨ \result ≡ -1
+FRAMAC_SHARE/libc	stdio.h	99	fclose	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdio.h	103	fflush	from clause	Considered valid	assigns \result \from stream, stream->__fc_FILE_id;
+FRAMAC_SHARE/libc	stdio.h	104	fflush	postcondition	Considered valid	result_zero_or_EOF: \result ≡ 0 ∨ \result ≡ -1
+FRAMAC_SHARE/libc	stdio.h	107	fflush	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdio.h	112	fopen	from clause	Considered valid	assigns \result \from (indirect: *(filename + (..))), (indirect: *(mode + (..))), __fc_p_fopen;
+FRAMAC_SHARE/libc	stdio.h	114	fopen	postcondition	Considered valid	result_null_or_valid_fd: \result ≡ \null ∨ \subset(\result, &__fc_fopen[0 .. 16 - 1])
+FRAMAC_SHARE/libc	stdio.h	116	fopen	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdio.h	121	fdopen	assigns clause	Considered valid	assigns \result, __fc_fopen[fd];
+FRAMAC_SHARE/libc	stdio.h	121	fdopen	from clause	Considered valid	assigns \result \from (indirect: fd), (indirect: *(mode + (0 ..))), (indirect: __fc_fopen[fd]), __fc_p_fopen;
+FRAMAC_SHARE/libc	stdio.h	121	fdopen	from clause	Considered valid	assigns __fc_fopen[fd] \from (indirect: fd), (indirect: *(mode + (0 ..))), (indirect: __fc_fopen[fd]), __fc_p_fopen;
+FRAMAC_SHARE/libc	stdio.h	124	fdopen	postcondition	Considered valid	result_null_or_valid_fd: \result ≡ \null ∨ \subset(\result, &__fc_fopen[0 .. 16 - 1])
+FRAMAC_SHARE/libc	stdio.h	132	freopen	assigns clause	Considered valid	assigns \result, *stream;
+FRAMAC_SHARE/libc	stdio.h	132	freopen	from clause	Considered valid	assigns \result \from (indirect: *(filename + (..))), (indirect: *(mode + (..))), __fc_p_fopen, (indirect: stream);
+FRAMAC_SHARE/libc	stdio.h	134	freopen	from clause	Considered valid	assigns *stream \from (indirect: *(filename + (..))), (indirect: *(mode + (..))), __fc_p_fopen, (indirect: stream);
+FRAMAC_SHARE/libc	stdio.h	137	freopen	postcondition	Considered valid	result_null_or_valid_fd: \result ≡ \null ∨ \result ∈ &__fc_fopen[0 .. 16 - 1]
+FRAMAC_SHARE/libc	stdio.h	139	freopen	postcondition	Considered valid	stream_opened: *\old(stream) ∈ __fc_fopen[0 .. 16 - 1]
+FRAMAC_SHARE/libc	stdio.h	145	setbuf	assigns clause	Considered valid	assigns *stream;
+FRAMAC_SHARE/libc	stdio.h	145	setbuf	from clause	Considered valid	assigns *stream \from buf;
+FRAMAC_SHARE/libc	stdio.h	149	setvbuf	assigns clause	Considered valid	assigns *stream;
+FRAMAC_SHARE/libc	stdio.h	149	setvbuf	from clause	Considered valid	assigns *stream \from buf, mode, size;
+FRAMAC_SHARE/libc	stdio.h	178	vfprintf	assigns clause	Considered valid	assigns *stream;
+FRAMAC_SHARE/libc	stdio.h	178	vfprintf	from clause	Considered valid	assigns *stream \from *(format + (..)), arg;
+FRAMAC_SHARE/libc	stdio.h	183	vfscanf	assigns clause	Considered valid	assigns *stream;
+FRAMAC_SHARE/libc	stdio.h	183	vfscanf	from clause	Considered valid	assigns *stream \from *(format + (..)), *stream;
+FRAMAC_SHARE/libc	stdio.h	189	vprintf	assigns clause	Considered valid	assigns *__fc_stdout;
+FRAMAC_SHARE/libc	stdio.h	189	vprintf	from clause	Considered valid	assigns *__fc_stdout \from arg;
+FRAMAC_SHARE/libc	stdio.h	193	vscanf	assigns clause	Considered valid	assigns *__fc_stdin;
+FRAMAC_SHARE/libc	stdio.h	193	vscanf	from clause	Considered valid	assigns *__fc_stdin \from *(format + (..));
+FRAMAC_SHARE/libc	stdio.h	198	vsnprintf	assigns clause	Considered valid	assigns *(s + (0 .. n - 1));
+FRAMAC_SHARE/libc	stdio.h	198	vsnprintf	from clause	Considered valid	assigns *(s + (0 .. n - 1)) \from *(format + (..)), arg;
+FRAMAC_SHARE/libc	stdio.h	204	vsprintf	assigns clause	Considered valid	assigns *(s + (0 ..));
+FRAMAC_SHARE/libc	stdio.h	204	vsprintf	from clause	Considered valid	assigns *(s + (0 ..)) \from *(format + (..)), arg;
+FRAMAC_SHARE/libc	stdio.h	217	fgetc	assigns clause	Considered valid	assigns *stream, \result;
+FRAMAC_SHARE/libc	stdio.h	217	fgetc	from clause	Considered valid	assigns *stream \from *stream;
+FRAMAC_SHARE/libc	stdio.h	218	fgetc	from clause	Considered valid	assigns \result \from (indirect: *stream);
+FRAMAC_SHARE/libc	stdio.h	219	fgetc	postcondition	Considered valid	result_uchar_or_eof: (0 ≤ \result ≤ 255) ∨ \result ≡ -1
+FRAMAC_SHARE/libc	stdio.h	225	fgets	assigns clause	Considered valid	assigns *(s + (0 .. size)), \result;
+FRAMAC_SHARE/libc	stdio.h	225	fgets	from clause	Considered valid	assigns *(s + (0 .. size)) \from (indirect: size), (indirect: *stream);
+FRAMAC_SHARE/libc	stdio.h	226	fgets	from clause	Considered valid	assigns \result \from s, (indirect: size), (indirect: *stream);
+FRAMAC_SHARE/libc	stdio.h	227	fgets	postcondition	Considered valid	result_null_or_same: \result ≡ \null ∨ \result ≡ \old(s)
+FRAMAC_SHARE/libc	stdio.h	229	fgets	postcondition	Considered valid	terminated_string_on_success: \result ≢ \null ⇒ valid_string(\old(s))
+FRAMAC_SHARE/libc	stdio.h	234	fputc	assigns clause	Considered valid	assigns *stream;
+FRAMAC_SHARE/libc	stdio.h	237	fputs	assigns clause	Considered valid	assigns *stream;
+FRAMAC_SHARE/libc	stdio.h	237	fputs	from clause	Considered valid	assigns *stream \from *(s + (..));
+FRAMAC_SHARE/libc	stdio.h	241	getc	assigns clause	Considered valid	assigns \result, *stream;
+FRAMAC_SHARE/libc	stdio.h	241	getc	from clause	Considered valid	assigns \result \from *stream;
+FRAMAC_SHARE/libc	stdio.h	241	getc	from clause	Considered valid	assigns *stream \from *stream;
+FRAMAC_SHARE/libc	stdio.h	244	getchar	from clause	Considered valid	assigns \result \from *__fc_stdin;
+FRAMAC_SHARE/libc	stdio.h	245	getchar	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdio.h	248	gets	assigns clause	Considered valid	assigns *(s + (..)), \result;
+FRAMAC_SHARE/libc	stdio.h	248	gets	from clause	Considered valid	assigns *(s + (..)) \from *__fc_stdin;
+FRAMAC_SHARE/libc	stdio.h	249	gets	from clause	Considered valid	assigns \result \from s, __fc_stdin;
+FRAMAC_SHARE/libc	stdio.h	250	gets	postcondition	Considered valid	result_null_or_same: \result ≡ \old(s) ∨ \result ≡ \null
+FRAMAC_SHARE/libc	stdio.h	254	putc	assigns clause	Considered valid	assigns *stream;
+FRAMAC_SHARE/libc	stdio.h	254	putc	from clause	Considered valid	assigns *stream \from c;
+FRAMAC_SHARE/libc	stdio.h	257	putchar	assigns clause	Considered valid	assigns *__fc_stdout;
+FRAMAC_SHARE/libc	stdio.h	257	putchar	from clause	Considered valid	assigns *__fc_stdout \from c;
+FRAMAC_SHARE/libc	stdio.h	260	puts	assigns clause	Considered valid	assigns *__fc_stdout;
+FRAMAC_SHARE/libc	stdio.h	260	puts	from clause	Considered valid	assigns *__fc_stdout \from *(s + (..));
+FRAMAC_SHARE/libc	stdio.h	263	ungetc	assigns clause	Considered valid	assigns *stream;
+FRAMAC_SHARE/libc	stdio.h	263	ungetc	from clause	Considered valid	assigns *stream \from c;
+FRAMAC_SHARE/libc	stdio.h	269	fread	assigns clause	Considered valid	assigns *((char *)ptr + (0 .. nmemb * size - 1)), \result;
+FRAMAC_SHARE/libc	stdio.h	269	fread	from clause	Considered valid	assigns *((char *)ptr + (0 .. nmemb * size - 1)) \from size, nmemb, *stream;
+FRAMAC_SHARE/libc	stdio.h	270	fread	from clause	Considered valid	assigns \result \from size, *stream;
+FRAMAC_SHARE/libc	stdio.h	271	fread	postcondition	Considered valid	size_read: \result ≤ \old(nmemb)
+FRAMAC_SHARE/libc	stdio.h	272	fread	postcondition	Considered valid	initialization: \initialized((char *)\old(ptr) + (0 .. \result * \old(size) - 1))
+FRAMAC_SHARE/libc	stdio.h	282	fwrite	assigns clause	Considered valid	assigns *stream, \result;
+FRAMAC_SHARE/libc	stdio.h	282	fwrite	from clause	Considered valid	assigns *stream \from *((char *)ptr + (0 .. nmemb * size - 1));
+FRAMAC_SHARE/libc	stdio.h	282	fwrite	from clause	Considered valid	assigns \result \from *((char *)ptr + (0 .. nmemb * size - 1));
+FRAMAC_SHARE/libc	stdio.h	283	fwrite	postcondition	Considered valid	size_written: \result ≤ \old(nmemb)
+FRAMAC_SHARE/libc	stdio.h	290	fgetpos	assigns clause	Considered valid	assigns *pos;
+FRAMAC_SHARE/libc	stdio.h	290	fgetpos	from clause	Considered valid	assigns *pos \from *stream;
+FRAMAC_SHARE/libc	stdio.h	297	fseek	assigns clause	Considered valid	assigns *stream, \result, __fc_errno;
+FRAMAC_SHARE/libc	stdio.h	297	fseek	from clause	Considered valid	assigns *stream \from *stream, (indirect: offset), (indirect: whence);
+FRAMAC_SHARE/libc	stdio.h	298	fseek	from clause	Considered valid	assigns \result \from (indirect: *stream), (indirect: offset), (indirect: whence);
+FRAMAC_SHARE/libc	stdio.h	298	fseek	from clause	Considered valid	assigns __fc_errno \from (indirect: *stream), (indirect: offset), (indirect: whence);
+FRAMAC_SHARE/libc	stdio.h	303	fsetpos	assigns clause	Considered valid	assigns *stream;
+FRAMAC_SHARE/libc	stdio.h	303	fsetpos	from clause	Considered valid	assigns *stream \from *pos;
+FRAMAC_SHARE/libc	stdio.h	308	ftell	assigns clause	Considered valid	assigns \result, __fc_errno;
+FRAMAC_SHARE/libc	stdio.h	308	ftell	from clause	Considered valid	assigns \result \from (indirect: *stream);
+FRAMAC_SHARE/libc	stdio.h	308	ftell	from clause	Considered valid	assigns __fc_errno \from (indirect: *stream);
+FRAMAC_SHARE/libc	stdio.h	310	ftell	postcondition	Considered valid	success_or_error: \result ≡ -1 ∨ (\result ≥ 0 ∧ __fc_errno ≡ \old(__fc_errno))
+FRAMAC_SHARE/libc	stdio.h	314	rewind	assigns clause	Considered valid	assigns *stream;
+FRAMAC_SHARE/libc	stdio.h	314	rewind	from clause	Considered valid	assigns *stream \from \nothing;
+FRAMAC_SHARE/libc	stdio.h	317	clearerr	assigns clause	Considered valid	assigns *stream;
+FRAMAC_SHARE/libc	stdio.h	317	clearerr	from clause	Considered valid	assigns *stream \from \nothing;
+FRAMAC_SHARE/libc	stdio.h	320	feof	from clause	Considered valid	assigns \result \from *stream;
+FRAMAC_SHARE/libc	stdio.h	321	feof	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdio.h	323	fileno	from clause	Considered valid	assigns \result \from *stream;
+FRAMAC_SHARE/libc	stdio.h	324	fileno	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdio.h	326	flockfile	assigns clause	Considered valid	assigns *stream;
+FRAMAC_SHARE/libc	stdio.h	326	flockfile	from clause	Considered valid	assigns *stream \from \nothing;
+FRAMAC_SHARE/libc	stdio.h	329	funlockfile	assigns clause	Considered valid	assigns *stream;
+FRAMAC_SHARE/libc	stdio.h	329	funlockfile	from clause	Considered valid	assigns *stream \from \nothing;
+FRAMAC_SHARE/libc	stdio.h	332	ftrylockfile	assigns clause	Considered valid	assigns \result, *stream;
+FRAMAC_SHARE/libc	stdio.h	332	ftrylockfile	from clause	Considered valid	assigns \result \from \nothing;
+FRAMAC_SHARE/libc	stdio.h	332	ftrylockfile	from clause	Considered valid	assigns *stream \from \nothing;
+FRAMAC_SHARE/libc	stdio.h	335	ferror	from clause	Considered valid	assigns \result \from *stream;
+FRAMAC_SHARE/libc	stdio.h	336	ferror	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdio.h	338	perror	assigns clause	Considered valid	assigns __fc_stdout;
+FRAMAC_SHARE/libc	stdio.h	338	perror	from clause	Considered valid	assigns __fc_stdout \from __fc_errno, *(s + (..));
+FRAMAC_SHARE/libc	stdio.h	341	getc_unlocked	assigns clause	Considered valid	assigns \result, *stream;
+FRAMAC_SHARE/libc	stdio.h	341	getc_unlocked	from clause	Considered valid	assigns \result \from *stream;
+FRAMAC_SHARE/libc	stdio.h	341	getc_unlocked	from clause	Considered valid	assigns *stream \from *stream;
+FRAMAC_SHARE/libc	stdio.h	343	getchar_unlocked	from clause	Considered valid	assigns \result \from *__fc_stdin;
+FRAMAC_SHARE/libc	stdio.h	344	getchar_unlocked	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdio.h	345	putc_unlocked	assigns clause	Considered valid	assigns *stream;
+FRAMAC_SHARE/libc	stdio.h	345	putc_unlocked	from clause	Considered valid	assigns *stream \from c;
+FRAMAC_SHARE/libc	stdio.h	347	putchar_unlocked	assigns clause	Considered valid	assigns *__fc_stdout;
+FRAMAC_SHARE/libc	stdio.h	347	putchar_unlocked	from clause	Considered valid	assigns *__fc_stdout \from c;
+FRAMAC_SHARE/libc	stdio.h	350	clearerr_unlocked	assigns clause	Considered valid	assigns *stream;
+FRAMAC_SHARE/libc	stdio.h	350	clearerr_unlocked	from clause	Considered valid	assigns *stream \from \nothing;
+FRAMAC_SHARE/libc	stdio.h	352	feof_unlocked	from clause	Considered valid	assigns \result \from *stream;
+FRAMAC_SHARE/libc	stdio.h	353	feof_unlocked	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdio.h	354	ferror_unlocked	from clause	Considered valid	assigns \result \from *stream;
+FRAMAC_SHARE/libc	stdio.h	355	ferror_unlocked	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdio.h	356	fileno_unlocked	from clause	Considered valid	assigns \result \from *stream;
+FRAMAC_SHARE/libc	stdio.h	357	fileno_unlocked	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdio.h	381	popen	assigns clause	Considered valid	assigns \result, __fc_fopen[0 ..];
+FRAMAC_SHARE/libc	stdio.h	381	popen	from clause	Considered valid	assigns \result \from (indirect: *command), (indirect: *type), __fc_p_fopen;
+FRAMAC_SHARE/libc	stdio.h	383	popen	from clause	Considered valid	assigns __fc_fopen[0 ..] \from (indirect: *command), (indirect: *type), __fc_fopen[0 ..];
+FRAMAC_SHARE/libc	stdio.h	386	popen	postcondition	Considered valid	result_error_or_valid_open_pipe: \result ≡ \null ∨ (\subset(\result, &__fc_fopen[0 .. 16 - 1]) ∧ is_open_pipe(\result))
+FRAMAC_SHARE/libc	stdio.h	395	pclose	from clause	Considered valid	assigns \result \from (indirect: *stream);
+FRAMAC_SHARE/libc	stdio.h	396	pclose	postcondition	Considered valid	closed_stream: ¬is_open_pipe(\old(stream))
+FRAMAC_SHARE/libc	stdio.h	398	pclose	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdlib.h	73	atof	from clause	Considered valid	assigns \result \from (indirect: nptr), (indirect: *(nptr + (0 ..)));
+FRAMAC_SHARE/libc	stdlib.h	75	atof	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdlib.h	79	atoi	from clause	Considered valid	assigns \result \from (indirect: nptr), (indirect: *(nptr + (0 ..)));
+FRAMAC_SHARE/libc	stdlib.h	81	atoi	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdlib.h	85	atol	from clause	Considered valid	assigns \result \from (indirect: nptr), (indirect: *(nptr + (0 ..)));
+FRAMAC_SHARE/libc	stdlib.h	87	atol	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdlib.h	91	atoll	from clause	Considered valid	assigns \result \from (indirect: nptr), (indirect: *(nptr + (0 ..)));
+FRAMAC_SHARE/libc	stdlib.h	93	atoll	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdlib.h	100	strtod	assigns clause	Considered valid	assigns \result, *endptr;
+FRAMAC_SHARE/libc	stdlib.h	100	strtod	from clause	Considered valid	assigns \result \from (indirect: nptr), (indirect: *(nptr + (0 ..)));
+FRAMAC_SHARE/libc	stdlib.h	101	strtod	from clause	Considered valid	assigns *endptr \from nptr, (indirect: *(nptr + (0 ..))), (indirect: endptr);
+FRAMAC_SHARE/libc	stdlib.h	104	strtod	from clause	Considered valid	assigns \result \from (indirect: nptr), (indirect: *(nptr + (0 ..)));
+FRAMAC_SHARE/libc	stdlib.h	108	strtod	assigns clause	Considered valid	assigns \result, *endptr;
+FRAMAC_SHARE/libc	stdlib.h	108	strtod	from clause	Considered valid	assigns \result \from (indirect: nptr), (indirect: *(nptr + (0 ..)));
+FRAMAC_SHARE/libc	stdlib.h	109	strtod	from clause	Considered valid	assigns *endptr \from nptr, (indirect: *(nptr + (0 ..))), (indirect: endptr);
+FRAMAC_SHARE/libc	stdlib.h	110	strtod	postcondition	Considered valid	initialization: \initialized(\old(endptr))
+FRAMAC_SHARE/libc	stdlib.h	111	strtod	postcondition	Considered valid	valid_endptr: \valid_read(\old(endptr))
+FRAMAC_SHARE/libc	stdlib.h	112	strtod	postcondition	Considered valid	position_subset: \subset(*\old(endptr), \old(nptr) + (0 ..))
+FRAMAC_SHARE/libc	stdlib.h	116	strtod	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdlib.h	122	strtof	assigns clause	Considered valid	assigns \result, *endptr;
+FRAMAC_SHARE/libc	stdlib.h	122	strtof	from clause	Considered valid	assigns \result \from (indirect: nptr), (indirect: *(nptr + (0 ..)));
+FRAMAC_SHARE/libc	stdlib.h	123	strtof	from clause	Considered valid	assigns *endptr \from nptr, (indirect: *(nptr + (0 ..))), (indirect: endptr);
+FRAMAC_SHARE/libc	stdlib.h	126	strtof	from clause	Considered valid	assigns \result \from (indirect: nptr), (indirect: *(nptr + (0 ..)));
+FRAMAC_SHARE/libc	stdlib.h	130	strtof	assigns clause	Considered valid	assigns \result, *endptr;
+FRAMAC_SHARE/libc	stdlib.h	130	strtof	from clause	Considered valid	assigns \result \from (indirect: nptr), (indirect: *(nptr + (0 ..)));
+FRAMAC_SHARE/libc	stdlib.h	131	strtof	from clause	Considered valid	assigns *endptr \from nptr, (indirect: *(nptr + (0 ..))), (indirect: endptr);
+FRAMAC_SHARE/libc	stdlib.h	132	strtof	postcondition	Considered valid	initialization: \initialized(\old(endptr))
+FRAMAC_SHARE/libc	stdlib.h	133	strtof	postcondition	Considered valid	valid_endptr: \valid_read(\old(endptr))
+FRAMAC_SHARE/libc	stdlib.h	134	strtof	postcondition	Considered valid	position_subset: \subset(*\old(endptr), \old(nptr) + (0 ..))
+FRAMAC_SHARE/libc	stdlib.h	138	strtof	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdlib.h	144	strtold	assigns clause	Considered valid	assigns \result, *endptr;
+FRAMAC_SHARE/libc	stdlib.h	144	strtold	from clause	Considered valid	assigns \result \from (indirect: nptr), (indirect: *(nptr + (0 ..)));
+FRAMAC_SHARE/libc	stdlib.h	145	strtold	from clause	Considered valid	assigns *endptr \from nptr, (indirect: *(nptr + (0 ..))), (indirect: endptr);
+FRAMAC_SHARE/libc	stdlib.h	148	strtold	from clause	Considered valid	assigns \result \from (indirect: nptr), (indirect: *(nptr + (0 ..)));
+FRAMAC_SHARE/libc	stdlib.h	152	strtold	assigns clause	Considered valid	assigns \result, *endptr;
+FRAMAC_SHARE/libc	stdlib.h	152	strtold	from clause	Considered valid	assigns \result \from (indirect: nptr), (indirect: *(nptr + (0 ..)));
+FRAMAC_SHARE/libc	stdlib.h	153	strtold	from clause	Considered valid	assigns *endptr \from nptr, (indirect: *(nptr + (0 ..))), (indirect: endptr);
+FRAMAC_SHARE/libc	stdlib.h	154	strtold	postcondition	Considered valid	initialization: \initialized(\old(endptr))
+FRAMAC_SHARE/libc	stdlib.h	155	strtold	postcondition	Considered valid	valid_endptr: \valid_read(\old(endptr))
+FRAMAC_SHARE/libc	stdlib.h	156	strtold	postcondition	Considered valid	position_subset: \subset(*\old(endptr), \old(nptr) + (0 ..))
+FRAMAC_SHARE/libc	stdlib.h	160	strtold	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdlib.h	168	strtol	assigns clause	Considered valid	assigns \result, *endptr;
+FRAMAC_SHARE/libc	stdlib.h	168	strtol	from clause	Considered valid	assigns \result \from (indirect: nptr), (indirect: *(nptr + (0 ..))), (indirect: base);
+FRAMAC_SHARE/libc	stdlib.h	169	strtol	from clause	Considered valid	assigns *endptr \from nptr, (indirect: *(nptr + (0 ..))), (indirect: endptr), (indirect: base);
+FRAMAC_SHARE/libc	stdlib.h	172	strtol	from clause	Considered valid	assigns \result \from (indirect: nptr), (indirect: *(nptr + (0 ..))), (indirect: base);
+FRAMAC_SHARE/libc	stdlib.h	176	strtol	assigns clause	Considered valid	assigns \result, *endptr;
+FRAMAC_SHARE/libc	stdlib.h	176	strtol	from clause	Considered valid	assigns \result \from (indirect: nptr), (indirect: *(nptr + (0 ..))), (indirect: base);
+FRAMAC_SHARE/libc	stdlib.h	177	strtol	from clause	Considered valid	assigns *endptr \from nptr, (indirect: *(nptr + (0 ..))), (indirect: endptr), (indirect: base);
+FRAMAC_SHARE/libc	stdlib.h	178	strtol	postcondition	Considered valid	initialization: \initialized(\old(endptr))
+FRAMAC_SHARE/libc	stdlib.h	179	strtol	postcondition	Considered valid	valid_endptr: \valid_read(\old(endptr))
+FRAMAC_SHARE/libc	stdlib.h	180	strtol	postcondition	Considered valid	position_subset: \subset(*\old(endptr), \old(nptr) + (0 ..))
+FRAMAC_SHARE/libc	stdlib.h	184	strtol	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdlib.h	193	strtoll	assigns clause	Considered valid	assigns \result, *endptr;
+FRAMAC_SHARE/libc	stdlib.h	193	strtoll	from clause	Considered valid	assigns \result \from (indirect: nptr), (indirect: *(nptr + (0 ..))), (indirect: base);
+FRAMAC_SHARE/libc	stdlib.h	194	strtoll	from clause	Considered valid	assigns *endptr \from nptr, (indirect: *(nptr + (0 ..))), (indirect: endptr), (indirect: base);
+FRAMAC_SHARE/libc	stdlib.h	197	strtoll	from clause	Considered valid	assigns \result \from (indirect: nptr), (indirect: *(nptr + (0 ..))), (indirect: base);
+FRAMAC_SHARE/libc	stdlib.h	201	strtoll	assigns clause	Considered valid	assigns \result, *endptr;
+FRAMAC_SHARE/libc	stdlib.h	201	strtoll	from clause	Considered valid	assigns \result \from (indirect: nptr), (indirect: *(nptr + (0 ..))), (indirect: base);
+FRAMAC_SHARE/libc	stdlib.h	202	strtoll	from clause	Considered valid	assigns *endptr \from nptr, (indirect: *(nptr + (0 ..))), (indirect: endptr), (indirect: base);
+FRAMAC_SHARE/libc	stdlib.h	203	strtoll	postcondition	Considered valid	initialization: \initialized(\old(endptr))
+FRAMAC_SHARE/libc	stdlib.h	204	strtoll	postcondition	Considered valid	valid_endptr: \valid_read(\old(endptr))
+FRAMAC_SHARE/libc	stdlib.h	205	strtoll	postcondition	Considered valid	position_subset: \subset(*\old(endptr), \old(nptr) + (0 ..))
+FRAMAC_SHARE/libc	stdlib.h	209	strtoll	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdlib.h	218	strtoul	assigns clause	Considered valid	assigns \result, *endptr;
+FRAMAC_SHARE/libc	stdlib.h	218	strtoul	from clause	Considered valid	assigns \result \from (indirect: nptr), (indirect: *(nptr + (0 ..))), (indirect: base);
+FRAMAC_SHARE/libc	stdlib.h	219	strtoul	from clause	Considered valid	assigns *endptr \from nptr, (indirect: *(nptr + (0 ..))), (indirect: endptr), (indirect: base);
+FRAMAC_SHARE/libc	stdlib.h	222	strtoul	from clause	Considered valid	assigns \result \from (indirect: nptr), (indirect: *(nptr + (0 ..))), (indirect: base);
+FRAMAC_SHARE/libc	stdlib.h	226	strtoul	assigns clause	Considered valid	assigns \result, *endptr;
+FRAMAC_SHARE/libc	stdlib.h	226	strtoul	from clause	Considered valid	assigns \result \from (indirect: nptr), (indirect: *(nptr + (0 ..))), (indirect: base);
+FRAMAC_SHARE/libc	stdlib.h	227	strtoul	from clause	Considered valid	assigns *endptr \from nptr, (indirect: *(nptr + (0 ..))), (indirect: endptr), (indirect: base);
+FRAMAC_SHARE/libc	stdlib.h	228	strtoul	postcondition	Considered valid	initialization: \initialized(\old(endptr))
+FRAMAC_SHARE/libc	stdlib.h	229	strtoul	postcondition	Considered valid	valid_endptr: \valid_read(\old(endptr))
+FRAMAC_SHARE/libc	stdlib.h	230	strtoul	postcondition	Considered valid	position_subset: \subset(*\old(endptr), \old(nptr) + (0 ..))
+FRAMAC_SHARE/libc	stdlib.h	234	strtoul	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdlib.h	243	strtoull	assigns clause	Considered valid	assigns \result, *endptr;
+FRAMAC_SHARE/libc	stdlib.h	243	strtoull	from clause	Considered valid	assigns \result \from (indirect: nptr), (indirect: *(nptr + (0 ..))), (indirect: base);
+FRAMAC_SHARE/libc	stdlib.h	244	strtoull	from clause	Considered valid	assigns *endptr \from nptr, (indirect: *(nptr + (0 ..))), (indirect: endptr), (indirect: base);
+FRAMAC_SHARE/libc	stdlib.h	247	strtoull	from clause	Considered valid	assigns \result \from (indirect: nptr), (indirect: *(nptr + (0 ..))), (indirect: base);
+FRAMAC_SHARE/libc	stdlib.h	251	strtoull	assigns clause	Considered valid	assigns \result, *endptr;
+FRAMAC_SHARE/libc	stdlib.h	251	strtoull	from clause	Considered valid	assigns \result \from (indirect: nptr), (indirect: *(nptr + (0 ..))), (indirect: base);
+FRAMAC_SHARE/libc	stdlib.h	252	strtoull	from clause	Considered valid	assigns *endptr \from nptr, (indirect: *(nptr + (0 ..))), (indirect: endptr), (indirect: base);
+FRAMAC_SHARE/libc	stdlib.h	253	strtoull	postcondition	Considered valid	initialization: \initialized(\old(endptr))
+FRAMAC_SHARE/libc	stdlib.h	254	strtoull	postcondition	Considered valid	valid_endptr: \valid_read(\old(endptr))
+FRAMAC_SHARE/libc	stdlib.h	255	strtoull	postcondition	Considered valid	position_subset: \subset(*\old(endptr), \old(nptr) + (0 ..))
+FRAMAC_SHARE/libc	stdlib.h	259	strtoull	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdlib.h	268	rand	assigns clause	Considered valid	assigns \result, __fc_random_counter;
+FRAMAC_SHARE/libc	stdlib.h	268	rand	from clause	Considered valid	assigns \result \from __fc_random_counter;
+FRAMAC_SHARE/libc	stdlib.h	269	rand	from clause	Considered valid	assigns __fc_random_counter \from __fc_random_counter;
+FRAMAC_SHARE/libc	stdlib.h	270	rand	postcondition	Considered valid	result_range: 0 ≤ \result ≤ __fc_rand_max
+FRAMAC_SHARE/libc	stdlib.h	274	srand	assigns clause	Considered valid	assigns __fc_random_counter;
+FRAMAC_SHARE/libc	stdlib.h	274	srand	from clause	Considered valid	assigns __fc_random_counter \from seed;
+FRAMAC_SHARE/libc	stdlib.h	278	random	from clause	Considered valid	assigns \result \from __fc_random_counter;
+FRAMAC_SHARE/libc	stdlib.h	279	random	postcondition	Considered valid	result_range: 0 ≤ \result ≤ __fc_rand_max
+FRAMAC_SHARE/libc	stdlib.h	281	random	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdlib.h	283	srandom	assigns clause	Considered valid	assigns __fc_random_counter;
+FRAMAC_SHARE/libc	stdlib.h	283	srandom	from clause	Considered valid	assigns __fc_random_counter \from seed;
+FRAMAC_SHARE/libc	stdlib.h	293	srand48	assigns clause	Considered valid	assigns __fc_random48_counter[0 .. 2], __fc_random48_init;
+FRAMAC_SHARE/libc	stdlib.h	293	srand48	from clause	Considered valid	assigns __fc_random48_counter[0 .. 2] \from seed;
+FRAMAC_SHARE/libc	stdlib.h	294	srand48	from clause	Considered valid	assigns __fc_random48_init \from \nothing;
+FRAMAC_SHARE/libc	stdlib.h	295	srand48	postcondition	Considered valid	random48_initialized: __fc_random48_init ≡ 1
+FRAMAC_SHARE/libc	stdlib.h	301	seed48	assigns clause	Considered valid	assigns __fc_random48_counter[0 .. 2], __fc_random48_init, \result;
+FRAMAC_SHARE/libc	stdlib.h	301	seed48	from clause	Considered valid	assigns __fc_random48_counter[0 .. 2] \from (indirect: *(seed16v + (0 .. 2)));
+FRAMAC_SHARE/libc	stdlib.h	302	seed48	from clause	Considered valid	assigns __fc_random48_init \from \nothing;
+FRAMAC_SHARE/libc	stdlib.h	303	seed48	from clause	Considered valid	assigns \result \from __fc_p_random48_counter;
+FRAMAC_SHARE/libc	stdlib.h	304	seed48	postcondition	Considered valid	random48_initialized: __fc_random48_init ≡ 1
+FRAMAC_SHARE/libc	stdlib.h	305	seed48	postcondition	Considered valid	result_counter: \result ≡ __fc_p_random48_counter
+FRAMAC_SHARE/libc	stdlib.h	310	lcong48	assigns clause	Considered valid	assigns __fc_random48_counter[0 .. 2], __fc_random48_init;
+FRAMAC_SHARE/libc	stdlib.h	310	lcong48	from clause	Considered valid	assigns __fc_random48_counter[0 .. 2] \from *(param + (0 .. 5));
+FRAMAC_SHARE/libc	stdlib.h	311	lcong48	from clause	Considered valid	assigns __fc_random48_init \from \nothing;
+FRAMAC_SHARE/libc	stdlib.h	312	lcong48	postcondition	Considered valid	random48_initialized: __fc_random48_init ≡ 1
+FRAMAC_SHARE/libc	stdlib.h	318	drand48	assigns clause	Considered valid	assigns __fc_random48_counter[0 .. 2], \result;
+FRAMAC_SHARE/libc	stdlib.h	318	drand48	from clause	Considered valid	assigns __fc_random48_counter[0 .. 2] \from __fc_random48_counter[0 .. 2];
+FRAMAC_SHARE/libc	stdlib.h	319	drand48	from clause	Considered valid	assigns \result \from __fc_random48_counter[0 .. 2];
+FRAMAC_SHARE/libc	stdlib.h	320	drand48	postcondition	Considered valid	result_range: \is_finite(\result) ∧ 0.0 ≤ \result < 1.0
+FRAMAC_SHARE/libc	stdlib.h	326	erand48	assigns clause	Considered valid	assigns __fc_random48_counter[0 .. 2], \result;
+FRAMAC_SHARE/libc	stdlib.h	326	erand48	from clause	Considered valid	assigns __fc_random48_counter[0 .. 2] \from __fc_random48_counter[0 .. 2];
+FRAMAC_SHARE/libc	stdlib.h	327	erand48	from clause	Considered valid	assigns \result \from __fc_random48_counter[0 .. 2];
+FRAMAC_SHARE/libc	stdlib.h	328	erand48	postcondition	Considered valid	result_range: \is_finite(\result) ∧ 0.0 ≤ \result < 1.0
+FRAMAC_SHARE/libc	stdlib.h	334	lrand48	assigns clause	Considered valid	assigns __fc_random48_counter[0 .. 2], \result;
+FRAMAC_SHARE/libc	stdlib.h	334	lrand48	from clause	Considered valid	assigns __fc_random48_counter[0 .. 2] \from __fc_random48_counter[0 .. 2];
+FRAMAC_SHARE/libc	stdlib.h	335	lrand48	from clause	Considered valid	assigns \result \from __fc_random48_counter[0 .. 2];
+FRAMAC_SHARE/libc	stdlib.h	336	lrand48	postcondition	Considered valid	result_range: 0 ≤ \result < 2147483648
+FRAMAC_SHARE/libc	stdlib.h	342	nrand48	assigns clause	Considered valid	assigns __fc_random48_counter[0 .. 2], \result;
+FRAMAC_SHARE/libc	stdlib.h	342	nrand48	from clause	Considered valid	assigns __fc_random48_counter[0 .. 2] \from __fc_random48_counter[0 .. 2];
+FRAMAC_SHARE/libc	stdlib.h	343	nrand48	from clause	Considered valid	assigns \result \from __fc_random48_counter[0 .. 2];
+FRAMAC_SHARE/libc	stdlib.h	344	nrand48	postcondition	Considered valid	result_range: 0 ≤ \result < 2147483648
+FRAMAC_SHARE/libc	stdlib.h	350	mrand48	assigns clause	Considered valid	assigns __fc_random48_counter[0 .. 2], \result;
+FRAMAC_SHARE/libc	stdlib.h	350	mrand48	from clause	Considered valid	assigns __fc_random48_counter[0 .. 2] \from __fc_random48_counter[0 .. 2];
+FRAMAC_SHARE/libc	stdlib.h	351	mrand48	from clause	Considered valid	assigns \result \from __fc_random48_counter[0 .. 2];
+FRAMAC_SHARE/libc	stdlib.h	352	mrand48	postcondition	Considered valid	result_range: -2147483648 ≤ \result < 2147483648
+FRAMAC_SHARE/libc	stdlib.h	358	jrand48	assigns clause	Considered valid	assigns __fc_random48_counter[0 .. 2], \result;
+FRAMAC_SHARE/libc	stdlib.h	358	jrand48	from clause	Considered valid	assigns __fc_random48_counter[0 .. 2] \from __fc_random48_counter[0 .. 2];
+FRAMAC_SHARE/libc	stdlib.h	359	jrand48	from clause	Considered valid	assigns \result \from __fc_random48_counter[0 .. 2];
+FRAMAC_SHARE/libc	stdlib.h	360	jrand48	postcondition	Considered valid	result_range: -2147483648 ≤ \result < 2147483648
+FRAMAC_SHARE/libc	stdlib.h	367	calloc	assigns clause	Considered valid	assigns __fc_heap_status, \result;
+FRAMAC_SHARE/libc	stdlib.h	367	calloc	from clause	Considered valid	assigns __fc_heap_status \from (indirect: nmemb), (indirect: size), __fc_heap_status;
+FRAMAC_SHARE/libc	stdlib.h	368	calloc	from clause	Considered valid	assigns \result \from (indirect: nmemb), (indirect: size), (indirect: __fc_heap_status);
+FRAMAC_SHARE/libc	stdlib.h	373	calloc	postcondition	Considered valid	allocation: \fresh{Old, Here}(\result,\old(nmemb) * \old(size))
+FRAMAC_SHARE/libc	stdlib.h	374	calloc	postcondition	Considered valid	initialization: \initialized((char *)\result + (0 .. \old(nmemb) * \old(size) - 1))
+FRAMAC_SHARE/libc	stdlib.h	375	calloc	postcondition	Considered valid	zero_initialization: \subset(*((char *)\result + (0 .. \old(nmemb) * \old(size) - 1)), {0})
+FRAMAC_SHARE/libc	stdlib.h	379	calloc	from clause	Considered valid	assigns \result \from \nothing;
+FRAMAC_SHARE/libc	stdlib.h	381	calloc	postcondition	Considered valid	null_result: \result ≡ \null
+FRAMAC_SHARE/libc	stdlib.h	385	calloc	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdlib.h	388	malloc	assigns clause	Considered valid	assigns __fc_heap_status, \result;
+FRAMAC_SHARE/libc	stdlib.h	388	malloc	from clause	Considered valid	assigns __fc_heap_status \from size, __fc_heap_status;
+FRAMAC_SHARE/libc	stdlib.h	389	malloc	from clause	Considered valid	assigns \result \from (indirect: size), (indirect: __fc_heap_status);
+FRAMAC_SHARE/libc	stdlib.h	392	malloc	assigns clause	Considered valid	assigns __fc_heap_status, \result;
+FRAMAC_SHARE/libc	stdlib.h	392	malloc	from clause	Considered valid	assigns __fc_heap_status \from size, __fc_heap_status;
+FRAMAC_SHARE/libc	stdlib.h	393	malloc	from clause	Considered valid	assigns \result \from (indirect: size), (indirect: __fc_heap_status);
+FRAMAC_SHARE/libc	stdlib.h	394	malloc	postcondition	Considered valid	allocation: \fresh{Old, Here}(\result,\old(size))
+FRAMAC_SHARE/libc	stdlib.h	397	malloc	from clause	Considered valid	assigns \result \from \nothing;
+FRAMAC_SHARE/libc	stdlib.h	399	malloc	postcondition	Considered valid	null_result: \result ≡ \null
+FRAMAC_SHARE/libc	stdlib.h	403	malloc	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdlib.h	407	free	assigns clause	Considered valid	assigns __fc_heap_status;
+FRAMAC_SHARE/libc	stdlib.h	407	free	from clause	Considered valid	assigns __fc_heap_status \from __fc_heap_status;
+FRAMAC_SHARE/libc	stdlib.h	410	free	assigns clause	Considered valid	assigns __fc_heap_status;
+FRAMAC_SHARE/libc	stdlib.h	410	free	from clause	Considered valid	assigns __fc_heap_status \from __fc_heap_status;
+FRAMAC_SHARE/libc	stdlib.h	411	free	postcondition	Considered valid	freed: \allocable(\old(p))
+FRAMAC_SHARE/libc	stdlib.h	419	free	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdlib.h	425	realloc	assigns clause	Considered valid	assigns __fc_heap_status, \result;
+FRAMAC_SHARE/libc	stdlib.h	425	realloc	from clause	Considered valid	assigns __fc_heap_status \from __fc_heap_status;
+FRAMAC_SHARE/libc	stdlib.h	426	realloc	from clause	Considered valid	assigns \result \from size, ptr, __fc_heap_status;
+FRAMAC_SHARE/libc	stdlib.h	431	realloc	from clause	Considered valid	assigns \result \from size, __fc_heap_status;
+FRAMAC_SHARE/libc	stdlib.h	432	realloc	postcondition	Considered valid	allocation: \fresh{Old, Here}(\result,\old(size))
+FRAMAC_SHARE/libc	stdlib.h	438	realloc	postcondition	Considered valid	freed: \allocable(\old(ptr))
+FRAMAC_SHARE/libc	stdlib.h	439	realloc	postcondition	Considered valid	freeable: \result ≡ \null ∨ \freeable(\result)
+FRAMAC_SHARE/libc	stdlib.h	445	realloc	from clause	Considered valid	assigns \result \from size, __fc_heap_status;
+FRAMAC_SHARE/libc	stdlib.h	446	realloc	postcondition	Considered valid	null_result: \result ≡ \null
+FRAMAC_SHARE/libc	stdlib.h	452	realloc	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdlib.h	458	abort	postcondition	Considered valid	never_terminates: \false
+FRAMAC_SHARE/libc	stdlib.h	459	abort	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdlib.h	461	atexit	from clause	Considered valid	assigns \result \from \nothing;
+FRAMAC_SHARE/libc	stdlib.h	462	atexit	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdlib.h	464	at_quick_exit	from clause	Considered valid	assigns \result \from \nothing;
+FRAMAC_SHARE/libc	stdlib.h	465	at_quick_exit	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdlib.h	469	exit	postcondition	Considered valid	never_terminates: \false
+FRAMAC_SHARE/libc	stdlib.h	471	exit	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdlib.h	475	_Exit	postcondition	Considered valid	never_terminates: \false
+FRAMAC_SHARE/libc	stdlib.h	477	_Exit	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdlib.h	483	getenv	from clause	Considered valid	assigns \result \from __fc_env[0 ..], (indirect: name), *(name + (0 ..));
+FRAMAC_SHARE/libc	stdlib.h	484	getenv	postcondition	Considered valid	null_or_valid_result: \result ≡ \null ∨ \valid(\result)
+FRAMAC_SHARE/libc	stdlib.h	486	getenv	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdlib.h	490	putenv	assigns clause	Considered valid	assigns __fc_env[0 ..], \result;
+FRAMAC_SHARE/libc	stdlib.h	490	putenv	from clause	Considered valid	assigns __fc_env[0 ..] \from __fc_env[0 ..], string;
+FRAMAC_SHARE/libc	stdlib.h	491	putenv	from clause	Considered valid	assigns \result \from (indirect: __fc_env[0 ..]), (indirect: string);
+FRAMAC_SHARE/libc	stdlib.h	498	setenv	assigns clause	Considered valid	assigns \result, __fc_env[0 ..];
+FRAMAC_SHARE/libc	stdlib.h	498	setenv	from clause	Considered valid	assigns \result \from __fc_env[0 ..], (indirect: name), (indirect: *(name + (0 ..))), (indirect: value), (indirect: *(value + (0 ..))), (indirect: overwrite);
+FRAMAC_SHARE/libc	stdlib.h	498	setenv	from clause	Considered valid	assigns __fc_env[0 ..] \from __fc_env[0 ..], (indirect: name), (indirect: *(name + (0 ..))), (indirect: value), (indirect: *(value + (0 ..))), (indirect: overwrite);
+FRAMAC_SHARE/libc	stdlib.h	501	setenv	postcondition	Considered valid	result_ok_or_error: \result ≡ 0 ∨ \result ≡ -1
+FRAMAC_SHARE/libc	stdlib.h	507	unsetenv	assigns clause	Considered valid	assigns \result, __fc_env[0 ..];
+FRAMAC_SHARE/libc	stdlib.h	507	unsetenv	from clause	Considered valid	assigns \result \from __fc_env[0 ..], (indirect: name), (indirect: *(name + (0 ..)));
+FRAMAC_SHARE/libc	stdlib.h	507	unsetenv	from clause	Considered valid	assigns __fc_env[0 ..] \from __fc_env[0 ..], (indirect: name), (indirect: *(name + (0 ..)));
+FRAMAC_SHARE/libc	stdlib.h	509	unsetenv	postcondition	Considered valid	result_ok_or_error: \result ≡ 0 ∨ \result ≡ -1
+FRAMAC_SHARE/libc	stdlib.h	515	quick_exit	postcondition	Considered valid	never_terminates: \false
+FRAMAC_SHARE/libc	stdlib.h	517	quick_exit	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdlib.h	522	system	from clause	Considered valid	assigns \result \from (indirect: command), (indirect: *(command + (0 ..)));
+FRAMAC_SHARE/libc	stdlib.h	524	system	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdlib.h	537	bsearch	from clause	Considered valid	assigns \result \from (indirect: key), *((char *)key + (0 .. size - 1)), base, *((char *)base + (0 .. size * (nmemb - 1))), (indirect: nmemb), (indirect: size), (indirect: *compar);
+FRAMAC_SHARE/libc	stdlib.h	540	bsearch	postcondition	Considered valid	null_or_correct_result: \result ≡ \null ∨ \subset(\result, (void *)((char *)\old(base) + (0 .. \old(size) * (\old(nmemb) - 1))))
+FRAMAC_SHARE/libc	stdlib.h	543	bsearch	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdlib.h	550	qsort	assigns clause	Considered valid	assigns *((char *)base + (0 ..));
+FRAMAC_SHARE/libc	stdlib.h	550	qsort	from clause	Considered valid	assigns *((char *)base + (0 ..)) \from (indirect: base), *((char *)base + (0 ..)), (indirect: nmemb), (indirect: size), (indirect: compar), (indirect: *compar);
+FRAMAC_SHARE/libc	stdlib.h	561	abs	from clause	Considered valid	assigns \result \from j;
+FRAMAC_SHARE/libc	stdlib.h	564	abs	postcondition	Considered valid	opposite_result: \result ≡ -\old(j)
+FRAMAC_SHARE/libc	stdlib.h	567	abs	postcondition	Considered valid	same_result: \result ≡ \old(j)
+FRAMAC_SHARE/libc	stdlib.h	571	abs	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdlib.h	575	labs	from clause	Considered valid	assigns \result \from j;
+FRAMAC_SHARE/libc	stdlib.h	578	labs	postcondition	Considered valid	opposite_result: \result ≡ -\old(j)
+FRAMAC_SHARE/libc	stdlib.h	581	labs	postcondition	Considered valid	same_result: \result ≡ \old(j)
+FRAMAC_SHARE/libc	stdlib.h	585	labs	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdlib.h	589	llabs	from clause	Considered valid	assigns \result \from j;
+FRAMAC_SHARE/libc	stdlib.h	592	llabs	postcondition	Considered valid	opposite_result: \result ≡ -\old(j)
+FRAMAC_SHARE/libc	stdlib.h	595	llabs	postcondition	Considered valid	same_result: \result ≡ \old(j)
+FRAMAC_SHARE/libc	stdlib.h	599	llabs	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdlib.h	601	div	from clause	Considered valid	assigns \result \from numer, denom;
+FRAMAC_SHARE/libc	stdlib.h	602	div	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdlib.h	603	ldiv	from clause	Considered valid	assigns \result \from numer, denom;
+FRAMAC_SHARE/libc	stdlib.h	604	ldiv	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdlib.h	605	lldiv	from clause	Considered valid	assigns \result \from numer, denom;
+FRAMAC_SHARE/libc	stdlib.h	606	lldiv	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdlib.h	612	mblen	assigns clause	Considered valid	assigns \result, __fc_mblen_state;
+FRAMAC_SHARE/libc	stdlib.h	612	mblen	from clause	Considered valid	assigns \result \from (indirect: s), (indirect: *(s + (0 ..))), (indirect: n), __fc_mblen_state;
+FRAMAC_SHARE/libc	stdlib.h	612	mblen	from clause	Considered valid	assigns __fc_mblen_state \from (indirect: s), (indirect: *(s + (0 ..))), (indirect: n), __fc_mblen_state;
+FRAMAC_SHARE/libc	stdlib.h	620	mbtowc	assigns clause	Considered valid	assigns \result, *(pwc + (0 .. \result - 1)), __fc_mbtowc_state;
+FRAMAC_SHARE/libc	stdlib.h	620	mbtowc	from clause	Considered valid	assigns \result \from (indirect: s), (indirect: *(s + (0 .. n - 1))), (indirect: n), __fc_mbtowc_state;
+FRAMAC_SHARE/libc	stdlib.h	622	mbtowc	from clause	Considered valid	assigns *(pwc + (0 .. \result - 1)) \from (indirect: s), *(s + (0 .. n - 1)), (indirect: n), __fc_mbtowc_state;
+FRAMAC_SHARE/libc	stdlib.h	622	mbtowc	from clause	Considered valid	assigns __fc_mbtowc_state \from (indirect: s), *(s + (0 .. n - 1)), (indirect: n), __fc_mbtowc_state;
+FRAMAC_SHARE/libc	stdlib.h	624	mbtowc	postcondition	Considered valid	consumed_range: \result ≤ \old(n)
+FRAMAC_SHARE/libc	stdlib.h	634	wctomb	assigns clause	Considered valid	assigns \result, *(s + (0 ..)), __fc_wctomb_state;
+FRAMAC_SHARE/libc	stdlib.h	634	wctomb	from clause	Considered valid	assigns \result \from (indirect: wc), __fc_wctomb_state;
+FRAMAC_SHARE/libc	stdlib.h	635	wctomb	from clause	Considered valid	assigns *(s + (0 ..)) \from wc, __fc_wctomb_state;
+FRAMAC_SHARE/libc	stdlib.h	635	wctomb	from clause	Considered valid	assigns __fc_wctomb_state \from wc, __fc_wctomb_state;
+FRAMAC_SHARE/libc	stdlib.h	643	mbstowcs	assigns clause	Considered valid	assigns \result, *(pwcs + (0 .. n - 1));
+FRAMAC_SHARE/libc	stdlib.h	643	mbstowcs	from clause	Considered valid	assigns \result \from (indirect: s), (indirect: *(s + (0 .. n - 1))), (indirect: n);
+FRAMAC_SHARE/libc	stdlib.h	644	mbstowcs	from clause	Considered valid	assigns *(pwcs + (0 .. n - 1)) \from (indirect: s), *(s + (0 .. n - 1)), (indirect: n);
+FRAMAC_SHARE/libc	stdlib.h	652	wcstombs	assigns clause	Considered valid	assigns \result, *(s + (0 .. n - 1));
+FRAMAC_SHARE/libc	stdlib.h	652	wcstombs	from clause	Considered valid	assigns \result \from (indirect: pwcs), (indirect: *(pwcs + (0 .. n - 1))), (indirect: n);
+FRAMAC_SHARE/libc	stdlib.h	653	wcstombs	from clause	Considered valid	assigns *(s + (0 .. n - 1)) \from (indirect: pwcs), *(pwcs + (0 .. n - 1)), (indirect: n);
+FRAMAC_SHARE/libc	stdlib.h	667	posix_memalign	assigns clause	Considered valid	assigns __fc_heap_status, \result;
+FRAMAC_SHARE/libc	stdlib.h	667	posix_memalign	from clause	Considered valid	assigns __fc_heap_status \from (indirect: alignment), size, __fc_heap_status;
+FRAMAC_SHARE/libc	stdlib.h	668	posix_memalign	from clause	Considered valid	assigns \result \from (indirect: alignment), (indirect: size), (indirect: __fc_heap_status);
+FRAMAC_SHARE/libc	stdlib.h	672	posix_memalign	assigns clause	Considered valid	assigns __fc_heap_status, \result;
+FRAMAC_SHARE/libc	stdlib.h	672	posix_memalign	from clause	Considered valid	assigns __fc_heap_status \from (indirect: alignment), size, __fc_heap_status;
+FRAMAC_SHARE/libc	stdlib.h	673	posix_memalign	from clause	Considered valid	assigns \result \from (indirect: alignment), (indirect: size), (indirect: __fc_heap_status);
+FRAMAC_SHARE/libc	stdlib.h	675	posix_memalign	postcondition	Considered valid	allocation: \fresh{Old, Here}(*\old(memptr),\old(size))
+FRAMAC_SHARE/libc	stdlib.h	676	posix_memalign	postcondition	Considered valid	result_zero: \result ≡ 0
+FRAMAC_SHARE/libc	stdlib.h	679	posix_memalign	from clause	Considered valid	assigns \result \from (indirect: alignment);
+FRAMAC_SHARE/libc	stdlib.h	681	posix_memalign	postcondition	Considered valid	result_non_zero: \result < 0 ∨ \result > 0
+FRAMAC_SHARE/libc	stdlib.h	685	posix_memalign	assigns clause	Considered valid	assigns \nothing;
+FRAMAC_SHARE/libc	stdlib.h	691	mkstemp	assigns clause	Considered valid	assigns *(templat + (0 ..)), \result;
+FRAMAC_SHARE/libc	stdlib.h	691	mkstemp	from clause	Considered valid	assigns *(templat + (0 ..)) \from \nothing;
+FRAMAC_SHARE/libc	stdlib.h	692	mkstemp	from clause	Considered valid	assigns \result \from \nothing;
+FRAMAC_SHARE/libc	stdlib.h	693	mkstemp	postcondition	Considered valid	result_error_or_valid_fd: \result ≡ -1 ∨ (0 ≤ \result < 16)
+sub	functions2.c	31	add2	mem_access	Invalid or unreachable	\valid(overflow3 + 32)

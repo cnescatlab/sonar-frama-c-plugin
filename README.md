@@ -28,6 +28,8 @@ If you experienced a problem with the plugin please open an issue. Inside this i
 
 If you want to do a PR, please put inside of it the reason of this pull request. If this pull request fix an issue please insert the number of the issue or explain inside of the PR how to reproduce this issue.
 
+All details are available in [CONTRIBUTING](https://github.com/lequal/sonar-frama-c-plugin/CONTRIBUTING.md).
+
 ### Feedback and Support
 Contact : L-lequal@cnes.fr
 
