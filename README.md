@@ -1,9 +1,9 @@
 # Sonar Frama-C plugin
 [![Build Status](https://travis-ci.org/lequal/sonar-frama-c-plugin.svg?branch=master)](https://travis-ci.org/lequal/sonar-frama-c-plugin)
-[![SonarQube Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=fr.cnes.sonarqube.plugins%3Asonarframac&metric=alert_status)](https://sonarcloud.io/dashboard?id=fr.cnes.sonarqube.plugins%3Asonarframac)
-[![SonarQube Bugs](https://sonarcloud.io/api/project_badges/measure?project=fr.cnes.sonarqube.plugins%3Asonarframac&metric=bugs)](https://sonarcloud.io/project/issues?id=fr.cnes.sonarqube.plugins%3Asonarframac&resolved=false&types=BUG)
-[![SonarQube Coverage](https://sonarcloud.io/api/project_badges/measure?project=fr.cnes.sonarqube.plugins%3Asonarframac&metric=coverage)](https://sonarcloud.io/component_measures?id=fr.cnes.sonarqube.plugins%3Asonarframac&metric=coverage)
-[![SonarQube Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=fr.cnes.sonarqube.plugins%3Asonarframac&metric=sqale_index)](https://sonarcloud.io/component_measures?id=fr.cnes.sonarqube.plugins%3Asonarframac&metric=sqale_index)
+[![SonarQube Quality Gate](https://sonarcloud.io/api/project_badges/measure?project=fr.cnes.sonar.plugins%3Asonar-frama-c-plugin&metric=alert_status)](https://sonarcloud.io/dashboard?id=fr.cnes.sonar.plugins%3Asonar-frama-c-plugin)
+[![SonarQube Bugs](https://sonarcloud.io/api/project_badges/measure?project=fr.cnes.sonar.plugins%3Asonar-frama-c-plugin&metric=bugs)](https://sonarcloud.io/project/issues?id=fr.cnes.sonar.plugins%3Asonar-frama-c-plugin&resolved=false&types=BUG)
+[![SonarQube Coverage](https://sonarcloud.io/api/project_badges/measure?project=fr.cnes.sonar.plugins%3Asonar-frama-c-plugin&metric=coverage)](https://sonarcloud.io/component_measures?id=fr.cnes.sonar.plugins%3Asonar-frama-c-plugin&metric=coverage)
+[![SonarQube Technical Debt](https://sonarcloud.io/api/project_badges/measure?project=fr.cnes.sonar.plugins%3Asonar-frama-c-plugin&metric=sqale_index)](https://sonarcloud.io/component_measures?id=fr.cnes.sonar.plugins%3Asonar-frama-c-plugin&metric=sqale_index)
 
 SonarQube plugin for the code analysis tool: Frama-C.
 
@@ -27,6 +27,8 @@ You can get Frama-C on GitHub: [Frama-C/Frama-C-snapshot](https://github.com/Fra
 If you experienced a problem with the plugin please open an issue. Inside this issue please explain us how to reproduce this issue and paste the log. 
 
 If you want to do a PR, please put inside of it the reason of this pull request. If this pull request fix an issue please insert the number of the issue or explain inside of the PR how to reproduce this issue.
+
+All details are available in [CONTRIBUTING](https://github.com/lequal/sonar-frama-c-plugin/CONTRIBUTING.md).
 
 ### Feedback and Support
 Contact : L-lequal@cnes.fr
