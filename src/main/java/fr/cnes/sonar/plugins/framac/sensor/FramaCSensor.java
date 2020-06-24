@@ -67,7 +67,9 @@ public class FramaCSensor implements Sensor {
         sensorDescriptor.name("SonarFrama-C");
 
         // This sensor is activated only if C or C++ files are present in the project
-        sensorDescriptor.onlyOnLanguages("c", "cxx", "cpp");
+        // "c" and "cpp" are languages declared by the official (and licenced) SonarQube plugin
+        // "c++" is declared by the C++ (Community) plugin
+        sensorDescriptor.onlyOnLanguages("c", "cpp", "c++");
 
         // Only main files are concerned, not tests.
         sensorDescriptor.onlyOnFileType(InputFile.Type.MAIN);
