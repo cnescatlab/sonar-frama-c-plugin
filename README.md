@@ -13,10 +13,12 @@ This plugin is free software; you can redistribute it and/or modify it under the
 
 You can get Frama-C on GitHub: [Frama-C/Frama-C-snapshot](https://github.com/Frama-C/Frama-C-snapshot).
 
+For this plugin to work it is **required** to install either the official C/C++ SonarQube plugin or the [C++ Community plugin](https://github.com/SonarOpenCommunity/sonar-cxx).  
+
 ### Quickstart
 - Setup a SonarQube instance
 - Install Frama-C
-- Install Frama-C plugin
+- Install Frama-C plugin and one C/C++ plugin
 - Run Frama-C
 - Run an analysis
 

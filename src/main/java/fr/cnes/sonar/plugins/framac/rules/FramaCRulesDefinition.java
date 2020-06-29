@@ -59,6 +59,6 @@ public class FramaCRulesDefinition implements RulesDefinition {
 	}
 
 	public static String getRepositoryKeyForLanguage() {
-		    return FramaCLanguage.KEY + "-" + KEY;
+		    return REPO_KEY;
 	 }
 }
