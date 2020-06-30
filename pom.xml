@@ -6,7 +6,7 @@
     <groupId>fr.cnes.sonar.plugins</groupId>
     <artifactId>sonar-frama-c-plugin</artifactId>
     <packaging>sonar-plugin</packaging>
-    <version>2.1.1</version>
+    <version>2.2.0</version>
 
     <name>Sonar Frama-C plugin</name>
 
