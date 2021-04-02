@@ -60,8 +60,8 @@
 
     <properties>
         <jdk.version>1.8</jdk.version>
-        <jdk.min.version>11</jdk.min.version>
-        <jdk.max.version>11</jdk.max.version>
+        <jdk.min.version>1.8</jdk.min.version>
+        <jdk.max.version>1.8</jdk.max.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <sonar.apiVersion>6.7.7</sonar.apiVersion>
         <sonar-packaging-maven-plugin.version>1.17</sonar-packaging-maven-plugin.version>
