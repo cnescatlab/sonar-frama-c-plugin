@@ -63,7 +63,7 @@
         <jdk.min.version>11</jdk.min.version>
         <jdk.max.version>11</jdk.max.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <sonar.apiVersion>6.7.7</sonar.apiVersion>
+        <sonar.apiVersion>7.4</sonar.apiVersion>
         <sonar-packaging-maven-plugin.version>1.17</sonar-packaging-maven-plugin.version>
         <slf4j.version>1.7.25</slf4j.version>
         <junit.version>4.12</junit.version>
