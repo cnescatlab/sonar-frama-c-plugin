@@ -33,8 +33,6 @@ If you want to do a PR, please put inside of it the reason of this pull request.
 All details are available in [CONTRIBUTING](https://github.com/lequal/sonar-frama-c-plugin/CONTRIBUTING.md).
 
 ### Feedback and Support
-Contact : L-lequal@cnes.fr
-
 Bugs and Feature requests: https://github.com/lequal/sonar-frama-c-plugin/issues
 
 ### License
