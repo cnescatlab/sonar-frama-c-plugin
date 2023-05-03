@@ -9,8 +9,6 @@ SonarQube plugin for the code analysis tool: Frama-C.
 
 SonarQube is an open platform to manage code quality. This plugin adds the ability to import Frama-C results for C language.
 
-This plugin is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.
-
 You can get Frama-C on GitHub: [Frama-C/Frama-C-snapshot](https://github.com/Frama-C/Frama-C-snapshot).
 
 For this plugin to work it is **required** to install either the official C/C++ SonarQube plugin or the [C++ Community plugin](https://github.com/SonarOpenCommunity/sonar-cxx).  
